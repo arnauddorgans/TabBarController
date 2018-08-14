@@ -8,21 +8,22 @@
 import UIKit
 
 @objc public protocol TabBarControllerDelegate: class {
-    
-    @objc func tabBarController(_ tabBarController: TabBarController, shouldSelect viewController: UIViewController) -> Bool
-    @objc func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
+    @objc optional func tabBarController(_ tabBarController: TabBarController, shouldSelect viewController: UIViewController) -> Bool
+    @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
+    @objc optional func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+}
+
+enum TabBarControllerUpdateSource {
+    case action
+    case update
 }
 
 open class TabBarController: UIViewController {
     
     @IBOutlet public weak var delegate: TabBarControllerDelegate?
-    @IBOutlet public weak var tabBar: TabBar! {
-        didSet {
-            tabBar?.delegate = self
-        }
-    }
+    @IBOutlet public weak var tabBar: TabBar!
     
-    private let containerController = TabContainerController()
+    private lazy var containerController = TabContainerController(tabBarController: self)
     private lazy var tabBarContainer = TabBarContainer(tabBarController: self)
     
     private var _viewControllers: [UIViewController]?
@@ -39,7 +40,13 @@ open class TabBarController: UIViewController {
         get { return _selectedIndex }
         set {
             _selectedIndex = newValue
-            updateSelectedController()
+            updateSelectedController(source: .action)
+        }
+    }
+    
+    @IBInspectable var prefersAdditionalInset: Bool = false {
+        didSet {
+            updateInset()
         }
     }
     
@@ -68,20 +75,14 @@ open class TabBarController: UIViewController {
         containerController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         containerController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         containerController.view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        //containerController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        containerController.view.bottomAnchor.constraint(equalTo: self.tabBar.topAnchor).isActive = true
+        containerController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.addChildViewController(containerController)
         containerController.didMove(toParentViewController: self)
-        containerController.view.backgroundColor = .red
     }
     
     // MARK: TabBar
-    public func setTabBarHidden(_ hidden: Bool, animated: Bool) {
+    internal func setTabBarHidden(_ hidden: Bool) {
         self.tabBarContainer.setTabBarHidden(hidden)
-    }
-    
-    public func update() {
-        
     }
     
     // MARK: ViewControllers
@@ -93,18 +94,18 @@ open class TabBarController: UIViewController {
     private func updateViewControllers() {
         self._viewControllers = self._viewControllers?.map { NavContainerController(controller: $0, tabBarController: self) ?? $0 }
         self.tabBar?.setItems(viewControllers.flatMap { $0.map { $0.tabBarItem } }, animated: false)
-        updateSelectedController()
+        updateSelectedController(source: .update)
     }
     
     // MARK: SelectedController
-    private func updateSelectedController() {
+    private func updateSelectedController(source: TabBarControllerUpdateSource) {
         guard let viewControllers = self.viewControllers, !viewControllers.isEmpty else {
-            containerController.setViewController(nil)
+            containerController.setViewController(nil, source: source)
             self._selectedIndex = 0
             return
         }
         self._selectedIndex = max(0, min(viewControllers.count - 1, selectedIndex))
-        containerController.setViewController(viewControllers[selectedIndex])
+        containerController.setViewController(viewControllers[selectedIndex], source: source)
         self.tabBar?.selectedItem = self.selectedViewController?.tabBarItem
     }
     
@@ -133,14 +134,19 @@ extension TabBarController: TabBarDelegate {
             let controller = self.viewControllers?[index] else {
             return
         }
-        guard self.delegate?.tabBarController(self, shouldSelect: controller) != false else {
-            updateSelectedController()
+        guard self.delegate?.tabBarController?(self, shouldSelect: controller) != false else {
+            updateSelectedController(source: .update)
             return
         }
         self.selectedIndex = index
+        guard let selectedViewController = self.selectedViewController else {
+            return
+        }
+        self.delegate?.tabBarController?(self, didSelect: selectedViewController)
     }
 }
 
+// MARK: Transitions
 extension TabBarController: UINavigationControllerDelegate {
     
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -152,36 +158,52 @@ extension TabBarController: UINavigationControllerDelegate {
     }
     
     private func update(navigationController: UINavigationController, viewController: UIViewController, animated: Bool) {
-        func update(viewController: UIViewController?, animated: Bool) {
-            guard let viewController = viewController else {
-                return
-            }
-            self.setTabBarHidden(viewController.hidesBottomBarWhenPushed, animated: animated)
-        }
         guard let transitionCoordinator = navigationController.transitionCoordinator else {
-            update(viewController: viewController, animated: animated)
+            self.update(viewController: viewController)
             return
         }
-        transitionCoordinator.animateAlongsideTransition(in: self.tabBarContainer, animation: { context in
-            update(viewController: context.viewController(forKey: .to), animated: false)
+        transitionCoordinator.animateAlongsideTransition(in: self.tabBarContainer, animation: { [unowned self] context in
+            self.update(viewController: context.viewController(forKey: .to))
         }, completion: nil)
     }
     
-    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return nil
+    private func update(viewController: UIViewController?) {
+        guard let viewController = viewController else {
+            return
+        }
+        self.setTabBarHidden(viewController.hidesBottomBarWhenPushed)
+        updateInset(viewController: viewController)
     }
     
-    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
+    private func updateInset(viewController: UIViewController? = nil) {
+        if #available(iOS 11.0, *) {
+            containerController.additionalSafeAreaInsets.bottom = !self.prefersAdditionalInset ? tabBarContainer.additionalInset : 0
+        }
+        let inset: CGFloat = {
+            if #available(iOS 11.0, *), !self.prefersAdditionalInset {
+                return 0
+            }
+            return tabBarContainer.additionalInset
+        }()
+        (containerController.viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
+        (viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
     }
 }
 
 extension TabBarController: TabBarContainerDelegate {
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets) {
-        /*if #available(iOS 11.0, *) {
-            containerController.additionalSafeAreaInsets = insets
-        } else {
-            // Fallback on earlier versions
-        }*/
+    
+    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInset inset: CGFloat) {
+        updateInset()
+    }
+}
+
+extension TabBarController: TabContainerControllerDelegate {
+    
+    func tabContainerController(_ tabContainerController: TabContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self.delegate?.tabBarController?(self, animationControllerFrom: fromVC, to: toVC)
+    }
+    
+    func tabContainerController(_ tabContainerController: TabContainerController, willShow viewController: UIViewController?) {
+        updateInset(viewController: viewController)
     }
 }

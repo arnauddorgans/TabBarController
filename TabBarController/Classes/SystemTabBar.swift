@@ -12,10 +12,6 @@ import UIKit
     public let tabBar = UITabBar()
     public var delegate: TabBarDelegate?
     
-    public var additionalInset: CGFloat {
-        return 10
-    }
-    
     @IBInspectable var barTintColor: UIColor? {
         get { return tabBar.barTintColor }
         set { tabBar.barTintColor = newValue }

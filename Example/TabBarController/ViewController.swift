@@ -35,23 +35,25 @@ class ViewController: TabBarController {
     }
 }
 
-class ViewControllerTest: UIViewController {
+class ViewControllerTest: UIViewController, TabBarChildControllerProtocol {
+
+    @IBOutlet weak var additionalInsetConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("tab:\(self.tab.controller)")
+
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    func updateAdditionalInset(_ inset: CGFloat) {
+
     }
 }
 
-class HiddenController: UIViewController {
+class HiddenController: ViewControllerTest {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.hidesBottomBarWhenPushed = true
-        print("tab:\(self.tab.controller)")
     }
 }

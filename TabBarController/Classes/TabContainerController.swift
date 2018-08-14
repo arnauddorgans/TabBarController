@@ -7,13 +7,27 @@
 
 import UIKit
 
+protocol TabContainerControllerDelegate: class {
+    
+    func tabContainerController(_ tabContainerController: TabContainerController, willShow viewController: UIViewController?)
+    func tabContainerController(_ tabContainerController: TabContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+}
+
 internal class TabContainerController: UINavigationController {
     
     weak var _tabBarController: TabBarController?
-    private var viewController: UIViewController? {
+    weak var containerDelegate: TabContainerControllerDelegate?
+    
+    var viewController: UIViewController? {
         return self.viewControllers.last
     }
-
+    
+    init(tabBarController: TabBarController) {
+        self._tabBarController = tabBarController
+        self.containerDelegate = tabBarController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,9 +35,14 @@ internal class TabContainerController: UINavigationController {
         self.delegate = self
     }
     
-    func setViewController(_ viewController: UIViewController?) {
+    func setViewController(_ viewController: UIViewController?, source: TabBarControllerUpdateSource) {
         if viewController != self.viewController {
-            self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: false)
+            let animated = source == .action && self.viewController.flatMap { fromVC in
+                viewController.flatMap { toVC in
+                    self.containerDelegate?.tabContainerController(self, animationControllerFrom: fromVC, to: toVC)
+                }
+            } != nil
+            self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: animated)
         }
     }
     
@@ -42,15 +61,19 @@ internal class TabContainerController: UINavigationController {
     override var childViewControllerForStatusBarStyle: UIViewController? {
         return viewController
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension TabContainerController: UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        self.containerDelegate?.tabContainerController(self, willShow: viewController)
     }
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self.containerDelegate?.tabContainerController(self, animationControllerFrom: fromVC, to: toVC)
     }
 }

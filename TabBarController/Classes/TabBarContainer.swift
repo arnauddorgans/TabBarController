@@ -9,7 +9,7 @@ import UIKit
 
 protocol TabBarContainerDelegate: class {
     
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets)
+    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInset inset: CGFloat)
 }
 
 class TabBarContainer: UIView {
@@ -22,6 +22,8 @@ class TabBarContainer: UIView {
     private var hiddenConstraints = [NSLayoutConstraint]()
     
     private (set) var isTabBarHidden: Bool = false
+    
+    var additionalInset: CGFloat = 0
 
     init(tabBarController: TabBarController) {
         self.tabBarController = tabBarController
@@ -73,10 +75,16 @@ class TabBarContainer: UIView {
     }
     
     private func updateSafeArea() {
-        if #available(iOS 11.0, *) {
-            let inset = max(0, self.tabBar.frame.height - self.tabBar.safeAreaInsets.bottom + (self.tabBar?.additionalInset ?? 0))
-            self.delegate?.tabBarContainer(self, didUpdateAdditionalInsets: self.isTabBarHidden ? .zero : UIEdgeInsets(top: 0, left: 0, bottom: inset, right: 0))
+        if self.isTabBarHidden {
+            self.additionalInset = 0
+        } else {
+            var inset = max(0, self.tabBar.frame.height + (self.tabBar?.additionalInset ?? 0))
+            if #available(iOS 11.0, *) {
+                inset = max(0, inset - self.tabBar.safeAreaInsets.bottom)
+            }
+            self.additionalInset = inset
         }
+        self.delegate?.tabBarContainer(self, didUpdateAdditionalInset: self.additionalInset)
     }
     
     override func layoutSubviews() {

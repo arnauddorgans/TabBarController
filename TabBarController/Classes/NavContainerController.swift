@@ -46,7 +46,7 @@ internal class NavContainerController: UIViewController {
         controller.didMove(toParentViewController: self)
         
         self.forwardDelegate = controller.delegate
-        controller.delegate = _tabBarController
+        controller.delegate = self
     }
     
     override var childViewControllerForStatusBarStyle: UIViewController? {
@@ -67,5 +67,26 @@ internal class NavContainerController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension NavContainerController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        _tabBarController?.navigationController(navigationController, didShow: viewController, animated: animated)
+        forwardDelegate?.navigationController?(navigationController, didShow: viewController, animated: animated)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        _tabBarController?.navigationController(navigationController, willShow: viewController, animated: animated)
+        forwardDelegate?.navigationController?(navigationController, willShow: viewController, animated: animated)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return forwardDelegate?.navigationController?(navigationController, interactionControllerFor: animationController)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return forwardDelegate?.navigationController?(navigationController, animationControllerFor: operation, from: fromVC, to: toVC)
     }
 }

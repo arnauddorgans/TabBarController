@@ -23,8 +23,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="prefersAdditionalInset" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="tabBar" destination="mGt-wA-TRv" id="c5U-ci-er2"/>
+                        <segue destination="dUG-cF-Xz5" kind="custom" id="hPt-uh-yca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -41,12 +45,12 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-338" y="-41"/>
+            <point key="canvasLocation" x="-486" y="-84"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller Test-->
         <scene sceneID="qCk-p4-WUe">
             <objects>
-                <viewController storyboardIdentifier="test" id="dUG-cF-Xz5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="test" id="dUG-cF-Xz5" customClass="ViewControllerTest" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gx5-eB-6mI"/>
                         <viewControllerLayoutGuide type="bottom" id="emw-lc-2AF"/>
@@ -67,12 +71,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="emw-lc-2AF" firstAttribute="top" secondItem="kKg-IK-GUs" secondAttribute="bottom" id="5b6-I2-31R"/>
                             <constraint firstItem="kKg-IK-GUs" firstAttribute="top" secondItem="gx5-eB-6mI" secondAttribute="bottom" id="XR5-Yp-g3A"/>
                             <constraint firstItem="kKg-IK-GUs" firstAttribute="leading" secondItem="cFc-3y-Db3" secondAttribute="leadingMargin" id="jvB-WV-fPI"/>
-                            <constraint firstItem="emw-lc-2AF" firstAttribute="top" secondItem="kKg-IK-GUs" secondAttribute="bottom" id="noQ-YO-hFI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kKg-IK-GUs" secondAttribute="trailing" id="xVe-3D-ali"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="additionalInsetConstraint" destination="5b6-I2-31R" id="cAj-q6-Lz4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gmA-QT-QcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -108,6 +115,9 @@
                             <constraint firstItem="CXp-z7-c7I" firstAttribute="top" secondItem="akM-j1-Fny" secondAttribute="bottom" id="xRu-Ib-uBY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="additionalInsetConstraint" destination="xRu-Ib-uBY" id="pI2-KK-lS1"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1202" y="104"/>
