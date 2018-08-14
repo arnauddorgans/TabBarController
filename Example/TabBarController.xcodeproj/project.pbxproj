@@ -28,8 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15760B3267DED21540B77CB3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		5E73035CB8E2C334207F833C /* TabBarController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = TabBarController.podspec; path = ../TabBarController.podspec; sourceTree = "<group>"; };
+		15760B3267DED21540B77CB3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		5E73035CB8E2C334207F833C /* TabBarController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TabBarController.podspec; path = ../TabBarController.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACD01AFB9204008FA782 /* TabBarController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBarController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8401B9CBC7D663C150F67D /* Pods-TabBarController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.release.xcconfig"; sourceTree = "<group>"; };
-		FFE524DD65DDAE359AC3EBB9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		FFE524DD65DDAE359AC3EBB9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
