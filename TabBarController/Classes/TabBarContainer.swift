@@ -70,11 +70,10 @@ class TabBarContainer: UIView {
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
         updateTabBar()
     }
     
-    private func updateSafeArea() {
+    private func updateInset() {
         if self.isTabBarHidden {
             self.additionalInset = 0
         } else {
@@ -89,13 +88,13 @@ class TabBarContainer: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateSafeArea()
+        updateInset()
     }
     
     override func safeAreaInsetsDidChange() {
         if #available(iOS 11.0, *) {
             super.safeAreaInsetsDidChange()
-            updateSafeArea()
+            updateInset()
         }
     }
     

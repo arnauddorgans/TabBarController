@@ -24,11 +24,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="prefersAdditionalInset" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="prefersAdditionalInset" value="NO"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="tabBar" destination="mGt-wA-TRv" id="c5U-ci-er2"/>
-                        <segue destination="dUG-cF-Xz5" kind="custom" id="hPt-uh-yca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -45,7 +44,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-486" y="-84"/>
+            <point key="canvasLocation" x="-551" y="-84"/>
         </scene>
         <!--View Controller Test-->
         <scene sceneID="qCk-p4-WUe">
@@ -60,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKg-IK-GUs">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="16" y="20" width="343" height="598"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -77,13 +76,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="kKg-IK-GUs" secondAttribute="trailing" id="xVe-3D-ali"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="dB0-qI-rQu"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="additionalInsetConstraint" destination="5b6-I2-31R" id="cAj-q6-Lz4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gmA-QT-QcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="401" y="104"/>
+            <point key="canvasLocation" x="298" y="-84"/>
         </scene>
         <!--Hidden Controller-->
         <scene sceneID="uCv-AL-RdP">
@@ -120,7 +121,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1202" y="104"/>
+            <point key="canvasLocation" x="1110" y="-84"/>
         </scene>
     </scenes>
 </document>

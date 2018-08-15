@@ -10,8 +10,6 @@ import UIKit
 internal class NavContainerController: UIViewController {
     
     var controller: UINavigationController
-    weak var _tabBarController: TabBarController?
-    weak var forwardDelegate: UINavigationControllerDelegate?
     
     override var title: String? {
         get { return controller.title }
@@ -28,8 +26,8 @@ internal class NavContainerController: UIViewController {
             return nil
         }
         self.controller = controller
-        self._tabBarController = tabBarController
         super.init(nibName: nil, bundle: nil)
+        controller.delegate = tabBarController
     }
     
     override func viewDidLoad() {
@@ -44,9 +42,6 @@ internal class NavContainerController: UIViewController {
         controller.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.addChildViewController(controller)
         controller.didMove(toParentViewController: self)
-        
-        self.forwardDelegate = controller.delegate
-        controller.delegate = self
     }
     
     override var childViewControllerForStatusBarStyle: UIViewController? {
@@ -70,23 +65,9 @@ internal class NavContainerController: UIViewController {
     }
 }
 
-extension NavContainerController: UINavigationControllerDelegate {
+extension NavContainerController: TabBarChildControllerProtocol {
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        _tabBarController?.navigationController(navigationController, didShow: viewController, animated: animated)
-        forwardDelegate?.navigationController?(navigationController, didShow: viewController, animated: animated)
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        _tabBarController?.navigationController(navigationController, willShow: viewController, animated: animated)
-        forwardDelegate?.navigationController?(navigationController, willShow: viewController, animated: animated)
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return forwardDelegate?.navigationController?(navigationController, interactionControllerFor: animationController)
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return forwardDelegate?.navigationController?(navigationController, animationControllerFor: operation, from: fromVC, to: toVC)
+    func tabBarAction() {
+        controller.tabBarAction()
     }
 }

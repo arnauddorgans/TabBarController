@@ -11,6 +11,8 @@ import UIKit
     
     @objc optional weak var additionalInsetConstraint: NSLayoutConstraint! { get }
     @objc optional func updateAdditionalInset(_ inset: CGFloat)
+    
+    @objc optional func tabBarAction()
 }
 
 extension TabBarChildControllerProtocol {

@@ -23,7 +23,6 @@ class ViewController: TabBarController {
                 let c = self.storyboard!.instantiateViewController(withIdentifier: "test")
                 let controller = UINavigationController(rootViewController: c)
                 controller.interactivePopGestureRecognizer?.delegate = nil
-                controller.title = "2"
                 return controller
             }(), { () -> UIViewController in
                 let controller = ViewControllerTest()
@@ -54,6 +53,6 @@ class HiddenController: ViewControllerTest {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hidesBottomBarWhenPushed = true
+        //self.hidesBottomBarWhenPushed = true
     }
 }

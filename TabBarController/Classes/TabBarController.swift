@@ -138,11 +138,15 @@ extension TabBarController: TabBarDelegate {
             updateSelectedController(source: .update)
             return
         }
-        self.selectedIndex = index
-        guard let selectedViewController = self.selectedViewController else {
-            return
+        if index != self.selectedIndex {
+            self.selectedIndex = index
+            guard let selectedViewController = self.selectedViewController else {
+                return
+            }
+            self.delegate?.tabBarController?(self, didSelect: selectedViewController)
+        } else {
+            (self.selectedViewController as? TabBarChildControllerProtocol)?.tabBarAction?()
         }
-        self.delegate?.tabBarController?(self, didSelect: selectedViewController)
     }
 }
 
