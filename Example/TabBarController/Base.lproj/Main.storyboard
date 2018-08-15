@@ -89,7 +89,6 @@
         <!--Hidden Controller-->
         <scene sceneID="uCv-AL-RdP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b8a-qi-kaB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="IkP-9N-lXM" customClass="HiddenController" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ORk-R4-sxe"/>
@@ -104,7 +103,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="IkP-9N-lXM" kind="show" id="pvW-rE-crp"/>
+                                    <action selector="switchTab:" destination="IkP-9N-lXM" eventType="touchUpInside" id="ENV-w0-gUY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -120,6 +119,7 @@
                         <outlet property="additionalInsetConstraint" destination="xRu-Ib-uBY" id="pI2-KK-lS1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8a-qi-kaB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1110" y="-84"/>
         </scene>

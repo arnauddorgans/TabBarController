@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc public protocol TabBarChildControllerProtocol: class {
+@objc public protocol TabBarChildControllerProtocol where Self: UIViewController {
     
     @objc optional weak var additionalInsetConstraint: NSLayoutConstraint! { get }
     @objc optional func updateAdditionalInset(_ inset: CGFloat)
@@ -19,6 +19,7 @@ extension TabBarChildControllerProtocol {
     
     internal func updateAdditionalConstraint(_ inset: CGFloat) {
         self.additionalInsetConstraint??.constant = inset
+        self.view.layoutIfNeeded()
     }
     
     internal func updateAllConstraints(_ inset: CGFloat) {

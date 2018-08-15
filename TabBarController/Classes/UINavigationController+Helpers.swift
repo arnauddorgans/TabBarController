@@ -16,4 +16,8 @@ extension UINavigationController: TabBarChildControllerProtocol {
             (self.viewControllers.last as? TabBarChildControllerProtocol)?.tabBarAction?()
         }
     }
+    
+    public func updateAdditionalInset(_ inset: CGFloat) {
+        (self.viewControllers.last as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
+    }
 }

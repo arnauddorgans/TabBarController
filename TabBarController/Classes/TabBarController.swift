@@ -11,6 +11,7 @@ import UIKit
     @objc optional func tabBarController(_ tabBarController: TabBarController, shouldSelect viewController: UIViewController) -> Bool
     @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
     @objc optional func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    @objc optional func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: ()->Void)
 }
 
 enum TabBarControllerUpdateSource {
@@ -42,6 +43,10 @@ open class TabBarController: UIViewController {
             _selectedIndex = newValue
             updateSelectedController(source: .action)
         }
+    }
+    
+    public var isTabBarHidden: Bool {
+        return tabBarContainer.isTabBarHidden
     }
     
     @IBInspectable var prefersAdditionalInset: Bool = false {
@@ -81,8 +86,19 @@ open class TabBarController: UIViewController {
     }
     
     // MARK: TabBar
-    internal func setTabBarHidden(_ hidden: Bool) {
-        self.tabBarContainer.setTabBarHidden(hidden)
+    public func setTabBarHidden(_ hidden: Bool, animated: Bool) {
+        func update() {
+            self.tabBarContainer.setTabBarHidden(hidden)
+            self.updateInset()
+        }
+        if animated {
+            guard self.delegate?.tabBarController?(self, animateTabBar: update) == nil else {
+                return
+            }
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: update, completion: nil)
+        } else {
+            update()
+        }
     }
     
     // MARK: ViewControllers
@@ -166,6 +182,12 @@ extension TabBarController: UINavigationControllerDelegate {
             self.update(viewController: viewController)
             return
         }
+        transitionCoordinator.notifyWhenInteractionEnds { [unowned self] context in
+            guard context.isCancelled else {
+                return
+            }
+            self.update(viewController: context.viewController(forKey: .from))
+        }
         transitionCoordinator.animateAlongsideTransition(in: self.tabBarContainer, animation: { [unowned self] context in
             self.update(viewController: context.viewController(forKey: .to))
         }, completion: nil)
@@ -175,7 +197,7 @@ extension TabBarController: UINavigationControllerDelegate {
         guard let viewController = viewController else {
             return
         }
-        self.setTabBarHidden(viewController.hidesBottomBarWhenPushed)
+        self.setTabBarHidden(viewController.hidesBottomBarWhenPushed, animated: false)
         updateInset(viewController: viewController)
     }
     

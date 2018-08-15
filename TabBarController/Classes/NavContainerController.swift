@@ -70,4 +70,8 @@ extension NavContainerController: TabBarChildControllerProtocol {
     func tabBarAction() {
         controller.tabBarAction()
     }
+    
+    func updateAdditionalInset(_ inset: CGFloat) {
+        self.controller.updateAdditionalInset(inset)
+    }
 }

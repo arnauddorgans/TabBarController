@@ -53,6 +53,13 @@ class HiddenController: ViewControllerTest {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.hidesBottomBarWhenPushed = true
+        self.hidesBottomBarWhenPushed = true
+    }
+    
+    @IBAction func switchTab(_ sender: Any) {
+        guard let controller = self.tab.controller else {
+            return
+        }
+        controller.setTabBarHidden(!controller.isTabBarHidden, animated: true)
     }
 }

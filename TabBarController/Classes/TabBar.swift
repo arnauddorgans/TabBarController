@@ -16,6 +16,7 @@ public typealias TabBar = UIView & TabBarProtocol
     @objc optional var additionalInset: CGFloat { get }
     
     func setItems(_ items: [UITabBarItem]?, animated: Bool)
+    @objc optional func setTabBarHidden(_ hidden: Bool)
 }
 
 @objc public protocol TabBarDelegate: NSObjectProtocol {

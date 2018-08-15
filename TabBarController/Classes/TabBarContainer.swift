@@ -34,6 +34,7 @@ class TabBarContainer: UIView {
     func setTabBarHidden(_ hidden: Bool) {
         isTabBarHidden = hidden
         updateTabBarConstraints()
+        self.tabBar.setTabBarHidden?(hidden)
     }
     
     private func updateTabBar() {
