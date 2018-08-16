@@ -212,10 +212,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = CPE39ZT2AY;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = CPE39ZT2AY;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -469,6 +471,7 @@
 			baseConfigurationReference = DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CPE39ZT2AY;
 				INFOPLIST_FILE = TabBarController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -484,6 +487,7 @@
 			baseConfigurationReference = EB8401B9CBC7D663C150F67D /* Pods-TabBarController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CPE39ZT2AY;
 				INFOPLIST_FILE = TabBarController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -498,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 61D9F485C719FED61FABF33C /* Pods-TabBarController_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = CPE39ZT2AY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -520,6 +525,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E58C7F8F03118F5234D86F7 /* Pods-TabBarController_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = CPE39ZT2AY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

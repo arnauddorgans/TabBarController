@@ -1,5 +1,5 @@
 //
-//  TabContainerController.swift
+//  TabBarContainerController.swift
 //  TabBarController
 //
 //  Created by Arnaud Dorgans on 14/08/2018.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol TabContainerControllerDelegate: class {
+protocol TabBarContainerControllerDelegate: class {
     
-    func tabContainerController(_ tabContainerController: TabContainerController, willShow viewController: UIViewController?)
-    func tabContainerController(_ tabContainerController: TabContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    func tabBarContainerController(_ TabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?)
+    func tabBarContainerController(_ TabBarContainerController: TabBarContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
 }
 
-internal class TabContainerController: UINavigationController {
+internal class TabBarContainerController: UINavigationController {
     
     weak var _tabBarController: TabBarController?
-    weak var containerDelegate: TabContainerControllerDelegate?
+    weak var containerDelegate: TabBarContainerControllerDelegate?
     
     var viewController: UIViewController? {
         return self.viewControllers.last
@@ -26,28 +26,28 @@ internal class TabContainerController: UINavigationController {
         self._tabBarController = tabBarController
         self.containerDelegate = tabBarController
         super.init(nibName: nil, bundle: nil)
+        self.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.isNavigationBarHidden = true
-        self.delegate = self
     }
     
     func setViewController(_ viewController: UIViewController?, source: TabBarControllerUpdateSource) {
         if viewController != self.viewController {
             let animated = source == .action && self.viewController.flatMap { fromVC in
                 viewController.flatMap { toVC in
-                    self.containerDelegate?.tabContainerController(self, animationControllerFrom: fromVC, to: toVC)
+                    self.containerDelegate?.tabBarContainerController(self, animationControllerFrom: fromVC, to: toVC)
                 }
             } != nil
             self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: animated)
+            self.setNeedsStatusBarAppearanceUpdate()
+            if #available(iOS 11.0, *) {
+                self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+            }
         }
-    }
-    
-    override func childViewControllerForScreenEdgesDeferringSystemGestures() -> UIViewController? {
-        return viewController
     }
     
     override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
@@ -67,13 +67,13 @@ internal class TabContainerController: UINavigationController {
     }
 }
 
-extension TabContainerController: UINavigationControllerDelegate {
+extension TabBarContainerController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        self.containerDelegate?.tabContainerController(self, willShow: viewController)
+        self.containerDelegate?.tabBarContainerController(self, willShow: viewController)
     }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return self.containerDelegate?.tabContainerController(self, animationControllerFrom: fromVC, to: toVC)
+        return self.containerDelegate?.tabBarContainerController(self, animationControllerFrom: fromVC, to: toVC)
     }
 }

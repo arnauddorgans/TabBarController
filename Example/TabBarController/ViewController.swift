@@ -22,6 +22,7 @@ class ViewController: TabBarController {
             }(), { () -> UIViewController in
                 let c = self.storyboard!.instantiateViewController(withIdentifier: "test")
                 let controller = UINavigationController(rootViewController: c)
+                controller.delegate = self
                 controller.interactivePopGestureRecognizer?.delegate = nil
                 return controller
             }(), { () -> UIViewController in
@@ -30,7 +31,7 @@ class ViewController: TabBarController {
                 return controller
             }()]
         
-        self.setViewControllers(viewControllers: controllers)
+        self.setViewControllers(controllers)
     }
 }
 

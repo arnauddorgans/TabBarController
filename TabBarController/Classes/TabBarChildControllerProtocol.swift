@@ -18,7 +18,10 @@ import UIKit
 extension TabBarChildControllerProtocol {
     
     internal func updateAdditionalConstraint(_ inset: CGFloat) {
-        self.additionalInsetConstraint??.constant = inset
+        guard let additionalInsetConstraint = self.additionalInsetConstraint as? NSLayoutConstraint else {
+            return
+        }
+        additionalInsetConstraint.constant = inset
         self.view.layoutIfNeeded()
     }
     

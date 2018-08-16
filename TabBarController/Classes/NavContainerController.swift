@@ -27,7 +27,6 @@ internal class NavContainerController: UIViewController {
         }
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
-        controller.delegate = tabBarController
     }
     
     override func viewDidLoad() {
@@ -53,10 +52,6 @@ internal class NavContainerController: UIViewController {
     }
     
     override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
-        return controller
-    }
-    
-    override func childViewControllerForScreenEdgesDeferringSystemGestures() -> UIViewController? {
         return controller
     }
     
