@@ -23,10 +23,6 @@ class ViewControllerTest: UIViewController, TabBarChildControllerProtocol {
         super.viewDidLoad()
 
     }
-    
-    func updateAdditionalInset(_ inset: CGFloat) {
-
-    }
 }
 
 class HiddenController: ViewControllerTest {

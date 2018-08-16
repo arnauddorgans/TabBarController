@@ -7,16 +7,16 @@
 
 import UIKit
 
-internal class TabBarNavigationContainerController: UIViewController {
+public class TabBarNavigationContainerController: UIViewController {
     
     let controller: UINavigationController
     
-    override var title: String? {
+    override public var title: String? {
         get { return controller.title }
         set { controller.title = newValue }
     }
     
-    override var tabBarItem: UITabBarItem! {
+    override public var tabBarItem: UITabBarItem! {
         get { return controller.tabBarItem }
         set { controller.tabBarItem = newValue }
     }
@@ -30,7 +30,7 @@ internal class TabBarNavigationContainerController: UIViewController {
         controller.delegate = tabBarController
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         controller.willMove(toParentViewController: self)
@@ -44,30 +44,30 @@ internal class TabBarNavigationContainerController: UIViewController {
         controller.didMove(toParentViewController: self)
     }
     
-    override var childViewControllerForStatusBarStyle: UIViewController? {
+    override public var childViewControllerForStatusBarStyle: UIViewController? {
         return controller
     }
     
-    override var childViewControllerForStatusBarHidden: UIViewController? {
+    override public var childViewControllerForStatusBarHidden: UIViewController? {
         return controller
     }
     
-    override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
+    override public func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return controller
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension TabBarNavigationContainerController: TabBarChildControllerProtocol {
     
-    func tabBarAction() {
+    public func tabBarAction() {
         controller.tabBarAction()
     }
     
-    func updateAdditionalInsets(_ insets: UIEdgeInsets) {
+    public func updateAdditionalInsets(_ insets: UIEdgeInsets) {
         self.controller.updateAdditionalInsets(insets)
     }
 }

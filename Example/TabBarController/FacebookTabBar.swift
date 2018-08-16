@@ -9,6 +9,11 @@
 import UIKit
 import TabBarController
 
+class FacebookTabBarItem: UITabBarItem {
+    
+    @IBInspectable var selectedTintColor: UIColor = .cyan
+}
+
 @IBDesignable class FacebookTabBar: UIView, TabBarProtocol {
     
     private let contentView = UIStackView()
@@ -84,7 +89,7 @@ import TabBarController
                 return
             }
             button.isSelected = self.items?[$0.tag] == self.selectedItem
-            button.tintColor = button.isSelected ? self.tintColor : self.unselectedItemTintColor
+            button.tintColor = button.isSelected ? ((self.items?[$0.tag] as? FacebookTabBarItem)?.selectedTintColor ?? self.tintColor) : self.unselectedItemTintColor
         }
     }
     
@@ -101,7 +106,7 @@ import TabBarController
                                 image: UIImage(named: $0, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil),
                                 selectedImage: UIImage(named: $1, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil))
         }
-        let items = [item("outline-recent_actors-24px", "twotone-recent_actors-24px"),
+        let items = [item("outline-chrome_reader_mode-24px", "twotone-chrome_reader_mode-24px"),
                      item("outline-account_circle-24px", "twotone-account_circle-24px"),
                      item("outline-notifications-24px", "twotone-notifications-24px")]
         self.setItems(items, animated: false)

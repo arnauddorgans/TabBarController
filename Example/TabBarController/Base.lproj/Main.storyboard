@@ -38,10 +38,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="390" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="tintColor" red="0.16078431372549018" green="0.50196078431372548" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.1764705882352941" green="0.20392156862745098" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
-                            <color key="value" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="0.60306078767123283" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.69803921568627447" green="0.74509803921568629" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -61,7 +61,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="outline-recent_actors-24px" selectedImage="twotone-recent_actors-24px" id="myE-Nh-ubi"/>
+                    <tabBarItem key="tabBarItem" title="" image="outline-chrome_reader_mode-24px" selectedImage="twotone-chrome_reader_mode-24px" id="myE-Nh-ubi" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                <color key="value" red="0.086274509803921567" green="0.62745098039215685" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqR-6X-FRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -98,15 +104,13 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKg-IK-GUs">
                                 <rect key="frame" x="16" y="64" width="343" height="554"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" red="0.87450980392156863" green="0.90196078431372551" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="IkP-9N-lXM" kind="show" id="2LR-Ek-74Z"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="emw-lc-2AF" firstAttribute="top" secondItem="kKg-IK-GUs" secondAttribute="bottom" id="5b6-I2-31R"/>
                             <constraint firstItem="kKg-IK-GUs" firstAttribute="top" secondItem="gx5-eB-6mI" secondAttribute="bottom" id="XR5-Yp-g3A"/>
@@ -114,7 +118,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="kKg-IK-GUs" secondAttribute="trailing" id="xVe-3D-ali"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" image="outline-account_circle-24px" selectedImage="twotone-account_circle-24px" id="dB0-qI-rQu"/>
+                    <tabBarItem key="tabBarItem" image="outline-account_circle-24px" selectedImage="twotone-account_circle-24px" id="dB0-qI-rQu" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                <color key="value" red="0.16078431372549018" green="0.50196078431372548" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="3kv-Mf-To9"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -139,7 +149,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="outline-notifications-24px" selectedImage="twotone-notifications-24px" id="k83-Pg-pSb"/>
+                    <tabBarItem key="tabBarItem" title="" image="outline-notifications-24px" selectedImage="twotone-notifications-24px" id="k83-Pg-pSb" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                <color key="value" red="0.95294117647058818" green="0.61176470588235299" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KGE-lU-0c6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,14 +176,13 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-j1-Fny">
                                 <rect key="frame" x="16" y="64" width="343" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="switchTab:" destination="IkP-9N-lXM" eventType="touchUpInside" id="ENV-w0-gUY"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="akM-j1-Fny" firstAttribute="leading" secondItem="YeS-zx-auw" secondAttribute="leadingMargin" id="NmR-IT-v8N"/>
                             <constraint firstItem="akM-j1-Fny" firstAttribute="top" secondItem="ORk-R4-sxe" secondAttribute="bottom" id="aiN-MZ-hoa"/>
@@ -186,11 +201,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="outline-account_circle-24px" width="18" height="18"/>
-        <image name="outline-notifications-24px" width="18" height="18"/>
-        <image name="outline-recent_actors-24px" width="18" height="18"/>
-        <image name="twotone-account_circle-24px" width="18" height="18"/>
-        <image name="twotone-notifications-24px" width="18" height="18"/>
-        <image name="twotone-recent_actors-24px" width="18" height="18"/>
+        <image name="outline-account_circle-24px" width="27" height="27"/>
+        <image name="outline-chrome_reader_mode-24px" width="27" height="27"/>
+        <image name="outline-notifications-24px" width="27" height="27"/>
+        <image name="twotone-account_circle-24px" width="27" height="27"/>
+        <image name="twotone-chrome_reader_mode-24px" width="27" height="27"/>
+        <image name="twotone-notifications-24px" width="27" height="27"/>
     </resources>
 </document>

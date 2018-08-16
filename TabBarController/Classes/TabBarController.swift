@@ -46,9 +46,14 @@ open class TabBarController: UIViewController {
         }
     }
     
-    internal var tabBarAnchor: TabBarAnchor {
+    public var tabBarAnchor: TabBarAnchor {
         get { return tabBarContainer.anchor }
         set { tabBarContainer.anchor = newValue }
+    }
+    
+    @IBInspectable var tabBarAnchorIndex: Int {
+        get { return TabBarAnchor.all.index(of: tabBarAnchor)! }
+        set { tabBarAnchor = TabBarAnchor.all[newValue % 2 == 0 ? 0 : 1] }
     }
     
     public var isTabBarHidden: Bool {

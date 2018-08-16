@@ -9,13 +9,13 @@ import UIKit
 
 public typealias TabBar = UIView & TabBarProtocol
 
-internal enum TabBarAnchor {
+public enum TabBarAnchor {
     case top
     case bottom
     
     static let all = [top, bottom]
     
-    static let `default`: TabBarAnchor = {
+    public static let `default`: TabBarAnchor = {
         return UIDevice.current.userInterfaceIdiom == .tv ? .top : .bottom
     }()
 }
