@@ -27,6 +27,7 @@ internal class TabBarNavigationContainerController: UIViewController {
         }
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
+        controller.delegate = tabBarController
     }
     
     override func viewDidLoad() {
@@ -66,7 +67,7 @@ extension TabBarNavigationContainerController: TabBarChildControllerProtocol {
         controller.tabBarAction()
     }
     
-    func updateAdditionalInset(_ inset: CGFloat) {
-        self.controller.updateAdditionalInset(inset)
+    func updateAdditionalInsets(_ insets: UIEdgeInsets) {
+        self.controller.updateAdditionalInsets(insets)
     }
 }

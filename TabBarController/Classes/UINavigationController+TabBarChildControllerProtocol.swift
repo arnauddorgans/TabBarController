@@ -1,5 +1,5 @@
 //
-//  UINavigationController+Helpers.swift
+//  UINavigationController+TabBarChildControllerProtocol.swift
 //  TabBarController
 //
 //  Created by Arnaud Dorgans on 15/08/2018.
@@ -17,7 +17,7 @@ extension UINavigationController: TabBarChildControllerProtocol {
         }
     }
     
-    public func updateAdditionalInset(_ inset: CGFloat) {
-        (self.viewControllers.last as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
+    public func updateAdditionalInsets(_ insets: UIEdgeInsets) {
+        (self.viewControllers.last as? TabBarChildControllerProtocol)?.updateAllConstraints(insets)
     }
 }

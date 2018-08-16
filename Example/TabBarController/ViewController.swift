@@ -11,32 +11,13 @@ import TabBarController
 
 class ViewController: TabBarController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let controllers = [{ () -> UIViewController in
-            let controller = ViewControllerTest()
-            controller.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
-            return controller
-            }(), { () -> UIViewController in
-                let c = self.storyboard!.instantiateViewController(withIdentifier: "test")
-                let controller = UINavigationController(rootViewController: c)
-                controller.delegate = self
-                controller.interactivePopGestureRecognizer?.delegate = nil
-                return controller
-            }(), { () -> UIViewController in
-                let controller = ViewControllerTest()
-                controller.title = "3"
-                return controller
-            }()]
-        
-        self.setViewControllers(controllers)
-    }
+
 }
 
 class ViewControllerTest: UIViewController, TabBarChildControllerProtocol {
 
-    @IBOutlet weak var additionalInsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var additionalTopInsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var additionalBottomInsetConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +41,7 @@ class HiddenController: ViewControllerTest {
         guard let controller = self.tab.controller else {
             return
         }
-        controller.setTabBarHidden(!controller.isTabBarHidden, animated: true)
+        self.hidesBottomBarWhenPushed = !controller.isTabBarHidden
+        controller.setTabBarHidden(self.hidesBottomBarWhenPushed, animated: true)
     }
 }

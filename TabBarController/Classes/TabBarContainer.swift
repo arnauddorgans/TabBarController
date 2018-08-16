@@ -9,7 +9,7 @@ import UIKit
 
 protocol TabBarContainerDelegate: class {
     
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInset inset: CGFloat)
+    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets)
 }
 
 class TabBarContainer: UIView {
@@ -18,12 +18,12 @@ class TabBarContainer: UIView {
     weak var tabBar: TabBar!
     weak var delegate: TabBarContainerDelegate?
     
-    private var visibleConstraints = [NSLayoutConstraint]()
-    private var hiddenConstraints = [NSLayoutConstraint]()
+    private var anchorConstraints = [NSLayoutConstraint]()
     
     private (set) var isTabBarHidden: Bool = false
     
-    var additionalInset: CGFloat = 0
+    var additionalInsets: UIEdgeInsets = .zero
+    var anchor: TabBarAnchor = .default
 
     init(tabBarController: TabBarController) {
         self.tabBarController = tabBarController
@@ -54,28 +54,34 @@ class TabBarContainer: UIView {
         self.addSubview(tabBar)
         tabBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         tabBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.heightAnchor.constraint(equalTo: tabBar.heightAnchor).isActive = true
         
         self.tabBar = tabBar
-        self.visibleConstraints = [tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
-        self.hiddenConstraints = [tabBar.topAnchor.constraint(equalTo: self.bottomAnchor)]
         updateTabBarConstraints()
     }
     
     private func updateTabBarConstraints() {
-        func updateHiddenConstraints() {
-            self.hiddenConstraints.forEach { $0.isActive = self.isTabBarHidden }
+        NSLayoutConstraint.deactivate(anchorConstraints)
+        anchorConstraints.removeAll()
+        
+        guard let tabBar = self.tabBar else {
+            return
         }
-        func updateVisibleConstraints() {
-            self.visibleConstraints.forEach { $0.isActive = !self.isTabBarHidden }
+        switch self.anchor {
+        case .top:
+            if isTabBarHidden {
+                anchorConstraints = [tabBar.bottomAnchor.constraint(equalTo: self.topAnchor)]
+            } else {
+                anchorConstraints = [tabBar.topAnchor.constraint(equalTo: self.topAnchor)]
+            }
+        case .bottom:
+            if isTabBarHidden {
+                anchorConstraints = [tabBar.topAnchor.constraint(equalTo: self.bottomAnchor)]
+            } else {
+                anchorConstraints = [tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
+            }
         }
-        if !isTabBarHidden {
-            updateHiddenConstraints()
-            updateVisibleConstraints()
-        } else {
-            updateVisibleConstraints()
-            updateHiddenConstraints()
-        }
+        NSLayoutConstraint.activate(anchorConstraints)
+        
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
@@ -87,15 +93,17 @@ class TabBarContainer: UIView {
     
     private func updateInset() {
         if self.isTabBarHidden {
-            self.additionalInset = 0
+            self.additionalInsets = .zero
         } else {
-            var inset = max(0, self.tabBar.frame.height + (self.tabBar?.additionalInset ?? 0))
-            if #available(iOS 11.0, *) {
-                inset = max(0, inset - self.tabBar.safeAreaInsets.bottom)
-            }
-            self.additionalInset = inset
+            self.additionalInsets = {
+                var inset = max(0, self.tabBar.frame.height + (self.tabBar?.additionalInset ?? 0))
+                if #available(iOS 11.0, *) {
+                    inset = max(0, inset - (self.anchor == .bottom ? self.tabBar.safeAreaInsets.bottom : self.tabBar.safeAreaInsets.top))
+                }
+                return UIEdgeInsets(top: self.anchor == .bottom ? 0 : inset, left: 0, bottom: self.anchor != .bottom ? 0 : inset, right: 0)
+            }()
         }
-        self.delegate?.tabBarContainer(self, didUpdateAdditionalInset: self.additionalInset)
+        self.delegate?.tabBarContainer(self, didUpdateAdditionalInsets: self.additionalInsets)
     }
     
     override func layoutSubviews() {

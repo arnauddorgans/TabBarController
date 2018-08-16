@@ -80,6 +80,10 @@ extension SystemTabBar: UITabBarDelegate {
 
 extension SystemTabBar: TabBarProtocol {
     
+    public var items: [UITabBarItem]? {
+        return tabBar.items
+    }
+    
     @IBInspectable public var selectedItem: UITabBarItem? {
         get { return tabBar.selectedItem }
         set { tabBar.selectedItem = newValue }

@@ -26,6 +26,7 @@ open class TabBarController: UIViewController {
     
     private lazy var containerController = TabBarContainerController(tabBarController: self)
     private lazy var tabBarContainer = TabBarContainer(tabBarController: self)
+    private let segueIdentifierPrefix = "tab"
     
     private var _viewControllers: [UIViewController]?
     public var viewControllers: [UIViewController]? {
@@ -43,6 +44,11 @@ open class TabBarController: UIViewController {
             _selectedIndex = newValue
             updateSelectedController(source: .action)
         }
+    }
+    
+    internal var tabBarAnchor: TabBarAnchor {
+        get { return tabBarContainer.anchor }
+        set { tabBarContainer.anchor = newValue }
     }
     
     public var isTabBarHidden: Bool {
@@ -75,6 +81,7 @@ open class TabBarController: UIViewController {
         self.tabBar?.delegate = self
         tabBarContainer.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tabBarContainer)
+        tabBarContainer.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         tabBarContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         tabBarContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         tabBarContainer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -88,6 +95,8 @@ open class TabBarController: UIViewController {
         containerController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.addChildViewController(containerController)
         containerController.didMove(toParentViewController: self)
+        
+        addStoryboardSegues()
     }
     
     // MARK: TabBar
@@ -104,6 +113,10 @@ open class TabBarController: UIViewController {
         } else {
             update()
         }
+    }
+    
+    private func setTabBarAnchor(_ anchor: TabBarAnchor) {
+        
     }
     
     // MARK: ViewControllers
@@ -150,6 +163,27 @@ open class TabBarController: UIViewController {
     
     open override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return containerController
+    }
+    
+    // MARK: StoryboardSegue
+    private func addStoryboardSegues() {
+        (self.value(forKey: "storyboardSegueTemplates") as? [AnyObject] ?? [])
+            .map { $0.value(forKey: "identifier") as? String }
+            .filter { self.isTabBarSegue($0) }
+            .map { $0! }
+            .sorted()
+            .forEach {
+                self.performSegue(withIdentifier: $0, sender: tabBarContainer)
+            }
+    }
+    
+    private func isTabBarSegue(_ identifier: String?) -> Bool {
+        guard let identifier = identifier,
+            let range = identifier.range(of: segueIdentifierPrefix), range.lowerBound == identifier.startIndex,
+            let _ = Int(identifier.replacingCharacters(in: range, with: "")) else {
+                return false
+        }
+        return true
     }
 }
 
@@ -208,14 +242,14 @@ extension TabBarController: UINavigationControllerDelegate {
     
     private func updateInset(viewController: UIViewController? = nil) {
         if #available(iOS 11.0, *) {
-            containerController.additionalSafeAreaInsets.bottom = !self.prefersAdditionalInset ? tabBarContainer.additionalInset : 0
+            containerController.additionalSafeAreaInsets = !self.prefersAdditionalInset ? tabBarContainer.additionalInsets : .zero
             containerController.viewSafeAreaInsetsDidChange()
         }
-        let inset: CGFloat = {
+        let inset: UIEdgeInsets = {
             if #available(iOS 11.0, *), !self.prefersAdditionalInset {
-                return 0
+                return .zero
             }
-            return tabBarContainer.additionalInset
+            return tabBarContainer.additionalInsets
         }()
         (containerController.viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
         (viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
@@ -224,7 +258,7 @@ extension TabBarController: UINavigationControllerDelegate {
 
 extension TabBarController: TabBarContainerDelegate {
     
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInset inset: CGFloat) {
+    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets) {
         updateInset()
     }
 }

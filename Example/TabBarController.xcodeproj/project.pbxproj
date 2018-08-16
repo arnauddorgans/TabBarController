@@ -15,6 +15,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		73092051AA4108D989191A1E /* Pods_TabBarController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */; };
 		7D6CE9C04F41E9E11B7E7F36 /* Pods_TabBarController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */; };
+		D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		61D9F485C719FED61FABF33C /* Pods-TabBarController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Tests/Pods-TabBarController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E58C7F8F03118F5234D86F7 /* Pods-TabBarController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Tests/Pods-TabBarController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTabBar.swift; sourceTree = "<group>"; };
 		DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8401B9CBC7D663C150F67D /* Pods-TabBarController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

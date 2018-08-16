@@ -9,9 +9,21 @@ import UIKit
 
 public typealias TabBar = UIView & TabBarProtocol
 
+internal enum TabBarAnchor {
+    case top
+    case bottom
+    
+    static let all = [top, bottom]
+    
+    static let `default`: TabBarAnchor = {
+        return UIDevice.current.userInterfaceIdiom == .tv ? .top : .bottom
+    }()
+}
+
 @objc public protocol TabBarProtocol: NSObjectProtocol {
     
     weak var delegate: TabBarDelegate? { get set }
+    var items: [UITabBarItem]? { get }
     var selectedItem: UITabBarItem? { get set }
     @objc optional var additionalInset: CGFloat { get }
     
