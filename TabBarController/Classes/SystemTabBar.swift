@@ -11,7 +11,7 @@ import UIKit
     
     public let tabBar = UITabBar()
     public var delegate: TabBarDelegate?
-    
+        
     @IBInspectable var barTintColor: UIColor? {
         get { return tabBar.barTintColor }
         set { tabBar.barTintColor = newValue }
@@ -30,10 +30,6 @@ import UIKit
         }
     }
     
-    override open var intrinsicContentSize: CGSize {
-        return tabBar.intrinsicContentSize
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -50,20 +46,28 @@ import UIKit
     
     private func sharedInit() {
         tabBar.delegate = self
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(tabBar)
-        self.layoutMargins = .zero
-    }
-    
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-        tabBar.frame = self.bounds
+        tabBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        tabBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        tabBar.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     override open func safeAreaInsetsDidChange() {
         if #available(iOS 11.0, *) {
             super.safeAreaInsetsDidChange()
-            self.invalidateIntrinsicContentSize()
+            tabBar.invalidateIntrinsicContentSize()
         }
+    }
+    
+    open override func prepareForInterfaceBuilder() {
+        let items = [UITabBarItem(tabBarSystemItem: .favorites, tag: 0),
+                     UITabBarItem(tabBarSystemItem: .recents, tag: 0),
+                     UITabBarItem(tabBarSystemItem: .contacts, tag: 0),
+                     UITabBarItem(tabBarSystemItem: .search, tag: 0)]
+        self.setItems(items, animated: false)
+        self.selectedItem = items.first
     }
 }
 

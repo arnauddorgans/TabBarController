@@ -1,5 +1,5 @@
 //
-//  NavContainerController.swift
+//  TabBarNavigationContainerController.swift
 //  TabBarController
 //
 //  Created by Arnaud Dorgans on 14/08/2018.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-internal class NavContainerController: UIViewController {
+internal class TabBarNavigationContainerController: UIViewController {
     
-    var controller: UINavigationController
+    let controller: UINavigationController
     
     override var title: String? {
         get { return controller.title }
@@ -60,7 +60,7 @@ internal class NavContainerController: UIViewController {
     }
 }
 
-extension NavContainerController: TabBarChildControllerProtocol {
+extension TabBarNavigationContainerController: TabBarChildControllerProtocol {
     
     func tabBarAction() {
         controller.tabBarAction()

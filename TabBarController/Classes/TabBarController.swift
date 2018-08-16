@@ -108,7 +108,7 @@ open class TabBarController: UIViewController {
     }
     
     private func updateViewControllers() {
-        self._viewControllers = self._viewControllers?.map { NavContainerController(controller: $0, tabBarController: self) ?? $0 }
+        self._viewControllers = self._viewControllers?.map { TabBarNavigationContainerController(controller: $0, tabBarController: self) ?? $0 }
         self.tabBar?.setItems(viewControllers.flatMap { $0.map { $0.tabBarItem } }, animated: false)
         updateSelectedController(source: .update)
     }
