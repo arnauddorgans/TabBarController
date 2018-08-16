@@ -114,6 +114,10 @@ open class TabBarController: UIViewController {
     }
     
     open func update(viewController: UIViewController) {
+        self.setNeedsStatusBarAppearanceUpdate()
+        if #available(iOS 11.0, *) {
+            self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
         self.setTabBarHidden(viewController.hidesBottomBarWhenPushed, animated: false)
         updateInset(viewController: viewController)
     }

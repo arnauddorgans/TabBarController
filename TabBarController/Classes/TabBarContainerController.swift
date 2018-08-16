@@ -43,10 +43,6 @@ internal class TabBarContainerController: UINavigationController {
                 }
             } != nil
             self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: animated)
-            self.setNeedsStatusBarAppearanceUpdate()
-            if #available(iOS 11.0, *) {
-                self.setNeedsUpdateOfHomeIndicatorAutoHidden()
-            }
         }
     }
     
