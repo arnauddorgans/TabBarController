@@ -61,6 +61,11 @@ open class TabBarController: UIViewController {
         }
         return viewControllers[selectedIndex]
     }
+    
+    public convenience init(viewControllers: [UIViewController]?) {
+        self.init(nibName: nil, bundle: nil)
+        self.setViewControllers(viewControllers)
+    }
 
     override open func viewDidLoad() {
         super.viewDidLoad()

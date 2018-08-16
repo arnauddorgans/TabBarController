@@ -16,8 +16,7 @@ class ViewController: TabBarController {
         
         let controllers = [{ () -> UIViewController in
             let controller = ViewControllerTest()
-            controller.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.bookmarks, tag: 0)
-            controller.title = "1"
+            controller.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
             return controller
             }(), { () -> UIViewController in
                 let c = self.storyboard!.instantiateViewController(withIdentifier: "test")

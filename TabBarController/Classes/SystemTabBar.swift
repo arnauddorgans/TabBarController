@@ -48,9 +48,9 @@ import UIKit
         tabBar.delegate = self
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(tabBar)
+        tabBar.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tabBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         tabBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        tabBar.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     

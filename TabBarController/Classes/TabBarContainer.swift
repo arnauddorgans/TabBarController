@@ -63,8 +63,19 @@ class TabBarContainer: UIView {
     }
     
     private func updateTabBarConstraints() {
-        self.visibleConstraints.forEach { $0.isActive = !self.isTabBarHidden }
-        self.hiddenConstraints.forEach { $0.isActive = self.isTabBarHidden }
+        func updateHiddenConstraints() {
+            self.hiddenConstraints.forEach { $0.isActive = self.isTabBarHidden }
+        }
+        func updateVisibleConstraints() {
+            self.visibleConstraints.forEach { $0.isActive = !self.isTabBarHidden }
+        }
+        if !isTabBarHidden {
+            updateHiddenConstraints()
+            updateVisibleConstraints()
+        } else {
+            updateVisibleConstraints()
+            updateHiddenConstraints()
+        }
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
