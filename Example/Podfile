@@ -15,8 +15,6 @@ target 'TabBarController_Example tvOS' do
     
 end
 
-
-
 # Workaround for Cocoapods v.1.5 issue #7606
 post_install do |installer|
     installer.pods_project.build_configurations.each do |config|

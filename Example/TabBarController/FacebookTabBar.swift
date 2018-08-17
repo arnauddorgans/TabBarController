@@ -11,7 +11,7 @@ import TabBarController
 
 class FacebookTabBarItem: UITabBarItem {
     
-    @IBInspectable var selectedTintColor: UIColor = .cyan
+    @IBInspectable var selectedTintColor: UIColor = .blue
 }
 
 @IBDesignable class FacebookTabBar: UIView, TabBarProtocol {
@@ -67,12 +67,18 @@ class FacebookTabBarItem: UITabBarItem {
         } else {
             contentView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         }
-        if #available(iOS 11.0, *), UIDevice.current.userInterfaceIdiom != .tv {
+        if #available(iOS 11.0, *) {
             contentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
             contentView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         } else {
-            contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            contentView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor).isActive = true
+            contentView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor).isActive = true
+        }
+    }
+    
+    func setTabBarHidden(_ hidden: Bool) {
+        contentView.arrangedSubviews.forEach {
+            $0.transform = hidden ? CGAffineTransform(rotationAngle: .pi) : .identity
         }
     }
     
@@ -116,7 +122,7 @@ class FacebookTabBarItem: UITabBarItem {
     }
     
     override func prepareForInterfaceBuilder() {
-        let item: (String, String)->UITabBarItem = {
+        let item: (String, String) -> UITabBarItem = {
             return UITabBarItem(title: nil,
                                 image: UIImage(named: $0, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil),
                                 selectedImage: UIImage(named: $1, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil))

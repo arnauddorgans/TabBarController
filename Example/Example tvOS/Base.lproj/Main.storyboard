@@ -37,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="lGW-HW-fb5" customClass="FacebookTabBar" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="500" height="321"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1315" height="321"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <viewLayoutGuide key="safeArea" id="VJq-XW-du9"/>
@@ -69,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sHK-Rt-yU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3229" y="-1299"/>
+            <point key="canvasLocation" x="2530" y="69"/>
         </scene>
         <!--Item-->
         <scene sceneID="T5V-qM-U3N">
@@ -115,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d0m-w6-8pj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3229" y="1161"/>
+            <point key="canvasLocation" x="69" y="1854"/>
         </scene>
     </scenes>
     <resources>

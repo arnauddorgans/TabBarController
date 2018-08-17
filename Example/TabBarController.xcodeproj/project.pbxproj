@@ -19,12 +19,12 @@
 		D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */; };
 		D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B22126B7AF004D21C2 /* Main.storyboard */; };
 		D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B52126B7B0004D21C2 /* Assets.xcassets */; };
-		D45C21BB2126BD35004D21C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		D45C21BC2126BDE9004D21C2 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
 		D45C21C12126EFA4004D21C2 /* FacebookTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */; };
 		D45C21C22126F604004D21C2 /* FacebookTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */; };
 		D45C21C32126F614004D21C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
+		D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,7 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D45C21BB2126BD35004D21C2 /* Images.xcassets in Resources */,
+				D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */,
 				D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */,
 				D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */,
 			);

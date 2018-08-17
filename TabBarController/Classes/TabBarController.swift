@@ -115,7 +115,7 @@ open class TabBarController: UIViewController {
             guard self.delegate?.tabBarController?(self, animateTabBar: update) == nil else {
                 return
             }
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: update, completion: nil)
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: update, completion: nil)
         } else {
             update()
         }
@@ -253,7 +253,7 @@ extension TabBarController: UINavigationControllerDelegate {
             }
             self.update(viewController: viewController)
         }
-        transitionCoordinator.animate(alongsideTransition: { [unowned self] context in
+        transitionCoordinator.animateAlongsideTransition(in: self.view, animation: { [unowned self] context in
             guard let viewController = context.viewController(forKey: .to) else {
                 return
             }
@@ -300,6 +300,10 @@ extension TabBarController: TabBarContainerControllerDelegate {
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self.delegate?.tabBarController?(self, animationControllerFrom: fromVC, to: toVC)
+    }
+    
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, didShow viewController: UIViewController?) {
+        updateInset(viewController: viewController)
     }
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?) {
