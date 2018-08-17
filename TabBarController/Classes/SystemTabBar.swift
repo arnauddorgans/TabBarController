@@ -19,15 +19,19 @@ import UIKit
     
     @IBInspectable var unselectedItemTintColor: UIColor? {
         get {
-            if #available(iOS 10.0, *) {
+            if #available(iOS 10.0, tvOS 10.0, *) {
                 return tabBar.unselectedItemTintColor
             }
             return nil
         } set {
-            if #available(iOS 10.0, *) {
+            if #available(iOS 10.0, tvOS 10.0, *) {
                 tabBar.unselectedItemTintColor = newValue
             }
         }
+    }
+    
+    open override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return [tabBar]
     }
     
     override init(frame: CGRect) {
@@ -55,7 +59,7 @@ import UIKit
     }
     
     override open func safeAreaInsetsDidChange() {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
             super.safeAreaInsetsDidChange()
             tabBar.invalidateIntrinsicContentSize()
         }

@@ -15,7 +15,7 @@ protocol TabBarContainerControllerDelegate: class {
 
 internal class TabBarContainerController: UINavigationController {
     
-    weak var _tabBarController: TabBarController?
+    var isAnimating: Bool = false
     weak var containerDelegate: TabBarContainerControllerDelegate?
     
     var viewController: UIViewController? {
@@ -23,7 +23,6 @@ internal class TabBarContainerController: UINavigationController {
     }
     
     init(tabBarController: TabBarController) {
-        self._tabBarController = tabBarController
         self.containerDelegate = tabBarController
         super.init(nibName: nil, bundle: nil)
         self.delegate = self
@@ -37,15 +36,20 @@ internal class TabBarContainerController: UINavigationController {
     
     func setViewController(_ viewController: UIViewController?, source: TabBarControllerUpdateSource) {
         if viewController != self.viewController {
+            #if os(iOS)
             let animated = source == .action && self.viewController.flatMap { fromVC in
                 viewController.flatMap { toVC in
                     self.containerDelegate?.tabBarContainerController(self, animationControllerFrom: fromVC, to: toVC)
                 }
             } != nil
+            #elseif os(tvOS)
+            let animated = true
+            #endif
             self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: animated)
         }
     }
     
+    #if os(iOS)
     override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return viewController
     }
@@ -57,6 +61,7 @@ internal class TabBarContainerController: UINavigationController {
     override var childViewControllerForStatusBarStyle: UIViewController? {
         return viewController
     }
+    #endif
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,7 +71,12 @@ internal class TabBarContainerController: UINavigationController {
 extension TabBarContainerController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        self.isAnimating = animated
         self.containerDelegate?.tabBarContainerController(self, willShow: viewController)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        self.isAnimating = false
     }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {

@@ -15,6 +15,13 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		73092051AA4108D989191A1E /* Pods_TabBarController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */; };
 		7D6CE9C04F41E9E11B7E7F36 /* Pods_TabBarController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */; };
+		96C000D87BD12851D0510165 /* Pods_TabBarController_Example_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B154B1312E18994D6156B86 /* Pods_TabBarController_Example_tvOS.framework */; };
+		D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */; };
+		D45C21B12126B7AF004D21C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21B02126B7AF004D21C2 /* ViewController.swift */; };
+		D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B22126B7AF004D21C2 /* Main.storyboard */; };
+		D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B52126B7B0004D21C2 /* Assets.xcassets */; };
+		D45C21BB2126BD35004D21C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		D45C21BC2126BDE9004D21C2 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
 		D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B154B1312E18994D6156B86 /* Pods_TabBarController_Example_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Example_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C93BD87DEEF705A440F2C18 /* Pods-TabBarController_Example tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example tvOS/Pods-TabBarController_Example tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		15760B3267DED21540B77CB3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		5E73035CB8E2C334207F833C /* TabBarController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TabBarController.podspec; path = ../TabBarController.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACD01AFB9204008FA782 /* TabBarController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBarController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +52,14 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		61D9F485C719FED61FABF33C /* Pods-TabBarController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Tests/Pods-TabBarController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E58C7F8F03118F5234D86F7 /* Pods-TabBarController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Tests/Pods-TabBarController_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		9D5AEA353F010DD38CFF6965 /* Pods-TabBarController_Example tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example tvOS/Pods-TabBarController_Example tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D45C21AC2126B7AF004D21C2 /* TabBarController_Example tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TabBarController_Example tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D45C21B02126B7AF004D21C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D45C21B32126B7AF004D21C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D45C21B52126B7B0004D21C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D45C21B72126B7B0004D21C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTabBar.swift; sourceTree = "<group>"; };
 		DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +84,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D45C21A92126B7AF004D21C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96C000D87BD12851D0510165 /* Pods_TabBarController_Example_tvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -77,6 +101,7 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for TabBarController */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				D45C21AD2126B7AF004D21C2 /* Example tvOS */,
 				607FACD11AFB9204008FA782 /* Products */,
 				70CA7C8CDBC543A2BA2A51F2 /* Pods */,
 				D7136837F9A4A10D451C19B0 /* Frameworks */,
@@ -88,6 +113,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* TabBarController_Example.app */,
 				607FACE51AFB9204008FA782 /* TabBarController_Tests.xctest */,
+				D45C21AC2126B7AF004D21C2 /* TabBarController_Example tvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,8 +175,22 @@
 				EB8401B9CBC7D663C150F67D /* Pods-TabBarController_Example.release.xcconfig */,
 				61D9F485C719FED61FABF33C /* Pods-TabBarController_Tests.debug.xcconfig */,
 				6E58C7F8F03118F5234D86F7 /* Pods-TabBarController_Tests.release.xcconfig */,
+				9D5AEA353F010DD38CFF6965 /* Pods-TabBarController_Example tvOS.debug.xcconfig */,
+				0C93BD87DEEF705A440F2C18 /* Pods-TabBarController_Example tvOS.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D45C21AD2126B7AF004D21C2 /* Example tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */,
+				D45C21B02126B7AF004D21C2 /* ViewController.swift */,
+				D45C21B22126B7AF004D21C2 /* Main.storyboard */,
+				D45C21B52126B7B0004D21C2 /* Assets.xcassets */,
+				D45C21B72126B7B0004D21C2 /* Info.plist */,
+			);
+			path = "Example tvOS";
 			sourceTree = "<group>";
 		};
 		D7136837F9A4A10D451C19B0 /* Frameworks */ = {
@@ -158,6 +198,7 @@
 			children = (
 				B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */,
 				E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */,
+				0B154B1312E18994D6156B86 /* Pods_TabBarController_Example_tvOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,13 +244,32 @@
 			productReference = 607FACE51AFB9204008FA782 /* TabBarController_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D45C21AB2126B7AF004D21C2 /* TabBarController_Example tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D45C21BA2126B7B0004D21C2 /* Build configuration list for PBXNativeTarget "TabBarController_Example tvOS" */;
+			buildPhases = (
+				FAE3295DBA06D61C9BF2C96A /* [CP] Check Pods Manifest.lock */,
+				D45C21A82126B7AF004D21C2 /* Sources */,
+				D45C21A92126B7AF004D21C2 /* Frameworks */,
+				D45C21AA2126B7AF004D21C2 /* Resources */,
+				17E78BECF12D3353D83C9267 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TabBarController_Example tvOS";
+			productName = "Example tvOS";
+			productReference = D45C21AC2126B7AF004D21C2 /* TabBarController_Example tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -223,6 +283,10 @@
 						DevelopmentTeam = CPE39ZT2AY;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					D45C21AB2126B7AF004D21C2 = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -241,6 +305,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* TabBarController_Example */,
 				607FACE41AFB9204008FA782 /* TabBarController_Tests */,
+				D45C21AB2126B7AF004D21C2 /* TabBarController_Example tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -263,9 +328,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D45C21AA2126B7AF004D21C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D45C21BB2126BD35004D21C2 /* Images.xcassets in Resources */,
+				D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */,
+				D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		17E78BECF12D3353D83C9267 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TabBarController_Example tvOS/Pods-TabBarController_Example tvOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TabBarController-tvOS/TabBarController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TabBarController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TabBarController_Example tvOS/Pods-TabBarController_Example tvOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		32DDB7E237A6C4E69B106CA2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,7 +402,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/TabBarController/TabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/TabBarController-iOS/TabBarController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -318,6 +411,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAE3295DBA06D61C9BF2C96A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TabBarController_Example tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -338,6 +449,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D45C21A82126B7AF004D21C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D45C21BC2126BDE9004D21C2 /* FacebookTabBar.swift in Sources */,
+				D45C21B12126B7AF004D21C2 /* ViewController.swift in Sources */,
+				D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +487,14 @@
 				607FACDF1AFB9204008FA782 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		D45C21B22126B7AF004D21C2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D45C21B32126B7AF004D21C2 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -544,6 +673,62 @@
 			};
 			name = Release;
 		};
+		D45C21B82126B7B0004D21C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D5AEA353F010DD38CFF6965 /* Pods-TabBarController_Example tvOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Example tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TabBarController-Example-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.4;
+			};
+			name = Debug;
+		};
+		D45C21B92126B7B0004D21C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C93BD87DEEF705A440F2C18 /* Pods-TabBarController_Example tvOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Example tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TabBarController-Example-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.4;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -570,6 +755,15 @@
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
 				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D45C21BA2126B7B0004D21C2 /* Build configuration list for PBXNativeTarget "TabBarController_Example tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D45C21B82126B7B0004D21C2 /* Debug */,
+				D45C21B92126B7B0004D21C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14113" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="TabBarController" customModule="TabBarController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="tabBarAnchorIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="tabBar" destination="lGW-HW-fb5" id="xRG-7v-G1I"/>
+                        <segue destination="Fxc-na-ac3" kind="custom" identifier="tab0" customClass="TabBarSegue" customModule="TabBarController" id="1jV-m8-X2o"/>
+                        <segue destination="sFE-1z-cou" kind="custom" identifier="tab1" customClass="TabBarSegue" customModule="TabBarController" id="xiw-4O-bTv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="lGW-HW-fb5" customClass="FacebookTabBar" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="500" height="321"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="VJq-XW-du9"/>
+                </view>
+            </objects>
+        </scene>
+        <!--Item-->
+        <scene sceneID="WaR-Hm-OZD">
+            <objects>
+                <viewController id="Fxc-na-ac3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WzJ-vL-kaQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="hbz-xK-7qT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zmT-8Q-jte">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.61176470589999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Lx6-rX-Pu3"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="outline-account_circle-24px" selectedImage="twotone-account_circle-24px" id="ycf-JH-guA" customClass="FacebookTabBarItem" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sHK-Rt-yU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3229" y="-1299"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="T5V-qM-U3N">
+            <objects>
+                <viewController id="sFE-1z-cou" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gpy-lz-k2I"/>
+                        <viewControllerLayoutGuide type="bottom" id="1L5-I2-cXS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JfZ-RT-6aL">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96h-ST-qK3">
+                                <rect key="frame" x="863" y="497" width="195" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="96h-ST-qK3" firstAttribute="centerX" secondItem="JfZ-RT-6aL" secondAttribute="centerX" id="HIZ-bn-Tb2"/>
+                            <constraint firstItem="96h-ST-qK3" firstAttribute="centerY" secondItem="JfZ-RT-6aL" secondAttribute="centerY" id="iNK-QP-Y2B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zef-zu-Abl"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="outline-notifications-24px" selectedImage="twotone-notifications-24px" id="mcJ-5M-PYv" customClass="FacebookTabBarItem" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                <color key="value" red="0.95294117649999999" green="0.61176470589999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d0m-w6-8pj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3229" y="1161"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="outline-account_circle-24px" width="27" height="27"/>
+        <image name="outline-notifications-24px" width="27" height="27"/>
+        <image name="twotone-account_circle-24px" width="27" height="27"/>
+        <image name="twotone-notifications-24px" width="27" height="27"/>
+    </resources>
+</document>

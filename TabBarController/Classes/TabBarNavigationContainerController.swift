@@ -44,6 +44,7 @@ public class TabBarNavigationContainerController: UIViewController {
         controller.didMove(toParentViewController: self)
     }
     
+    #if os(iOS)
     override public var childViewControllerForStatusBarStyle: UIViewController? {
         return controller
     }
@@ -55,6 +56,7 @@ public class TabBarNavigationContainerController: UIViewController {
     override public func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return controller
     }
+    #endif
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

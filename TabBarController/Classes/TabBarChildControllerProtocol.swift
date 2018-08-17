@@ -8,11 +8,11 @@
 import UIKit
 
 @objc public protocol TabBarChildControllerProtocol where Self: UIViewController {
-    
+
     @objc optional weak var additionalTopInsetConstraint: NSLayoutConstraint! { get }
     @objc optional weak var additionalBottomInsetConstraint: NSLayoutConstraint! { get }
-    @objc optional func updateAdditionalInsets(_ insets: UIEdgeInsets)
     
+    @objc optional func updateAdditionalInsets(_ insets: UIEdgeInsets)
     @objc optional func tabBarAction()
 }
 

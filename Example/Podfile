@@ -10,6 +10,13 @@ target 'TabBarController_Example' do
   end
 end
 
+target 'TabBarController_Example tvOS' do
+    pod 'TabBarController', :path => '../'
+    
+end
+
+
+
 # Workaround for Cocoapods v.1.5 issue #7606
 post_install do |installer|
     installer.pods_project.build_configurations.each do |config|

@@ -46,24 +46,24 @@ open class TabBarController: UIViewController {
         }
     }
     
-    public var tabBarAnchor: TabBarAnchor {
-        get { return tabBarContainer.anchor }
-        set { tabBarContainer.anchor = newValue }
-    }
-    
     @IBInspectable var tabBarAnchorIndex: Int {
         get { return TabBarAnchor.all.index(of: tabBarAnchor)! }
         set { tabBarAnchor = TabBarAnchor.all[newValue % 2 == 0 ? 0 : 1] }
-    }
-    
-    public var isTabBarHidden: Bool {
-        return tabBarContainer.isTabBarHidden
     }
     
     @IBInspectable var prefersAdditionalInset: Bool = false {
         didSet {
             updateInset()
         }
+    }
+    
+    public var tabBarAnchor: TabBarAnchor {
+        get { return tabBarContainer.anchor }
+        set { tabBarContainer.anchor = newValue }
+    }
+    
+    public var isTabBarHidden: Bool {
+        return tabBarContainer.isTabBarHidden
     }
     
     public var selectedViewController: UIViewController? {
@@ -120,10 +120,6 @@ open class TabBarController: UIViewController {
         }
     }
     
-    private func setTabBarAnchor(_ anchor: TabBarAnchor) {
-        
-    }
-    
     // MARK: ViewControllers
     public func setViewControllers(_ viewControllers: [UIViewController]?) {
         self._viewControllers = viewControllers
@@ -137,11 +133,13 @@ open class TabBarController: UIViewController {
     }
     
     open func update(viewController: UIViewController) {
+        #if os(iOS)
         self.setNeedsStatusBarAppearanceUpdate()
         if #available(iOS 11.0, *) {
             self.setNeedsUpdateOfHomeIndicatorAutoHidden()
         }
         self.setTabBarHidden(viewController.hidesBottomBarWhenPushed, animated: false)
+        #endif
         updateInset(viewController: viewController)
     }
     
@@ -158,6 +156,7 @@ open class TabBarController: UIViewController {
     }
     
     // MARK: ChildViewController
+    #if os(iOS)
     open override var childViewControllerForStatusBarStyle: UIViewController? {
         return containerController
     }
@@ -169,6 +168,7 @@ open class TabBarController: UIViewController {
     open override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return containerController
     }
+    #endif
     
     // MARK: StoryboardSegue
     private func addStoryboardSegues() {
@@ -189,6 +189,21 @@ open class TabBarController: UIViewController {
                 return false
         }
         return true
+    }
+    
+    // MARK: tvOS
+    open override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        if self.isTabBarHidden {
+            return [containerController]
+        }
+        return [tabBarContainer, containerController]
+    }
+    
+    open override func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
+        guard !self.containerController.isAnimating else {
+            return false
+        }
+        return super.shouldUpdateFocus(in: context)
     }
 }
 
@@ -246,12 +261,11 @@ extension TabBarController: UINavigationControllerDelegate {
     }
     
     private func updateInset(viewController: UIViewController? = nil) {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
             containerController.additionalSafeAreaInsets = !self.prefersAdditionalInset ? tabBarContainer.additionalInsets : .zero
-            containerController.viewSafeAreaInsetsDidChange()
         }
         let inset: UIEdgeInsets = {
-            if #available(iOS 11.0, *), !self.prefersAdditionalInset {
+            if #available(iOS 11.0, tvOS 11.0, *), !self.prefersAdditionalInset {
                 return .zero
             }
             return tabBarContainer.additionalInsets
@@ -262,6 +276,15 @@ extension TabBarController: UINavigationControllerDelegate {
 }
 
 extension TabBarController: TabBarContainerDelegate {
+    
+    func tabBarContainer(_ tabBarContainer: TabBarContainer, didShowTabBar show: Bool) {
+        self.setNeedsFocusUpdate()
+        self.updateFocusIfNeeded()
+    }
+    
+    func tabBarContainer(_ tabBarContainer: TabBarContainer, didHandleShowGesture show: Bool) {
+        self.setTabBarHidden(!show, animated: true)
+    }
     
     func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets) {
         updateInset()
