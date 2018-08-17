@@ -59,7 +59,19 @@
                     <view key="view" contentMode="scaleToFill" id="1d1-oU-JQ7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFQ-vl-Aa4">
+                                <rect key="frame" x="16" y="20" width="343" height="598"/>
+                                <color key="backgroundColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bFQ-vl-Aa4" firstAttribute="top" secondItem="lJj-vC-0pX" secondAttribute="bottom" id="G5a-dG-0on"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bFQ-vl-Aa4" secondAttribute="trailing" id="Q9E-9b-hiU"/>
+                            <constraint firstItem="iN7-Ov-2au" firstAttribute="top" secondItem="bFQ-vl-Aa4" secondAttribute="bottom" id="l3m-gg-WLs"/>
+                            <constraint firstItem="bFQ-vl-Aa4" firstAttribute="leading" secondItem="1d1-oU-JQ7" secondAttribute="leadingMargin" id="mVe-0D-VgM"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="outline-chrome_reader_mode-24px" selectedImage="twotone-chrome_reader_mode-24px" id="myE-Nh-ubi" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>
@@ -77,6 +89,7 @@
         <!--Navigation Controller-->
         <scene sceneID="71O-xW-spP">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UFL-Ss-nMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="AgS-3c-U8S" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7v0-dC-8Sj">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -86,7 +99,6 @@
                         <segue destination="dUG-cF-Xz5" kind="relationship" relationship="rootViewController" id="hYV-1o-uBt"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UFL-Ss-nMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-572" y="-84"/>
         </scene>
@@ -147,7 +159,19 @@
                     <view key="view" contentMode="scaleToFill" id="Dnn-0e-EjI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6x-FF-bep">
+                                <rect key="frame" x="16" y="20" width="343" height="598"/>
+                                <color key="backgroundColor" red="0.95294117649999999" green="0.61176470589999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Ga-H7-T6o" firstAttribute="top" secondItem="Y6x-FF-bep" secondAttribute="bottom" id="SE2-Yh-G0O"/>
+                            <constraint firstItem="Y6x-FF-bep" firstAttribute="top" secondItem="dBB-3s-q1u" secondAttribute="bottom" id="fzf-GG-38Z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Y6x-FF-bep" secondAttribute="trailing" id="g0G-zi-osh"/>
+                            <constraint firstItem="Y6x-FF-bep" firstAttribute="leading" secondItem="Dnn-0e-EjI" secondAttribute="leadingMargin" id="zhz-Sx-RwO"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="outline-notifications-24px" selectedImage="twotone-notifications-24px" id="k83-Pg-pSb" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
                         <userDefinedRuntimeAttributes>

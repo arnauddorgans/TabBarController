@@ -11,6 +11,7 @@ import UIKit
     @objc optional func tabBarController(_ tabBarController: TabBarController, shouldSelect viewController: UIViewController) -> Bool
     @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
     @objc optional func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    @objc optional func tabBarController(_ tabBarController: TabBarController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
     @objc optional func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: ()->Void)
 }
 
@@ -293,11 +294,15 @@ extension TabBarController: TabBarContainerDelegate {
 
 extension TabBarController: TabBarContainerControllerDelegate {
     
-    func tabBarContainerController(_ TabBarContainerController: TabBarContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return self.delegate?.tabBarController?(self, interactionControllerFor: animationController)
+    }
+    
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self.delegate?.tabBarController?(self, animationControllerFrom: fromVC, to: toVC)
     }
     
-    func tabBarContainerController(_ TabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?) {
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?) {
         updateInset(viewController: viewController)
     }
 }

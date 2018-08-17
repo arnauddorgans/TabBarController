@@ -9,8 +9,9 @@ import UIKit
 
 protocol TabBarContainerControllerDelegate: class {
     
-    func tabBarContainerController(_ TabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?)
-    func tabBarContainerController(_ TabBarContainerController: TabBarContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?)
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
 }
 
 internal class TabBarContainerController: UINavigationController {
@@ -81,5 +82,9 @@ extension TabBarContainerController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self.containerDelegate?.tabBarContainerController(self, animationControllerFrom: fromVC, to: toVC)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return self.containerDelegate?.tabBarContainerController(self, interactionControllerFor: animationController)
     }
 }

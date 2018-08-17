@@ -102,7 +102,7 @@ class TabBarContainer: UIView {
     }
     
     private func updateInset() {
-        if self.isTabBarHidden {
+        if self.isTabBarHidden || !(self.tabBar.needsAdditionalInset ?? self.tabBar.defaultNeedsAdditionalInset) {
             self.additionalInsets = .zero
         } else {
             self.additionalInsets = {

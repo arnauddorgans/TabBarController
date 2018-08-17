@@ -11,7 +11,21 @@ import TabBarController
 
 class ViewController: TabBarController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.delegate = self
+    }
+}
 
+extension ViewController: TabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let fromIndex = tabBarController.viewControllers?.index(of: fromVC),
+            let toIndex = tabBarController.viewControllers?.index(of: toVC) else {
+                return nil
+        }
+        return FacebookTabBarTransition(isNext: toIndex > fromIndex)
+    }
 }
 
 class ViewControllerTest: UIViewController, TabBarChildControllerProtocol {
@@ -24,6 +38,8 @@ class ViewControllerTest: UIViewController, TabBarChildControllerProtocol {
 
     }
 }
+
+#if os(iOS)
 
 class HiddenController: ViewControllerTest {
     
@@ -41,3 +57,4 @@ class HiddenController: ViewControllerTest {
         controller.setTabBarHidden(self.hidesBottomBarWhenPushed, animated: true)
     }
 }
+#endif

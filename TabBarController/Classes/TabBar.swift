@@ -26,9 +26,17 @@ public enum TabBarAnchor {
     var items: [UITabBarItem]? { get }
     var selectedItem: UITabBarItem? { get set }
     @objc optional var additionalInset: CGFloat { get }
+    @objc optional var needsAdditionalInset: Bool { get }
     
     func setItems(_ items: [UITabBarItem]?, animated: Bool)
     @objc optional func setTabBarHidden(_ hidden: Bool)
+}
+
+extension TabBarProtocol {
+    
+    var defaultNeedsAdditionalInset: Bool {
+        return UIDevice.current.userInterfaceIdiom != .tv
+    }
 }
 
 @objc public protocol TabBarDelegate: NSObjectProtocol {

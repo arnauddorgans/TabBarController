@@ -52,6 +52,8 @@ class FacebookTabBarItem: UITabBarItem {
     }
     
     private func sharedInit() {
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         self.backgroundColor = .white
         
         contentView.axis = .horizontal
@@ -60,8 +62,12 @@ class FacebookTabBarItem: UITabBarItem {
         self.addSubview(contentView)
         contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        if #available(iOS 11.0, *) {
+        if UIDevice.current.userInterfaceIdiom == .tv {
+            contentView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        } else {
+            contentView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        }
+        if #available(iOS 11.0, *), UIDevice.current.userInterfaceIdiom != .tv {
             contentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
             contentView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         } else {
@@ -144,7 +150,7 @@ private class FacebookTabBarButton: UIButton {
     
     private func update() {
         self.setImage(self.isSelected ? item.selectedImage : item.image, for: .normal)
-        self.tintColor = self.isSelected ? item.selectedTintColor : .black
+        self.tintColor = self.isSelected ? item.selectedTintColor : UIColor.gray.withAlphaComponent(0.5)
         self.transform = self.isFocused ? CGAffineTransform(scaleX: 1.5, y: 1.5) : .identity
     }
     
