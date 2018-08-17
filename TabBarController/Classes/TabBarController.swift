@@ -7,17 +7,17 @@
 
 import UIKit
 
+enum TabBarControllerUpdateSource {
+    case action
+    case update
+}
+
 @objc public protocol TabBarControllerDelegate: class {
     @objc optional func tabBarController(_ tabBarController: TabBarController, shouldSelect viewController: UIViewController) -> Bool
     @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
     @objc optional func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
     @objc optional func tabBarController(_ tabBarController: TabBarController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
     @objc optional func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: ()->Void)
-}
-
-enum TabBarControllerUpdateSource {
-    case action
-    case update
 }
 
 open class TabBarController: UIViewController {
@@ -27,7 +27,7 @@ open class TabBarController: UIViewController {
     
     private lazy var containerController = TabBarContainerController(tabBarController: self)
     private lazy var tabBarContainer = TabBarContainer(tabBarController: self)
-    private let segueIdentifierPrefix = "tab"
+    private let storyboardSegueIdentifierPrefix = "tab"
     
     private var _viewControllers: [UIViewController]?
     public var viewControllers: [UIViewController]? {
@@ -47,15 +47,11 @@ open class TabBarController: UIViewController {
         }
     }
     
+    @IBInspectable var storyboardSeguesCount: Int = 0
+    
     @IBInspectable var tabBarAnchorIndex: Int {
         get { return TabBarAnchor.all.index(of: tabBarAnchor)! }
         set { tabBarAnchor = TabBarAnchor.all[newValue % 2 == 0 ? 0 : 1] }
-    }
-    
-    @IBInspectable var prefersAdditionalInset: Bool = false {
-        didSet {
-            updateInset()
-        }
     }
     
     public var tabBarAnchor: TabBarAnchor {
@@ -144,7 +140,16 @@ open class TabBarController: UIViewController {
         updateInset(viewController: viewController)
     }
     
-    // MARK: SelectedController
+    private func updateInset(viewController: UIViewController? = nil) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            containerController.additionalSafeAreaInsets = tabBarContainer.additionalInsets
+        } else if let viewController = viewController {
+            (viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(tabBarContainer.additionalInsets)
+        } else {
+            (containerController.viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(tabBarContainer.additionalInsets)
+        }
+    }
+    
     private func updateSelectedController(source: TabBarControllerUpdateSource) {
         guard let viewControllers = self.viewControllers, !viewControllers.isEmpty else {
             containerController.setViewController(nil, source: source)
@@ -156,43 +161,14 @@ open class TabBarController: UIViewController {
         self.tabBar?.selectedItem = self.selectedViewController?.tabBarItem
     }
     
-    // MARK: ChildViewController
-    #if os(iOS)
-    open override var childViewControllerForStatusBarStyle: UIViewController? {
-        return containerController
-    }
-    
-    open override var childViewControllerForStatusBarHidden: UIViewController? {
-        return containerController
-    }
-    
-    open override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
-        return containerController
-    }
-    #endif
-    
-    // MARK: StoryboardSegue
+    // MARK:- StoryboardSegue
     private func addStoryboardSegues() {
-        (self.value(forKey: "storyboardSegueTemplates") as? [AnyObject] ?? [])
-            .map { $0.value(forKey: "identifier") as? String }
-            .filter { self.isTabBarSegue($0) }
-            .map { $0! }
-            .sorted()
-            .forEach {
-                self.performSegue(withIdentifier: $0, sender: tabBarContainer)
-            }
-    }
-    
-    private func isTabBarSegue(_ identifier: String?) -> Bool {
-        guard let identifier = identifier,
-            let range = identifier.range(of: segueIdentifierPrefix), range.lowerBound == identifier.startIndex,
-            let _ = Int(identifier.replacingCharacters(in: range, with: "")) else {
-                return false
+        for i in 0..<storyboardSeguesCount {
+            self.performSegue(withIdentifier: storyboardSegueIdentifierPrefix + String(i), sender: self)
         }
-        return true
     }
     
-    // MARK: tvOS
+    // MARK:- Focus
     open override var preferredFocusEnvironments: [UIFocusEnvironment] {
         if self.isTabBarHidden {
             return [containerController]
@@ -206,8 +182,24 @@ open class TabBarController: UIViewController {
         }
         return super.shouldUpdateFocus(in: context)
     }
+    
+    // MARK:- ChildViewController
+    #if os(iOS)
+    open override var childViewControllerForStatusBarStyle: UIViewController? {
+        return containerController
+    }
+    
+    open override var childViewControllerForStatusBarHidden: UIViewController? {
+        return containerController
+    }
+    
+    open override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
+        return containerController
+    }
+    #endif
 }
 
+// MARK:- TabBarDelegate
 extension TabBarController: TabBarDelegate {
     
     public func tabBar(_ tabBar: TabBar, didSelect item: UITabBarItem) {
@@ -231,7 +223,7 @@ extension TabBarController: TabBarDelegate {
     }
 }
 
-// MARK: Transitions
+// MARK:- UINavigationControllerDelegate
 extension TabBarController: UINavigationControllerDelegate {
     
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -260,22 +252,9 @@ extension TabBarController: UINavigationControllerDelegate {
             self.update(viewController: viewController)
         }, completion: nil)
     }
-    
-    private func updateInset(viewController: UIViewController? = nil) {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            containerController.additionalSafeAreaInsets = !self.prefersAdditionalInset ? tabBarContainer.additionalInsets : .zero
-        }
-        let inset: UIEdgeInsets = {
-            if #available(iOS 11.0, tvOS 11.0, *), !self.prefersAdditionalInset {
-                return .zero
-            }
-            return tabBarContainer.additionalInsets
-        }()
-        (containerController.viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
-        (viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(inset)
-    }
 }
 
+// MARK:- TabBarContainerDelegate
 extension TabBarController: TabBarContainerDelegate {
     
     func tabBarContainer(_ tabBarContainer: TabBarContainer, didShowTabBar show: Bool) {
@@ -292,6 +271,7 @@ extension TabBarController: TabBarContainerDelegate {
     }
 }
 
+// MARK:- TabBarContainerControllerDelegate
 extension TabBarController: TabBarContainerControllerDelegate {
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {

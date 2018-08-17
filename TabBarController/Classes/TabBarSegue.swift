@@ -14,9 +14,9 @@ public class TabBarSegue: UIStoryboardSegue {
             return
         }
         if source.viewControllers == nil {
-            source.viewControllers = [destination]
+            source.viewControllers = [self.destination]
         } else {
-            source.viewControllers?.append(destination)
+            source.viewControllers?.append(self.destination)
         }
     }
 }

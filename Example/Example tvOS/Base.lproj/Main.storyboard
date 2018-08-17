@@ -28,6 +28,9 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="tabBarAnchorIndex">
                             <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="storyboardSeguesCount">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="tabBar" destination="lGW-HW-fb5" id="dFf-cT-99V"/>
@@ -43,6 +46,7 @@
                     <viewLayoutGuide key="safeArea" id="VJq-XW-du9"/>
                 </view>
             </objects>
+            <point key="canvasLocation" x="69" y="1229"/>
         </scene>
         <!--Item-->
         <scene sceneID="WaR-Hm-OZD">
@@ -69,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sHK-Rt-yU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2530" y="69"/>
+            <point key="canvasLocation" x="2349" y="1229"/>
         </scene>
         <!--Item-->
         <scene sceneID="T5V-qM-U3N">
@@ -115,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d0m-w6-8pj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="69" y="1854"/>
+            <point key="canvasLocation" x="69" y="2867"/>
         </scene>
     </scenes>
     <resources>
