@@ -51,6 +51,7 @@ internal class TabBarContainerController: UINavigationController {
         }
     }
     
+    // MARK: iOS
     #if os(iOS)
     override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return viewController
@@ -70,6 +71,7 @@ internal class TabBarContainerController: UINavigationController {
     }
 }
 
+// MARK: UINavigationControllerDelegate
 extension TabBarContainerController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {

@@ -105,7 +105,6 @@ open class TabBarController: UIViewController {
     public func setTabBarHidden(_ hidden: Bool, animated: Bool) {
         func update() {
             self.tabBarContainer.setTabBarHidden(hidden)
-            self.updateInset()
         }
         if animated {
             guard self.delegate?.tabBarController?(self, animateTabBar: update) == nil else {
@@ -137,7 +136,6 @@ open class TabBarController: UIViewController {
         }
         self.setTabBarHidden(viewController.hidesBottomBarWhenPushed, animated: false)
         #endif
-        updateInset(viewController: viewController)
     }
     
     private func updateInset(viewController: UIViewController? = nil) {

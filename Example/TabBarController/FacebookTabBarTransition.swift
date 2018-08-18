@@ -10,14 +10,14 @@ import UIKit
 
 class FacebookTabBarTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
-    var isNext: Bool
+    var isReversed: Bool
     
-    init(isNext: Bool) {
-        self.isNext = isNext
+    init(isReversed: Bool) {
+        self.isReversed = isReversed
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.1
+        return 0.2
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -33,7 +33,7 @@ class FacebookTabBarTransition: NSObject, UIViewControllerAnimatedTransitioning 
         containerView.addSubview(toView)
         toView.alpha = 0
         
-        if isNext {
+        if !isReversed {
             toView.frame = CGRect(x: finalFrame.minX + padding, y: finalFrame.origin.y, width: finalFrame.width, height: finalFrame.height)
         } else {
             toView.frame = CGRect(x: finalFrame.minX - padding, y: finalFrame.origin.y, width: finalFrame.width, height: finalFrame.height)
@@ -42,12 +42,14 @@ class FacebookTabBarTransition: NSObject, UIViewControllerAnimatedTransitioning 
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
             toView.frame = finalFrame
             toView.alpha = 1
-            if self.isNext {
+            fromView.alpha = 0
+            if !self.isReversed {
                 fromView.frame = CGRect(x: initialFrame.minX - padding, y: initialFrame.origin.y, width: initialFrame.width, height: initialFrame.height)
             } else {
                 fromView.frame = CGRect(x: initialFrame.minX + padding, y: initialFrame.origin.y, width: initialFrame.width, height: initialFrame.height)
             }
         }, completion: {
+            fromView.alpha = 1
             transitionContext.completeTransition($0)
             fromView.frame = initialFrame
         })

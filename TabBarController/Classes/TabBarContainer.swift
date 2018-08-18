@@ -54,11 +54,14 @@ class TabBarContainer: UIView {
         self.tabBar.setTabBarHidden?(hidden)
     }
     
-    // MARK: TabBar Constraints
-    private func updateTabBar() {
-        func clean() {
-            self.subviews.forEach { $0.removeFromSuperview() }
+    // MARK: Constraints
+    private func clean() {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        if let tabBar = tabBar {
+            self.removeObserver(tabBar: tabBar)
         }
+    }
+    private func updateTabBar() {
         guard let tabBarController = tabBarController,
             let tabBar = tabBarController.tabBar else {
             clean()
@@ -69,6 +72,7 @@ class TabBarContainer: UIView {
         }
         clean()
         tabBar.translatesAutoresizingMaskIntoConstraints = false
+        addObserver(tabBar: tabBar)
         self.addSubview(tabBar)
         tabBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         tabBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
@@ -111,13 +115,17 @@ class TabBarContainer: UIView {
     }
     
     private func updateInset() {
-        if self.isTabBarHidden || !(self.tabBar.needsAdditionalInset ?? self.tabBar.defaultNeedsAdditionalInset) {
+        guard let tabBar = self.tabBar,
+            let tabBarController = self.tabBarController else {
+            return
+        }
+        if self.isTabBarHidden || !(tabBar.needsAdditionalInset ?? tabBar.defaultNeedsAdditionalInset) {
             self.additionalInsets = .zero
         } else {
             self.additionalInsets = {
-                var inset = max(0, self.tabBar.frame.height + (self.tabBar?.additionalInset ?? 0))
+                var inset = max(0, tabBar.frame.height + (tabBar.additionalInset ?? 0))
                 if #available(iOS 11.0, tvOS 11.0, *) {
-                    inset = max(0, inset - (self.anchor == .bottom ? self.tabBar.safeAreaInsets.bottom : self.tabBar.safeAreaInsets.top))
+                    inset = max(0, inset - (self.anchor == .bottom ? self.safeAreaInsets.bottom : self.safeAreaInsets.top))
                 }
                 return UIEdgeInsets(top: self.anchor == .bottom ? 0 : inset, left: 0, bottom: self.anchor != .bottom ? 0 : inset, right: 0)
             }()
@@ -130,7 +138,16 @@ class TabBarContainer: UIView {
         }
         self.delegate?.tabBarContainer(self, didUpdateAdditionalInsets: self.additionalInsets)
     }
-
+    
+    // MARK: iOS
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let tabBar = self.tabBar else {
+            return nil
+        }
+        let point = self.convert(point, to: tabBar)
+        return tabBar.hitTest(point, with: event)
+    }
+    
     // MARK: tvOS
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
         return [tabBar]
@@ -154,21 +171,7 @@ class TabBarContainer: UIView {
         self.delegate?.tabBarContainer(self, didHandleShowGesture: true)
     }
     
-    // MARK: iOS
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard let tabBar = tabBar else {
-            return nil
-        }
-        let point = self.convert(point, to: tabBar)
-        return tabBar.hitTest(point, with: event)
-    }
-    
     // MARK: Layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updateInset()
-    }
-    
     override func safeAreaInsetsDidChange() {
         if #available(iOS 11.0, tvOS 11.0, *) {
             super.safeAreaInsetsDidChange()
@@ -179,6 +182,27 @@ class TabBarContainer: UIView {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         updateTabBar()
+    }
+    
+    // MARK: KVO
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        updateInset()
+    }
+    
+    func addObserver(tabBar: TabBar) {
+        tabBar.addObserver(self, forKeyPath: #keyPath(UIView.bounds), options: .new, context: nil)
+        tabBar.layer.addObserver(self, forKeyPath: #keyPath(CALayer.position), options: .new, context: nil)
+    }
+    
+    func removeObserver(tabBar: TabBar) {
+        tabBar.removeObserver(self, forKeyPath: #keyPath(UIView.bounds))
+        tabBar.layer.removeObserver(self, forKeyPath: #keyPath(CALayer.position))
+    }
+    
+    deinit {
+        if let tabBar = self.tabBar {
+            self.removeObserver(tabBar: tabBar)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
