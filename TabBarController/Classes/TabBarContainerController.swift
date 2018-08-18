@@ -38,16 +38,7 @@ internal class TabBarContainerController: UINavigationController {
     
     func setViewController(_ viewController: UIViewController?, source: TabBarControllerUpdateSource) {
         if viewController != self.viewController {
-            #if os(iOS)
-            let animated = source == .action && self.viewController.flatMap { fromVC in
-                viewController.flatMap { toVC in
-                    self.containerDelegate?.tabBarContainerController(self, animationControllerFrom: fromVC, to: toVC)
-                }
-            } != nil
-            #elseif os(tvOS)
-            let animated = true
-            #endif
-            self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: animated)
+            self.setViewControllers(viewController.flatMap { [$0] } ?? [], animated: source.animateViewController(viewController, in: self))
         }
     }
     

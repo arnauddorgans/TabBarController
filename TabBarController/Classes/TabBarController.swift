@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum TabBarControllerUpdateSource {
-    case action
-    case update
-}
-
 @objc public protocol TabBarControllerDelegate: class {
     @objc optional func tabBarController(_ tabBarController: TabBarController, shouldSelect viewController: UIViewController) -> Bool
     @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
@@ -70,8 +65,10 @@ open class TabBarController: UIViewController {
         return viewControllers[selectedIndex]
     }
     
-    public convenience init(viewControllers: [UIViewController]?) {
+    public convenience init(viewControllers: [UIViewController]?, tabBar: TabBar? = nil, anchor: TabBarAnchor = .default) {
         self.init(nibName: nil, bundle: nil)
+        self.tabBar = tabBar
+        self.tabBarAnchor = anchor
         self.setViewControllers(viewControllers)
     }
 
@@ -151,7 +148,7 @@ open class TabBarController: UIViewController {
         }
         self._selectedIndex = max(0, min(viewControllers.count - 1, selectedIndex))
         containerController.setViewController(viewControllers[selectedIndex], source: source)
-        self.tabBar?.selectedItem = self.selectedViewController?.tabBarItem
+        self.tabBar?.setSelectedItem(self.selectedViewController?.tabBarItem, animated: source.animateTabBarSelectedItem())
     }
     
     // MARK:- StoryboardSegue

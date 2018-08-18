@@ -11,6 +11,20 @@ import UIKit
     
     public let tabBar = UITabBar()
     public var delegate: TabBarDelegate?
+    
+    public var items: [UITabBarItem]? {
+        return tabBar.items
+    }
+    
+    public var selectedItem: UITabBarItem? {
+        get { return tabBar.selectedItem }
+        set { tabBar.selectedItem = newValue }
+    }
+    
+    @IBInspectable public var isTranslucent: Bool {
+        get { return tabBar.isTranslucent }
+        set { tabBar.isTranslucent = newValue }
+    }
         
     @IBInspectable var barTintColor: UIColor? {
         get { return tabBar.barTintColor }
@@ -28,10 +42,6 @@ import UIKit
                 tabBar.unselectedItemTintColor = newValue
             }
         }
-    }
-    
-    open override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        return [tabBar]
     }
     
     override init(frame: CGRect) {
@@ -58,6 +68,7 @@ import UIKit
         tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
+    // MARK: Layout
     override open func safeAreaInsetsDidChange() {
         if #available(iOS 11.0, tvOS 11.0, *) {
             super.safeAreaInsetsDidChange()
@@ -65,6 +76,7 @@ import UIKit
         }
     }
     
+    // MARK: InterfaceBuilder
     open override func prepareForInterfaceBuilder() {
         let items = [UITabBarItem(tabBarSystemItem: .favorites, tag: 0),
                      UITabBarItem(tabBarSystemItem: .recents, tag: 0),
@@ -72,6 +84,11 @@ import UIKit
                      UITabBarItem(tabBarSystemItem: .search, tag: 0)]
         self.setItems(items, animated: false)
         self.selectedItem = items.first
+    }
+    
+    // MARK: tvOS
+    open override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return [tabBar]
     }
 }
 
@@ -84,21 +101,11 @@ extension SystemTabBar: UITabBarDelegate {
 
 extension SystemTabBar: TabBarProtocol {
     
-    public var items: [UITabBarItem]? {
-        return tabBar.items
-    }
-    
-    @IBInspectable public var selectedItem: UITabBarItem? {
-        get { return tabBar.selectedItem }
-        set { tabBar.selectedItem = newValue }
-    }
-    
-    @IBInspectable public var isTranslucent: Bool {
-        get { return tabBar.isTranslucent }
-        set { tabBar.isTranslucent = newValue }
-    }
-    
     public func setItems(_ items: [UITabBarItem]?, animated: Bool) {
         tabBar.setItems(items, animated: animated)
+    }
+    
+    public func setSelectedItem(_ item: UITabBarItem?, animated: Bool) {
+        self.selectedItem = item
     }
 }

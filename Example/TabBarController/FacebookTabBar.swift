@@ -19,19 +19,6 @@ class FacebookTabBar: UIView, TabBarProtocol {
     private let contentView = UIStackView()
     
     weak var delegate: TabBarDelegate?
-
-    var items: [UITabBarItem]?
-    var selectedItem: UITabBarItem? {
-        didSet {
-            updateSelectedItem()
-        }
-    }
-    
-    @IBInspectable var unselectedItemTintColor: UIColor = .gray {
-        didSet {
-            updateSelectedItem()
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,7 +67,6 @@ class FacebookTabBar: UIView, TabBarProtocol {
     
     // MARK: Updates
     func setItems(_ items: [UITabBarItem]?, animated: Bool) {
-        self.items = items
         contentView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         guard let items = items else {
             return
@@ -92,15 +78,14 @@ class FacebookTabBar: UIView, TabBarProtocol {
             button.addTarget(self, action: #selector(self.didSelect(_:)), for: .touchUpInside)
             contentView.addArrangedSubview(button)
         }
-        updateSelectedItem()
     }
     
-    private func updateSelectedItem() {
+    func setSelectedItem(_ item: UITabBarItem?, animated: Bool) {
         contentView.arrangedSubviews.forEach {
             guard let button = $0 as? FacebookTabBarButton else {
                 return
             }
-            button.isSelected = button.item == self.selectedItem
+            button.isSelected = button.item == item
         }
     }
     

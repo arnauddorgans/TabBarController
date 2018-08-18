@@ -23,11 +23,10 @@ public typealias TabBar = UIView & TabBarProtocol
 @objc public protocol TabBarProtocol: NSObjectProtocol {
     
     weak var delegate: TabBarDelegate? { get set }
-    var items: [UITabBarItem]? { get }
-    var selectedItem: UITabBarItem? { get set }
     @objc optional var additionalInset: CGFloat { get }
     @objc optional var needsAdditionalInset: Bool { get }
     
+    func setSelectedItem(_ item: UITabBarItem?, animated: Bool)
     func setItems(_ items: [UITabBarItem]?, animated: Bool)
     @objc optional func setTabBarHidden(_ hidden: Bool)
     @objc optional func setAnchor(_ anchor: TabBarAnchor)
