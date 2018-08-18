@@ -14,7 +14,7 @@ class FacebookTabBarItem: UITabBarItem {
     @IBInspectable var selectedTintColor: UIColor = .blue
 }
 
-@IBDesignable class FacebookTabBar: UIView, TabBarProtocol {
+class FacebookTabBar: UIView, TabBarProtocol {
     
     private let contentView = UIStackView()
     
@@ -31,10 +31,6 @@ class FacebookTabBarItem: UITabBarItem {
         didSet {
             updateSelectedItem()
         }
-    }
-    
-    override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        return contentView.arrangedSubviews.sorted(by: { lhs, _ in return (lhs as? UIButton)?.isSelected == true })
     }
     
     override init(frame: CGRect) {
@@ -78,10 +74,11 @@ class FacebookTabBarItem: UITabBarItem {
     
     func setTabBarHidden(_ hidden: Bool) {
         contentView.arrangedSubviews.forEach {
-            $0.transform = hidden ? CGAffineTransform(rotationAngle: .pi) : .identity
+            $0.transform = hidden ? CGAffineTransform(rotationAngle: .pi/4) : .identity
         }
     }
     
+    // MARK: Updates
     func setItems(_ items: [UITabBarItem]?, animated: Bool) {
         self.items = items
         contentView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -114,24 +111,16 @@ class FacebookTabBarItem: UITabBarItem {
         self.delegate?.tabBar(self, didSelect: button.item)
     }
     
+    //MARK: tvOS
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return contentView.arrangedSubviews.sorted(by: { lhs, _ in return (lhs as? UIButton)?.isSelected == true })
+    }
+    
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         guard let nextButton = context.nextFocusedView as? FacebookTabBarButton else {
             return
         }
         self.didSelect(nextButton)
-    }
-    
-    override func prepareForInterfaceBuilder() {
-        let item: (String, String) -> UITabBarItem = {
-            return UITabBarItem(title: nil,
-                                image: UIImage(named: $0, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil),
-                                selectedImage: UIImage(named: $1, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil))
-        }
-        let items = [item("outline-chrome_reader_mode-24px", "twotone-chrome_reader_mode-24px"),
-                     item("outline-account_circle-24px", "twotone-account_circle-24px"),
-                     item("outline-notifications-24px", "twotone-notifications-24px")]
-        self.setItems(items, animated: false)
-        self.selectedItem = items.first
     }
 }
 
@@ -151,17 +140,37 @@ private class FacebookTabBarButton: UIButton {
         }
         self.item = item
         super.init(frame: .zero)
+        addObserver()
         update()
     }
     
     private func update() {
         self.setImage(self.isSelected ? item.selectedImage : item.image, for: .normal)
         self.tintColor = self.isSelected ? item.selectedTintColor : UIColor.gray.withAlphaComponent(0.5)
+        self.setTitleColor(self.tintColor, for: .normal)
         self.transform = self.isFocused ? CGAffineTransform(scaleX: 1.5, y: 1.5) : .identity
+        self.setTitle(self.item.badgeValue, for: .normal)
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations(self.update, completion: nil)
+    }
+    
+    // MARK: KVO
+    private func addObserver() {
+        item.addObserver(self, forKeyPath: #keyPath(UITabBarItem.badgeValue), options: .new, context: nil)
+    }
+    
+    private func removeObserver() {
+        item.removeObserver(self, forKeyPath: #keyPath(UITabBarItem.badgeValue))
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        update()
+    }
+    
+    deinit {
+        removeObserver()
     }
     
     required init?(coder aDecoder: NSCoder) {

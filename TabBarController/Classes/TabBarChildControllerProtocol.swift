@@ -18,24 +18,32 @@ import UIKit
 
 extension TabBarChildControllerProtocol {
     
-    internal func updateAdditionalConstraints(_ insets: UIEdgeInsets) {
-        func update(constraint: NSLayoutConstraint??, inset: CGFloat) -> Bool {
-            guard let additionalInsetConstraint = constraint as? NSLayoutConstraint,
-                additionalInsetConstraint.constant != inset else {
-                    return false
-            }
-            additionalInsetConstraint.constant = inset
-            return true
+    private func update(constraint: NSLayoutConstraint??, inset: CGFloat) -> Bool {
+        guard let additionalInsetConstraint = constraint as? NSLayoutConstraint,
+            additionalInsetConstraint.constant != inset else {
+                return false
         }
-        guard update(constraint: self.additionalTopInsetConstraint, inset: insets.top) ||
-            update(constraint: self.additionalBottomInsetConstraint, inset: insets.bottom) else {
+        additionalInsetConstraint.constant = inset
+        return true
+    }
+    
+    internal func updateAdditionalConstraints(_ insets: UIEdgeInsets) {
+        let controller = self as TabBarChildControllerProtocol
+        guard update(constraint: controller.additionalTopInsetConstraint, inset: insets.top) ||
+            update(constraint: controller.additionalBottomInsetConstraint, inset: insets.bottom) else {
                 return
         }
         self.view.layoutIfNeeded()
     }
     
-    internal func updateAllConstraints(_ insets: UIEdgeInsets) {
-        updateAdditionalInsets?(insets)
-        updateAdditionalConstraints(insets)
+    internal func updateAllAdditionalInsets(_ insets: UIEdgeInsets) {
+        var controller: TabBarChildControllerProtocol? = self
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            if !(self is TabBarController) {
+                controller = self.tab.controller
+            }
+        }
+        controller?.updateAdditionalInsets?(insets)
+        controller?.updateAdditionalConstraints(insets)        
     }
 }

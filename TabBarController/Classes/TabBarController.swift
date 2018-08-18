@@ -88,6 +88,8 @@ open class TabBarController: UIViewController {
         tabBarContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         tabBarContainer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
+        addStoryboardSegues()
+        
         containerController.willMove(toParentViewController: self)
         containerController.view.translatesAutoresizingMaskIntoConstraints = false
         self.view.insertSubview(containerController.view, at: 0)
@@ -97,8 +99,6 @@ open class TabBarController: UIViewController {
         containerController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.addChildViewController(containerController)
         containerController.didMove(toParentViewController: self)
-        
-        addStoryboardSegues()
     }
     
     // MARK: TabBar
@@ -138,14 +138,9 @@ open class TabBarController: UIViewController {
         #endif
     }
     
-    private func updateInset(viewController: UIViewController? = nil) {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            containerController.additionalSafeAreaInsets = tabBarContainer.additionalInsets
-        } else if let viewController = viewController {
-            (viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(tabBarContainer.additionalInsets)
-        } else {
-            (containerController.viewController as? TabBarChildControllerProtocol)?.updateAllConstraints(tabBarContainer.additionalInsets)
-        }
+    private func updateInsets(viewController: UIViewController? = nil) {
+        let controller = (viewController ?? containerController.viewController) as? TabBarChildControllerProtocol
+        controller?.updateAllAdditionalInsets(tabBarContainer.additionalInsets)
     }
     
     private func updateSelectedController(source: TabBarControllerUpdateSource) {
@@ -215,7 +210,7 @@ extension TabBarController: TabBarDelegate {
                 return
             }
             self.delegate?.tabBarController?(self, didSelect: selectedViewController)
-        } else {
+        } else if UIDevice.current.userInterfaceIdiom != .tv {
             (self.selectedViewController as? TabBarChildControllerProtocol)?.tabBarAction?()
         }
     }
@@ -243,7 +238,7 @@ extension TabBarController: UINavigationControllerDelegate {
             }
             self.update(viewController: viewController)
         }
-        transitionCoordinator.animateAlongsideTransition(in: self.view, animation: { [unowned self] context in
+        transitionCoordinator.animateAlongsideTransition(in: tabBarContainer, animation: { [unowned self] context in
             guard let viewController = context.viewController(forKey: .to) else {
                 return
             }
@@ -265,7 +260,7 @@ extension TabBarController: TabBarContainerDelegate {
     }
     
     func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets) {
-        updateInset()
+        updateInsets()
     }
 }
 
@@ -281,10 +276,19 @@ extension TabBarController: TabBarContainerControllerDelegate {
     }
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, didShow viewController: UIViewController?) {
-        updateInset(viewController: viewController)
+        updateInsets(viewController: viewController)
     }
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?) {
-        updateInset(viewController: viewController)
+        updateInsets(viewController: viewController)
+    }
+}
+
+extension TabBarController: TabBarChildControllerProtocol {
+    
+    public func updateAdditionalInsets(_ insets: UIEdgeInsets) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            self.containerController.additionalSafeAreaInsets = insets
+        }
     }
 }

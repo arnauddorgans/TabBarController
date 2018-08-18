@@ -18,6 +18,6 @@ extension UINavigationController: TabBarChildControllerProtocol {
     }
     
     public func updateAdditionalInsets(_ insets: UIEdgeInsets) {
-        (self.viewControllers.last as? TabBarChildControllerProtocol)?.updateAllConstraints(insets)
+        (self.viewControllers.last as? TabBarChildControllerProtocol)?.updateAllAdditionalInsets(insets)
     }
 }

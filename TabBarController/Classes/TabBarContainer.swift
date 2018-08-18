@@ -123,11 +123,24 @@ class TabBarContainer: UIView {
             self.additionalInsets = .zero
         } else {
             self.additionalInsets = {
-                var inset = max(0, tabBar.frame.height + (tabBar.additionalInset ?? 0))
+                let inset = max(0, tabBar.frame.height + (tabBar.additionalInset ?? 0))
+                var insets = UIEdgeInsets.zero
                 if #available(iOS 11.0, tvOS 11.0, *) {
-                    inset = max(0, inset - (self.anchor == .bottom ? self.safeAreaInsets.bottom : self.safeAreaInsets.top))
+                    switch self.anchor {
+                    case .top:
+                        insets.top = max(0, inset - self.safeAreaInsets.top)
+                    case .bottom:
+                        insets.bottom = max(0, inset - self.safeAreaInsets.bottom)
+                    }
+                } else {
+                    switch self.anchor {
+                    case .top:
+                        insets.top =  max(0, insets.top + inset)
+                    case .bottom:
+                        insets.bottom =  max(0, insets.bottom + inset)
+                    }
                 }
-                return UIEdgeInsets(top: self.anchor == .bottom ? 0 : inset, left: 0, bottom: self.anchor != .bottom ? 0 : inset, right: 0)
+                return insets
             }()
         }
         if #available(iOS 11.0, tvOS 11.0, *) { }

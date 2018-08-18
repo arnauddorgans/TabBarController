@@ -1,5 +1,5 @@
 //
-//  iOS10ViewController.swift
+//  iOS9ViewController.swift
 //  TabBarController_Example
 //
 //  Created by Arnaud Dorgans on 18/08/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import TabBarController
 
-class iOS10ViewController: UIViewController, TabBarChildControllerProtocol {
+class iOS9ViewController: UIViewController, TabBarChildControllerProtocol {
 
     @IBOutlet weak var additionalTopInsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var additionalBottomInsetConstraint: NSLayoutConstraint!

@@ -16,7 +16,7 @@
 		73092051AA4108D989191A1E /* Pods_TabBarController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */; };
 		7D6CE9C04F41E9E11B7E7F36 /* Pods_TabBarController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */; };
 		96C000D87BD12851D0510165 /* Pods_TabBarController_Example_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B154B1312E18994D6156B86 /* Pods_TabBarController_Example_tvOS.framework */; };
-		D44452A2212790AD009146F0 /* iOS10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44452A1212790AD009146F0 /* iOS10ViewController.swift */; };
+		D44452A2212790AD009146F0 /* iOS9ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44452A1212790AD009146F0 /* iOS9ViewController.swift */; };
 		D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */; };
 		D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B22126B7AF004D21C2 /* Main.storyboard */; };
 		D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B52126B7B0004D21C2 /* Assets.xcassets */; };
@@ -24,6 +24,7 @@
 		D45C21C12126EFA4004D21C2 /* FacebookTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */; };
 		D45C21C22126F604004D21C2 /* FacebookTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */; };
 		D45C21C32126F614004D21C2 /* FacebookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* FacebookTabBarController.swift */; };
+		D486CDC121284B380015BE9A /* iOS9TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486CDC021284B380015BE9A /* iOS9TableViewController.swift */; };
 		D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
 		D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -57,13 +58,14 @@
 		6E58C7F8F03118F5234D86F7 /* Pods-TabBarController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Tests/Pods-TabBarController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		9D5AEA353F010DD38CFF6965 /* Pods-TabBarController_Example tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example tvOS/Pods-TabBarController_Example tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B1D4FCBB08571854DF5B6C8F /* Pods_TabBarController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D44452A1212790AD009146F0 /* iOS10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS10ViewController.swift; sourceTree = "<group>"; };
+		D44452A1212790AD009146F0 /* iOS9ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS9ViewController.swift; sourceTree = "<group>"; };
 		D45C21AC2126B7AF004D21C2 /* TabBarController_Example tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TabBarController_Example tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D45C21B32126B7AF004D21C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D45C21B52126B7B0004D21C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D45C21B72126B7B0004D21C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTabBarTransition.swift; sourceTree = "<group>"; };
+		D486CDC021284B380015BE9A /* iOS9TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS9TableViewController.swift; sourceTree = "<group>"; };
 		D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTabBar.swift; sourceTree = "<group>"; };
 		DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				D44452A1212790AD009146F0 /* iOS10ViewController.swift */,
+				D44452A1212790AD009146F0 /* iOS9ViewController.swift */,
+				D486CDC021284B380015BE9A /* iOS9TableViewController.swift */,
 				D44452A021278F33009146F0 /* Facebook */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -454,8 +457,9 @@
 				607FACD81AFB9204008FA782 /* FacebookTabBarController.swift in Sources */,
 				D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */,
 				D45C21C12126EFA4004D21C2 /* FacebookTabBarTransition.swift in Sources */,
-				D44452A2212790AD009146F0 /* iOS10ViewController.swift in Sources */,
+				D44452A2212790AD009146F0 /* iOS9ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				D486CDC121284B380015BE9A /* iOS9TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
