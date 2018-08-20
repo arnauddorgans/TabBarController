@@ -9,10 +9,10 @@ How boring it is, when you discover on the latest update of your Zeplin's projec
 Or maybe just an advanced design of tabBar that can't be a subclass of UITabBar ?
 This moment when you know that you'll be constraint to imagine a custom hierarchy for your app just for a designer.. 😜
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540">
-
 TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar, you can even set a custom anchor for your tabBar, you want a top tabBar ? or maybe just a bottom tabBar on tvOS ?
 Well.. you can easily do all of thoses things with exactly 0 line of code, directly from you storyboard (or programmatically, if your not a storyboard's big fan 😉)
+
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540">
 
 ## Requirements
 
