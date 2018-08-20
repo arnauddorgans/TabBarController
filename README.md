@@ -61,6 +61,21 @@ self.hidesBottomBarWhenPushed = true // automatically hide tabBar when pushed
 self.tab.controller?.setTabBarHidden(true, animated: true) // manually hide tabBar, animated or not
 ```
 
+See iOS9ViewController.swift example 
+
+### Scroll To Top
+
+If you want to handle the scroll to top functionallity like system's UITabBarController when you tap on selected tab in tabBar
+
+```swift
+func tabBarAction() {
+    //
+    self.tableView.setContentOffset(.zero, animated: true)
+}
+```
+
+See iOS9TableViewController.swift example 
+
 ### Tab
 
 TabBarController provide extensions for UIViewController:
