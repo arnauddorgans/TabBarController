@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TabBarController'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of TabBarController.'
+  s.version          = '1.0'
+  s.summary          = 'TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar.
                        DESC
 
   s.homepage         = 'https://github.com/Arnoymous/TabBarController'
@@ -26,7 +26,7 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Arnoymous' => 'arnaud.dorgans@gmail.com' }
   s.source           = { :git => 'https://github.com/Arnoymous/TabBarController.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/arnauddorgans'
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
