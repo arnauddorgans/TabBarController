@@ -135,6 +135,8 @@ class YourTabBar: UIView, TabBarProtocol {
 }
 ```
 
+*See SpringboardTabBar.swift example*
+
 ### Storyboard
 
 Link tabBar outlet from your TabBarController to your custom tabBar in storyboard
@@ -187,6 +189,21 @@ class YourTabBar: UIView, TabBarProtocol {
     }
 }
 ```
+
+### Animations
+
+If you want to use custom animations on your TabBarController you have to make it inherit from TabBarControllerDelegate
+
+```swift
+extension YourTabBarController: TabBarControllerDelegate {
+
+    func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        // return your custom UIViewControllerAnimatedTransitioning
+    }
+}
+```
+
+*See SpringboardTabBarController.swift example*
 
 ## Prior iOS 11 support
 
