@@ -12,7 +12,7 @@ This moment when you know that you'll be constraint to imagine a custom hierarch
 TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar, you can even set a custom anchor for your tabBar, you want a top tabBar ? or maybe just a bottom tabBar on tvOS ?
 Well.. you can easily do all of thoses things with exactly 0 line of code, directly from you storyboard (or programmatically, if your not a storyboard's big fan 😉)
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/004.gif" height="540">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/004.gif" width="520">
 
 ## Requirements
 
@@ -49,7 +49,7 @@ You can set up a TabBarController directly from your storyboard, to do it :
 - For each of your segues you have to set an identifier that start with 'tab' and end with its index in TabBar
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard2.jpg" width="250">
 
-Exemple: if you want 4 viewControllers in your tab, you have to set storyboardSeguesCount to 4, and name your custom segues tab0, tab1, tab2 and tab3
+Example: if you want 4 viewControllers in your tab, you have to set storyboardSeguesCount to 4, and name your custom segues tab0, tab1, tab2 and tab3
 
 Et Voila !
 
@@ -70,7 +70,7 @@ self.hidesBottomBarWhenPushed = true // automatically hide tabBar when pushed
 self.tab.controller?.setTabBarHidden(true, animated: true) // manually hide tabBar, animated or not
 ```
 
-See iOS9ViewController.swift example 
+*See iOS9ViewController.swift example*
 
 ### Scroll To Top
 
@@ -83,7 +83,7 @@ func tabBarAction() {
 }
 ```
 
-See iOS9TableViewController.swift example 
+*See iOS9TableViewController.swift example*
 
 ### Tab
 
@@ -202,7 +202,10 @@ var tabBarBottomInsetConstraint: NSLayoutConstraint!
 ```
 
 Since UIViewController inherit from TabBarChildControllerProtocol, just add these properties in your class (use IBOutlet if you want to use them Interface Builder)
-See iOS9ViewController.swift example 
+
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/constraint.jpg" width="500">
+
+*See iOS9ViewController.swift example*
 
 ### Update TabBar Insets
 
@@ -210,7 +213,7 @@ If you want to add inset on your UIScrollView instead of directly update its fra
 ```swift
 func updateTabBarInsets(_ insets: UIEdgeInsets)
 ```
-See iOS9TableViewController.swift example 
+*See iOS9TableViewController.swift example*
 
 ## Author
 
