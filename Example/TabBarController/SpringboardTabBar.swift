@@ -158,8 +158,7 @@ class SpringboardTabBarButton: UIButton {
     }
     
     private func updateBadge() {
-        badgeView.text = item.badgeValue
-        badgeView.isHidden = badgeView.text?.isEmpty != false
+        badgeView.setText(item.badgeValue, animated: true)
     }
     
     // MARK: Layout
@@ -198,7 +197,7 @@ private class SpringboardTabBarButtonBadgeView: UIView {
     
     var text: String? {
         get { return label.text }
-        set { label.text = newValue }
+        set { self.setText(newValue, animated: false) }
     }
 
     init() {
@@ -208,6 +207,7 @@ private class SpringboardTabBarButtonBadgeView: UIView {
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 5
         self.layer.shadowOpacity = 0.2
+        self.isUserInteractionEnabled = false
         
         backgroundView.backgroundColor = .red
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -227,6 +227,26 @@ private class SpringboardTabBarButtonBadgeView: UIView {
         label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         label.widthAnchor.constraint(greaterThanOrEqualTo: label.heightAnchor).isActive = true
+        self.setText(nil, animated: false)
+    }
+    
+    func setText(_ string: String?, animated: Bool) {
+        label.text = string
+        func updateOpacity() {
+            self.alpha = string?.isEmpty == false ? 1 : 0
+        }
+        guard animated else {
+            updateOpacity()
+            return
+        }
+        UIView.animate(withDuration: 0.1, animations: {
+            updateOpacity()
+            self.backgroundView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.1, animations: {
+                self.backgroundView.transform = .identity
+            }, completion: nil)
+        })
     }
     
     override func layoutSubviews() {

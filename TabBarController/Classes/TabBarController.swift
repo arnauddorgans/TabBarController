@@ -49,6 +49,10 @@ open class TabBarController: UIViewController {
         set { tabBarAnchor = TabBarAnchor.all[newValue % 2 == 0 ? 0 : 1] }
     }
     
+    #if os(tvOS)
+    @IBInspectable var isMenuGesturesEnabled: Bool = true
+    #endif
+    
     public var tabBarAnchor: TabBarAnchor {
         get { return tabBarContainer.anchor }
         set { tabBarContainer.anchor = newValue }

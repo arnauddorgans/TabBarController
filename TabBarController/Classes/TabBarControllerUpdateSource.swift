@@ -24,15 +24,11 @@ enum TabBarControllerUpdateSource {
     }
     
     func animateTabBarSelectedItem() -> Bool {
-        #if os(iOS)
         switch self {
         case .action:
             return true
         case .update(animated: let animated):
             return animated
         }
-        #elseif os(tvOS)
-        return true
-        #endif
     }
 }

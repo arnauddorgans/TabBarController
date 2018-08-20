@@ -176,15 +176,16 @@ class TabBarContainer: UIView {
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        guard self.isTabBarHidden, self.contains(subview: context.nextFocusedView), !self.contains(subview: context.previouslyFocusedView) else {
-            return
+        if self.isTabBarHidden, self.contains(subview: context.nextFocusedView), !self.contains(subview: context.previouslyFocusedView) {
+            self.delegate?.tabBarContainer(self, didHandleShowGesture: true)
+        } else if !self.isTabBarHidden, !self.contains(subview: context.nextFocusedView) {
+            self.delegate?.tabBarContainer(self, didHandleShowGesture: false)
         }
-        self.delegate?.tabBarContainer(self, didHandleShowGesture: true)
     }
     
     private func updateFocusGestures() {
-        guard let tabBarController = self.tabBarController, tabBarController.isViewLoaded,
-            UIDevice.current.userInterfaceIdiom == .tv else {
+        #if os(tvOS)
+        guard let tabBarController = self.tabBarController, tabBarController.isViewLoaded else {
             return
         }
         if self.showTabBarGesture == nil, self.hideTabBarGesture == nil,
@@ -206,6 +207,9 @@ class TabBarContainer: UIView {
         case .bottom:
             hideTabBarGesture?.direction = .up
         }
+        hideTabBarGesture?.isEnabled = tabBarController.isMenuGesturesEnabled
+        showTabBarGesture?.isEnabled = tabBarController.isMenuGesturesEnabled
+        #endif
     }
     
     // MARK: Layout
@@ -250,10 +254,9 @@ class TabBarContainer: UIView {
 extension TabBarContainer: UIGestureRecognizerDelegate {
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let gestureRecognizerShouldBegin = super.gestureRecognizerShouldBegin(gestureRecognizer)
         guard showTabBarGesture == gestureRecognizer else {
-            return gestureRecognizerShouldBegin
+            return true
         }
-        return gestureRecognizerShouldBegin && self.isTabBarHidden
+        return self.isTabBarHidden
     }
 }

@@ -21,11 +21,8 @@
 		D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B22126B7AF004D21C2 /* Main.storyboard */; };
 		D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45C21B52126B7B0004D21C2 /* Assets.xcassets */; };
 		D45C21C12126EFA4004D21C2 /* SpringboardTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* SpringboardTabBarTransition.swift */; };
-		D45C21C22126F604004D21C2 /* SpringboardTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* SpringboardTabBarTransition.swift */; };
-		D45C21C32126F614004D21C2 /* SpringboardTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* SpringboardTabBarController.swift */; };
 		D486CDC121284B380015BE9A /* iOS9TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486CDC021284B380015BE9A /* iOS9TableViewController.swift */; };
 		D49561132129AF08008363D2 /* SpringboardTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49561122129AF08008363D2 /* SpringboardTabBar.swift */; };
-		D49561142129AF08008363D2 /* SpringboardTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49561122129AF08008363D2 /* SpringboardTabBar.swift */; };
 		D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -475,10 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D45C21C22126F604004D21C2 /* SpringboardTabBarTransition.swift in Sources */,
-				D45C21C32126F614004D21C2 /* SpringboardTabBarController.swift in Sources */,
 				D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */,
-				D49561142129AF08008363D2 /* SpringboardTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

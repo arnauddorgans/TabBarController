@@ -15,7 +15,7 @@ protocol TabBarContainerControllerDelegate: class {
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
 }
 
-internal class TabBarContainerController: UINavigationController {
+class TabBarContainerController: UINavigationController {
     
     var isAnimating: Bool = false
     weak var containerDelegate: TabBarContainerControllerDelegate?
