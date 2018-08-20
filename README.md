@@ -237,7 +237,7 @@ func updateTabBarInsets(_ insets: UIEdgeInsets) {
 
 ## Author
 
-Arnoymous, arnaud.dorgans@gmail.com
+Arnaud Dorgans, arnaud.dorgans@gmail.com
 
 ## License
 
