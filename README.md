@@ -40,18 +40,20 @@ pod 'TabBarController'
 You can set up a TabBarController directly from your storyboard, to do it :
 
 - Add a UIViewController on your storyboard and subclass it with TabBarController
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard0.png">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard0.png" width="250">
 
 - Change the storyboardSeguesCount attribute
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard1.png">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard1.png" width="250">
 
 - Add custom segues that inherit from TabBarSegue
 - For each of your segues you have to set an identifier that start with 'tab' and end with its index in TabBar
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard2.jpg">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard2.jpg" width="250">
 
 Exemple: if you want 4 viewControllers in your tab, you have to set storyboardSeguesCount to 4, and name your custom segues tab0, tab1, tab2 and tab3
 
 Et Voila !
+
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard3.jpg" width="500">
 
 ### Programmatically
 
