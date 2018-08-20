@@ -53,7 +53,7 @@ Exemple: if you want 4 viewControllers in your tab, you have to set storyboardSe
 
 Et Voila !
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard3.jpg" width="500">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard3.png" width="500">
 
 ### Programmatically
 
