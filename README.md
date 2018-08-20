@@ -12,7 +12,7 @@ This moment when you know that you'll be constraint to imagine a custom hierarch
 TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar, you can even set a custom anchor for your tabBar, you want a top tabBar ? or maybe just a bottom tabBar on tvOS ?
 Well.. you can easily do all of thoses things with exactly 0 line of code, directly from you storyboard (or programmatically, if your not a storyboard's big fan 😉)
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/004.gif" height="540">
 
 ## Requirements
 
@@ -140,7 +140,6 @@ class YourTabBar: UIView, TabBarProtocol {
 Link tabBar outlet from your TabBarController to your custom tabBar in storyboard
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboardtab.jpg" width="500">
 
-
 ### Programmatically
 
 ```swift
@@ -160,6 +159,8 @@ TabBarController support two anchor for TabBar:
 #### Storyboard
 
 Set the tabBarAnchorIndex attribute of your TabBarController (0: top, 1: bottom)
+
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboardAnchor.png" width="250">
 
 #### Programmatically
 
