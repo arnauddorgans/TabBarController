@@ -21,13 +21,13 @@ class TabBarNavigationContainerController: UIViewController {
         set { viewController.tabBarItem = newValue }
     }
     
-    init?(viewController: UIViewController, tabBarController: TabBarController) {
+    init?(viewController: UIViewController, delegate: UINavigationControllerDelegate) {
         guard let viewController = viewController as? UINavigationController else {
             return nil
         }
         self.viewController = viewController
         super.init(nibName: nil, bundle: nil)
-        viewController.delegate = tabBarController
+        viewController.delegate = delegate
     }
     
     override func viewDidLoad() {

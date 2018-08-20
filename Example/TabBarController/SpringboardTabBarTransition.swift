@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FacebookTabBarTransition: NSObject, UIViewControllerAnimatedTransitioning {
+class SpringboardTabBarTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     var isReversed: Bool
     

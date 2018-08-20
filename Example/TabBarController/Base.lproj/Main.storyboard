@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sCE-i5-ZCJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="55x-4E-n33">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,199 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Example-->
-        <scene sceneID="r93-5J-NKd">
-            <objects>
-                <tableViewController id="sDM-Pn-rP3" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v5I-oV-mCb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <sections>
-                            <tableViewSection id="SSV-yC-a1p">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zO6-xt-rJL" detailTextLabel="7na-2R-P1P" style="IBUITableViewCellStyleSubtitle" id="mxe-YM-AZA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mxe-YM-AZA" id="knV-5n-CmG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zO6-xt-rJL">
-                                                    <rect key="frame" x="16" y="5" width="57" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="safeArea iOS &gt;= 11 " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7na-2R-P1P">
-                                                    <rect key="frame" x="16" y="25.5" width="110" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="55x-4E-n33" kind="show" id="D7z-dh-e7a"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="XCA-9g-goi" detailTextLabel="igM-ur-75v" style="IBUITableViewCellStyleSubtitle" id="fhN-e0-tfi">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fhN-e0-tfi" id="HzB-uv-IBR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XCA-9g-goi">
-                                                    <rect key="frame" x="16" y="5" width="74.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="safeArea + additional inset iOS &lt; 11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="igM-ur-75v">
-                                                    <rect key="frame" x="16" y="25.5" width="199.5" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="vXZ-lx-hvc" kind="show" id="EqN-yE-Ftj"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="sDM-Pn-rP3" id="NvP-Kd-hSm"/>
-                            <outlet property="delegate" destination="sDM-Pn-rP3" id="pkb-iB-PbH"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Example" id="z0k-zd-K5R"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OUk-nn-gZu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2473" y="-84"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="AH5-eT-HV7">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="sCE-i5-ZCJ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QsF-T4-flc">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="sDM-Pn-rP3" kind="relationship" relationship="rootViewController" id="nTI-3b-uNQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lfx-rz-XLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3390" y="-84"/>
-        </scene>
-        <!--Facebook Tab Bar Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="FacebookTabBarController" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="storyboardSeguesCount">
-                            <integer key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outlet property="tabBar" destination="mGt-wA-TRv" id="c5U-ci-er2"/>
-                        <segue destination="AdZ-jQ-MRg" kind="custom" identifier="tab0" customClass="TabBarSegue" customModule="TabBarController" id="26l-5b-A5c"/>
-                        <segue destination="rfz-Xl-4Jv" kind="custom" identifier="tab1" customClass="TabBarSegue" customModule="TabBarController" id="y0m-Li-jdL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="mGt-wA-TRv" customClass="FacebookTabBar" customModule="TabBarController_Example" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="390" height="86"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="tintColor" red="0.1764705882352941" green="0.20392156862745098" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </view>
-            </objects>
-            <point key="canvasLocation" x="-1521" y="-84"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="EPw-aV-WN9">
-            <objects>
-                <navigationController id="AdZ-jQ-MRg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="wEf-4K-zE2">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="5DR-CU-Uw2" kind="relationship" relationship="rootViewController" id="jkg-Wi-SyP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q0d-mi-wZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-572" y="-818"/>
-        </scene>
-        <!--View-->
-        <scene sceneID="C2K-Pb-lhD">
-            <objects>
-                <viewController id="5DR-CU-Uw2" customClass="iOS9ViewController" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lJj-vC-0pX"/>
-                        <viewControllerLayoutGuide type="bottom" id="iN7-Ov-2au"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1d1-oU-JQ7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZh-iy-V8D">
-                                <rect key="frame" x="16" y="0.0" width="343" height="554"/>
-                                <color key="backgroundColor" red="0.87450980389999999" green="0.90196078430000004" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Toggle">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleTabBar:" destination="5DR-CU-Uw2" eventType="touchUpInside" id="E6Z-3F-Nut"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="iN7-Ov-2au" firstAttribute="top" secondItem="RZh-iy-V8D" secondAttribute="bottom" id="7oF-bR-waJ"/>
-                            <constraint firstItem="RZh-iy-V8D" firstAttribute="leading" secondItem="1d1-oU-JQ7" secondAttribute="leadingMargin" id="J61-fx-vkK"/>
-                            <constraint firstItem="RZh-iy-V8D" firstAttribute="top" secondItem="lJj-vC-0pX" secondAttribute="bottom" id="XCq-cf-x4q"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="RZh-iy-V8D" secondAttribute="trailing" id="clL-og-saF"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="outline-chrome_reader_mode-24px" selectedImage="twotone-chrome_reader_mode-24px" id="myE-Nh-ubi" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                <color key="value" red="0.086274509803921567" green="0.62745098039215685" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
-                    <navigationItem key="navigationItem" title="View" id="vKS-i0-thC"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="tabBarBottomInsetConstraint" destination="7oF-bR-waJ" id="Oyr-gy-PYz"/>
-                        <outlet property="tabBarTopInsetConstraint" destination="XCq-cf-x4q" id="eCN-Je-Ape"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mqR-6X-FRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="297" y="-818"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="71O-xW-spP">
             <objects>
@@ -832,10 +639,10 @@
             </objects>
             <point key="canvasLocation" x="-572" y="1818"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Springboard Tab Bar Controller-->
         <scene sceneID="ewS-5M-GLt">
             <objects>
-                <viewController id="55x-4E-n33" customClass="TabBarController" customModule="TabBarController" sceneMemberID="viewController">
+                <viewController id="55x-4E-n33" customClass="SpringboardTabBarController" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I2Q-h9-fuV"/>
                         <viewControllerLayoutGuide type="bottom" id="a0O-Jv-Dr7"/>
@@ -864,76 +671,6 @@
             </objects>
             <point key="canvasLocation" x="-1522" y="1074"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mxu-kP-Bv5">
-            <objects>
-                <navigationController id="rfz-Xl-4Jv" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="8Hh-vZ-gf7">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Lnd-Te-fsY" kind="relationship" relationship="rootViewController" id="Awx-F6-dFa"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UjJ-67-YxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-572" y="-84"/>
-        </scene>
-        <!--ScrollView-->
-        <scene sceneID="eUi-KQ-crB">
-            <objects>
-                <tableViewController id="Lnd-Te-fsY" customClass="iOS9TableViewController" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5co-BM-VFf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <sections>
-                            <tableViewSection id="WYG-Ps-YO6">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" textLabel="GRa-jC-w9G" style="IBUITableViewCellStyleDefault" id="Vpc-ex-1sb">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vpc-ex-1sb" id="2Ml-0J-b3o">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GRa-jC-w9G">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="Lnd-Te-fsY" id="sgT-tM-E8B"/>
-                            <outlet property="delegate" destination="Lnd-Te-fsY" id="o7t-XE-2Nh"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="" image="outline-notifications-24px" selectedImage="twotone-notifications-24px" id="k83-Pg-pSb" customClass="FacebookTabBarItem" customModule="TabBarController_Example" customModuleProvider="target">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                <color key="value" red="0.95294117647058818" green="0.61176470588235299" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
-                    <navigationItem key="navigationItem" title="ScrollView" id="RVI-Vn-jQz"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="IkP-9N-lXM" kind="show" identifier="push" id="Ab8-qE-cgK"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ENc-xJ-gE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="297" y="-84"/>
-        </scene>
         <!--Hidden-->
         <scene sceneID="uCv-AL-RdP">
             <objects>
@@ -943,11 +680,11 @@
                         <viewControllerLayoutGuide type="bottom" id="CXp-z7-c7I"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YeS-zx-auw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-j1-Fny">
-                                <rect key="frame" x="16" y="0.0" width="343" height="603"/>
+                                <rect key="frame" x="16" y="116" width="343" height="551"/>
                                 <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </button>
                         </subviews>
@@ -963,18 +700,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8a-qi-kaB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1719" y="311"/>
+            <point key="canvasLocation" x="1087" y="1818"/>
         </scene>
     </scenes>
     <resources>
         <image name="baseline-account_circle-24px" width="27" height="27"/>
         <image name="baseline-chrome_reader_mode-24px" width="27" height="27"/>
-        <image name="outline-chrome_reader_mode-24px" width="27" height="27"/>
-        <image name="outline-notifications-24px" width="27" height="27"/>
-        <image name="twotone-chrome_reader_mode-24px" width="27" height="27"/>
-        <image name="twotone-notifications-24px" width="27" height="27"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Ab8-qE-cgK"/>
-    </inferredMetricsTieBreakers>
 </document>

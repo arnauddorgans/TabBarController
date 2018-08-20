@@ -9,13 +9,13 @@ import UIKit
 
 extension UIView {
     
-    func contains(_ view: UIView?) -> Bool {
-        guard let view = view else {
+    func contains(subview: UIView?) -> Bool {
+        guard let subview = subview else {
             return false
         }
-        if view == self {
+        if subview == self {
             return true
         }
-        return contains(view.superview)
+        return contains(subview: subview.superview)
     }
 }

@@ -7,42 +7,10 @@
 
 import UIKit
 
-@IBDesignable open class SystemTabBar: UIView {
+open class SystemTabBar: UIView {
     
-    public let tabBar = UITabBar()
-    public weak var delegate: TabBarDelegate?
-    
-    public var items: [UITabBarItem]? {
-        return tabBar.items
-    }
-    
-    public var selectedItem: UITabBarItem? {
-        get { return tabBar.selectedItem }
-        set { tabBar.selectedItem = newValue }
-    }
-    
-    @IBInspectable public var isTranslucent: Bool {
-        get { return tabBar.isTranslucent }
-        set { tabBar.isTranslucent = newValue }
-    }
-        
-    @IBInspectable var barTintColor: UIColor? {
-        get { return tabBar.barTintColor }
-        set { tabBar.barTintColor = newValue }
-    }
-    
-    @IBInspectable var unselectedItemTintColor: UIColor? {
-        get {
-            if #available(iOS 10.0, tvOS 10.0, *) {
-                return tabBar.unselectedItemTintColor
-            }
-            return nil
-        } set {
-            if #available(iOS 10.0, tvOS 10.0, *) {
-                tabBar.unselectedItemTintColor = newValue
-            }
-        }
-    }
+    @IBOutlet public weak var tabBar: UITabBar!
+    @IBOutlet public weak var delegate: TabBarDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,13 +27,18 @@ import UIKit
     }
     
     private func sharedInit() {
+        let tabBar = self.tabBar ?? UITabBar()
         tabBar.delegate = self
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(tabBar)
-        tabBar.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        tabBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        tabBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        if !self.contains(subview: tabBar) {
+            tabBar.removeFromSuperview()
+            tabBar.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(tabBar)
+            tabBar.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            tabBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            tabBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        }
+        self.tabBar = tabBar
     }
     
     public func setTabBarHidden(_ hidden: Bool) {
@@ -82,21 +55,12 @@ import UIKit
         }
     }
     
-    // MARK: InterfaceBuilder
-    open override func prepareForInterfaceBuilder() {
-        let items = [UITabBarItem(tabBarSystemItem: .favorites, tag: 0),
-                     UITabBarItem(tabBarSystemItem: .recents, tag: 0),
-                     UITabBarItem(tabBarSystemItem: .contacts, tag: 0),
-                     UITabBarItem(tabBarSystemItem: .search, tag: 0)]
-        self.setItems(items, animated: false)
-        self.selectedItem = items.first
-    }
-    
     // MARK: Focus
     open override var preferredFocusEnvironments: [UIFocusEnvironment] {
         return [tabBar]
     }
     
+    // iOS 9 support
     override open var preferredFocusedView: UIView? {
         return preferredFocusEnvironments.first as? UIView
     }
@@ -116,6 +80,6 @@ extension SystemTabBar: TabBarProtocol {
     }
     
     public func setSelectedItem(_ item: UITabBarItem?, animated: Bool) {
-        self.selectedItem = item
+        tabBar.selectedItem = item
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FacebookTabBarController.swift
+//  SpringboardTabBarController.swift
 //  TabBarController
 //
 //  Created by Arnoymous on 08/14/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import TabBarController
 
-class FacebookTabBarController: TabBarController {
+class SpringboardTabBarController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +18,13 @@ class FacebookTabBarController: TabBarController {
     }
 }
 
-extension FacebookTabBarController: TabBarControllerDelegate {
+extension SpringboardTabBarController: TabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let fromIndex = tabBarController.viewControllers?.index(of: fromVC),
             let toIndex = tabBarController.viewControllers?.index(of: toVC) else {
                 return nil
         }
-        return FacebookTabBarTransition(isReversed: toIndex < fromIndex)
+        return SpringboardTabBarTransition(isReversed: toIndex < fromIndex)
     }
 }

@@ -53,6 +53,43 @@ let tabBarController = TabBarController(viewControllers: [...])
 self.present(tabBarController, animated: true, completion: nil) // present it, set it as rootViewController, what ever..
 ```
 
+### Hide TabBar
+
+```swift
+self.hidesBottomBarWhenPushed = true // automatically hide tabBar when pushed
+
+self.tab.controller?.setTabBarHidden(true, animated: true) // manually hide tabBar, animated or not
+```
+
+### Tab
+
+TabBarController provide extensions for UIViewController:
+```swift
+self.tab.controller // return the tabBarController of self
+self.tab.bar // return the tabBar of self.tab.controller
+self.tab.barItem // return the tabBarItem of self parent in TabBarController
+self.tab.navigationController /* In case of the root view controller of your controller's tab is a UINavigationController, TabBarController add it in private parent controller. 
+Using self.tab.navigationController on this private parent controller (via self.tab.controller?.viewControllers for example) return your navigationController*/
+self.tab.isNavigationController // return true if self.tab.navigationController != nil
+```
+
+### NavigationController
+
+TabBarController allows you to use UINavigationController as root view controller of each tab of your tabBarController,
+But to do so, it add it in a private parent controller and set its delegate to the TabBarController
+If you want to use custom delegate for your UINavigationController please redirect thoses events to the tabBarController, otherwise hidesBottomBarWhenPushed and other displays functionalities will not work.
+```swift
+func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+    //
+    navigationController.tab.controller?.navigationController(navigationController, willShow: viewController, animated: animated)
+}
+
+func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    //
+    navigationController.tab.controller?.navigationController(navigationController, didShow: viewController, animated: animated)
+}
+```
+
 ## Customization
 
 Create a UIView class and make it inherit from TabBarProtocol

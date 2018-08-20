@@ -33,17 +33,36 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="tabBar" destination="ebo-lW-vMd" id="9VZ-sL-c9M"/>
+                        <outlet property="tabBar" destination="sV4-X5-5QH" id="EYt-b3-Ds9"/>
                         <segue destination="Fxc-na-ac3" kind="custom" identifier="tab0" customClass="TabBarSegue" customModule="TabBarController" id="1jV-m8-X2o"/>
                         <segue destination="sFE-1z-cou" kind="custom" identifier="tab1" customClass="TabBarSegue" customModule="TabBarController" id="xiw-4O-bTv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="ebo-lW-vMd" customClass="FacebookTabBar" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="577" height="253"/>
+                <view contentMode="scaleToFill" id="sV4-X5-5QH" customClass="SystemTabBar" customModule="TabBarController">
+                    <rect key="frame" x="0.0" y="0.0" width="1410" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFs-Oc-LHt">
+                            <rect key="frame" x="0.0" y="0.0" width="1410" height="128"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <items>
+                                <tabBarItem systemItem="favorites" id="HtR-ub-UY2"/>
+                                <tabBarItem systemItem="more" id="iyX-bG-r4B"/>
+                            </items>
+                        </tabBar>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <viewLayoutGuide key="safeArea" id="p85-GF-o1x"/>
+                    <constraints>
+                        <constraint firstItem="YFs-Oc-LHt" firstAttribute="top" secondItem="sV4-X5-5QH" secondAttribute="top" id="1m2-1f-ySR"/>
+                        <constraint firstAttribute="trailing" secondItem="YFs-Oc-LHt" secondAttribute="trailing" id="5Ju-zt-Tub"/>
+                        <constraint firstAttribute="bottom" secondItem="YFs-Oc-LHt" secondAttribute="bottom" id="75j-pl-p36"/>
+                        <constraint firstItem="YFs-Oc-LHt" firstAttribute="leading" secondItem="sV4-X5-5QH" secondAttribute="leading" id="tuA-qb-4gB"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Ufw-mh-PDX"/>
+                    <connections>
+                        <outlet property="tabBar" destination="YFs-Oc-LHt" id="sPB-DC-Hle"/>
+                    </connections>
                 </view>
             </objects>
             <point key="canvasLocation" x="69" y="1229"/>

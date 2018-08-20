@@ -113,7 +113,8 @@ class SpringboardTabBarItem: UITabBarItem {
 
 class SpringboardTabBarButton: UIButton {
     
-    fileprivate let itemImageView = UIImageView()
+    private let itemImageView = UIImageView()
+    private let badgeView = SpringboardTabBarButtonBadgeView()
     
     let item: SpringboardTabBarItem
     
@@ -140,19 +141,98 @@ class SpringboardTabBarButton: UIButton {
         itemImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         itemImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
+        badgeView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(badgeView)
+        badgeView.centerXAnchor.constraint(equalTo: itemImageView.rightAnchor, constant: -3).isActive = true
+        badgeView.centerYAnchor.constraint(equalTo: itemImageView.topAnchor, constant: 3).isActive = true
+        
         self.widthAnchor.constraint(greaterThanOrEqualTo: self.heightAnchor).isActive = true
         
+        addObserver()
         update()
     }
     
     private func update() {
         itemImageView.image = item.image
+        updateBadge()
+    }
+    
+    private func updateBadge() {
+        badgeView.text = item.badgeValue
+        badgeView.isHidden = badgeView.text?.isEmpty != false
+    }
+    
+    // MARK: Layout
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        itemImageView.layer.cornerRadius = self.frame.height / 6
+    }
+    
+    // MARK: KVO
+    private func addObserver() {
+        item.addObserver(self, forKeyPath: #keyPath(UITabBarItem.badgeValue), options: .new, context: nil)
+    }
+    
+    private func removeObserver() {
+        item.removeObserver(self, forKeyPath: #keyPath(UITabBarItem.badgeValue))
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        updateBadge()
+    }
+    
+    deinit {
+        self.removeObserver()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private class SpringboardTabBarButtonBadgeView: UIView {
+    
+    private let label = UILabel()
+    private let backgroundView = UIView()
+    
+    var text: String? {
+        get { return label.text }
+        set { label.text = newValue }
+    }
+
+    init() {
+        super.init(frame: .zero)
+        
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 5
+        self.layer.shadowOpacity = 0.2
+        
+        backgroundView.backgroundColor = .red
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(backgroundView)
+        backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        backgroundView.addSubview(label)
+        label.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
+        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        label.widthAnchor.constraint(greaterThanOrEqualTo: label.heightAnchor).isActive = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        itemImageView.layer.cornerRadius = self.frame.height / 6
+        backgroundView.layer.cornerRadius = self.frame.height / 2
     }
     
     required init?(coder aDecoder: NSCoder) {

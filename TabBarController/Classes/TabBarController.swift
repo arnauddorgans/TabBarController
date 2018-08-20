@@ -120,7 +120,7 @@ open class TabBarController: UIViewController {
     }
     
     private func updateViewControllers(animated: Bool) {
-        self._viewControllers = self._viewControllers?.map { TabBarNavigationContainerController(viewController: $0, tabBarController: self) ?? $0 }
+        self._viewControllers = self._viewControllers?.map { TabBarNavigationContainerController(viewController: $0, delegate: self) ?? $0 }
         self.tabBar?.setItems(viewControllers.flatMap { $0.map { $0.tabBarItem } }, animated: animated)
         updateSelectedController(source: .update(animated: animated))
     }
@@ -174,6 +174,7 @@ open class TabBarController: UIViewController {
         return [tabBarContainer, containerController.view]
     }
     
+    // iOS 9 support
     override open var preferredFocusedView: UIView? {
         return preferredFocusEnvironments.first as? UIView
     }
@@ -242,7 +243,7 @@ extension TabBarController: UINavigationControllerDelegate {
             self.update(viewController: viewController)
             return
         }
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, tvOS 10.0, *) {
             transitionCoordinator.notifyWhenInteractionChanges { [unowned self] context in
                 guard let viewController = context.viewController(forKey: .from), context.isCancelled else {
                     return

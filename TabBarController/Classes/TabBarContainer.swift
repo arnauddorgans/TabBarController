@@ -159,6 +159,7 @@ class TabBarContainer: UIView {
         return [tabBar]
     }
     
+    // iOS 9 support
     override var preferredFocusedView: UIView? {
         return preferredFocusEnvironments.first as? UIView
     }
@@ -175,7 +176,7 @@ class TabBarContainer: UIView {
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        guard self.isTabBarHidden, self.contains(context.nextFocusedView), !self.contains(context.previouslyFocusedView) else {
+        guard self.isTabBarHidden, self.contains(subview: context.nextFocusedView), !self.contains(subview: context.previouslyFocusedView) else {
             return
         }
         self.delegate?.tabBarContainer(self, didHandleShowGesture: true)
