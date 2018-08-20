@@ -138,6 +138,8 @@ class YourTabBar: UIView, TabBarProtocol {
 ### Storyboard
 
 Link tabBar outlet from your TabBarController to your custom tabBar in storyboard
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboardtab.jpg" width="500">
+
 
 ### Programmatically
 
