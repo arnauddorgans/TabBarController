@@ -12,7 +12,7 @@ This moment when you know that you'll be constraint to imagine a custom hierarch
 TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar, you can even set a custom anchor for your tabBar, you want a top tabBar ? or maybe just a bottom tabBar on tvOS ?
 Well.. you can easily do all of thoses things with exactly 0 line of code, directly from you storyboard (or programmatically, if your not a storyboard's big fan 😉)
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/004.gif" width="520">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/004.gif" width="520">
 
 ## Requirements
 
@@ -37,19 +37,19 @@ pod 'TabBarController'
 
 ### Storyboard
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard3.png" width="500">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard3.png" width="500">
 
 You can set up a TabBarController directly from your storyboard, to do it :
 
 - Add a UIViewController on your storyboard and subclass it with TabBarController
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard0.png" width="250">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard0.png" width="250">
 
 - Change the storyboardSeguesCount attribute
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard1.png" width="250">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard1.png" width="250">
 
 - Add custom segues that inherit from TabBarSegue
 - For each of your segues you have to set an identifier that start with 'tab' and end with its index in TabBar
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboard2.jpg" width="250">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard2.jpg" width="250">
 
 Example: if you want 4 viewControllers in your tab, you have to set storyboardSeguesCount to 4, and name your custom segues tab0, tab1, tab2 and tab3
 
@@ -138,7 +138,7 @@ class YourTabBar: UIView, TabBarProtocol {
 ### Storyboard
 
 Link tabBar outlet from your TabBarController to your custom tabBar in storyboard
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboardtab.jpg" width="500">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboardtab.jpg" width="500">
 
 ### Programmatically
 
@@ -160,7 +160,7 @@ TabBarController support two anchor for TabBar:
 
 Set the tabBarAnchorIndex attribute of your TabBarController (0: top, 1: bottom)
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/storyboardAnchor.png" width="250">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboardAnchor.png" width="250">
 
 #### Programmatically
 
@@ -203,7 +203,7 @@ var tabBarBottomInsetConstraint: NSLayoutConstraint!
 
 Since UIViewController inherit from TabBarChildControllerProtocol, just add these properties in your class (use IBOutlet if you want to use them Interface Builder)
 
-<img src="https://github.com/arnauddorgans/TabBarController/blob/master/constraint.jpg" width="500">
+<img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/constraint.jpg" width="500">
 
 *See iOS9ViewController.swift example*
 
