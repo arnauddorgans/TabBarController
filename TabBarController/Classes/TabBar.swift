@@ -16,7 +16,11 @@ public typealias TabBar = UIView & TabBarProtocol
     static let all = [top, bottom]
     
     public static let `default`: TabBarAnchor = {
-        return UIDevice.current.userInterfaceIdiom == .tv ? .top : .bottom
+        #if os(tvOS)
+        return .top
+        #else
+        return .bottom
+        #endif
     }()
 }
 
@@ -35,7 +39,11 @@ public typealias TabBar = UIView & TabBarProtocol
 extension TabBarProtocol {
     
     var defaultNeedsAdditionalInset: Bool {
-        return UIDevice.current.userInterfaceIdiom != .tv
+        #if os(tvOS)
+        return false
+        #else
+        return true
+        #endif
     }
 }
 

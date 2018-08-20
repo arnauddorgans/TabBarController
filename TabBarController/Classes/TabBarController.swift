@@ -224,9 +224,11 @@ extension TabBarController: TabBarDelegate {
                 return
             }
             self.delegate?.tabBarController?(self, didSelect: selectedViewController)
-        } else if UIDevice.current.userInterfaceIdiom != .tv {
+        } else {
+            #if os(iOS)
             let viewController: TabBarChildControllerProtocol? = self.selectedViewController
             viewController?.tabBarAction?()
+            #endif
         }
     }
 }
