@@ -211,7 +211,10 @@ Since UIViewController inherit from TabBarChildControllerProtocol, just add thes
 
 If you want to add inset on your UIScrollView instead of directly update its frame, you can handle it using this method:
 ```swift
-func updateTabBarInsets(_ insets: UIEdgeInsets)
+func updateTabBarInsets(_ insets: UIEdgeInsets) {
+    self.tableView.contentInset.bottom = insets.bottom
+    self.tableView.scrollIndicatorInsets.bottom = insets.bottom
+}
 ```
 *See iOS9TableViewController.swift example*
 
