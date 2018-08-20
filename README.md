@@ -40,7 +40,7 @@ You can set up a TabBarController directly from your storyboard, to do it :
 - Add a UIViewController on your storyboard and subclass it with TabBarController
 - Change the storyboardSeguesCount attribute
 - Add custom segues that inherit from TabBarSegue
-- For each of your segues you have to set an identifier that start with 'tab' and end with his index on TabBar
+- For each of your segues you have to set an identifier that start with 'tab' and end with its index in TabBar
 
 Exemple: if you want 4 viewControllers in your tab, you have to set storyboardSeguesCount to 4, and name your custom segues tab0, tab1, tab2 and tab3
 
@@ -55,7 +55,7 @@ self.present(tabBarController, animated: true, completion: nil) // present it, s
 
 ## Customization
 
-Create a UIView class and constraints it to TabBarProtocol
+Create a UIView class and make it inherit from TabBarProtocol
 
 ```swift
 import TabBarController
@@ -126,7 +126,27 @@ class YourTabBar: UIView, TabBarProtocol {
 
 ## Prior iOS 11 support
 
+TabBarController is optimized for iOS 11 and safeArea, if you want support iOS 9 & 10 you need to use additional insets.
+This library provide different ways to do so.
 
+### TabBar Top/Bottom Inset Constraint
+
+The TabBarChildControllerProtocol provide two optionals property that allow you to manage tabBar insets easily :
+```swift 
+var tabBarTopInsetConstraint: NSLayoutConstraint!
+var tabBarBottomInsetConstraint: NSLayoutConstraint!
+```
+
+Since UIViewController inherit from TabBarChildControllerProtocol, just add these properties in your class (use IBOutlet if you want to use them Interface Builder)
+See iOS9ViewController.swift example 
+
+### Update TabBar Insets
+
+If you want to add inset on your UIScrollView instead of directly update its frame, you can handle it using this method:
+```swift
+func updateTabBarInsets(_ insets: UIEdgeInsets)
+```
+See iOS9TableViewController.swift example 
 
 ## Author
 

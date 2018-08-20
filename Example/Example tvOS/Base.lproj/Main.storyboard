@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TabBarController_Example_tvOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TabBarController" customModule="TabBarController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -33,17 +33,17 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="tabBar" destination="lGW-HW-fb5" id="dFf-cT-99V"/>
+                        <outlet property="tabBar" destination="ebo-lW-vMd" id="9VZ-sL-c9M"/>
                         <segue destination="Fxc-na-ac3" kind="custom" identifier="tab0" customClass="TabBarSegue" customModule="TabBarController" id="1jV-m8-X2o"/>
                         <segue destination="sFE-1z-cou" kind="custom" identifier="tab1" customClass="TabBarSegue" customModule="TabBarController" id="xiw-4O-bTv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="lGW-HW-fb5" customClass="FacebookTabBar" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="1315" height="321"/>
+                <view contentMode="scaleToFill" id="ebo-lW-vMd" customClass="FacebookTabBar" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="577" height="253"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <viewLayoutGuide key="safeArea" id="VJq-XW-du9"/>
+                    <viewLayoutGuide key="safeArea" id="p85-GF-o1x"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="69" y="1229"/>
@@ -59,7 +59,17 @@
                     <view key="view" contentMode="scaleToFill" id="zmT-8Q-jte">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.61176470589999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isX-QB-yOX">
+                                <rect key="frame" x="863" y="497" width="195" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="isX-QB-yOX" firstAttribute="centerX" secondItem="zmT-8Q-jte" secondAttribute="centerX" id="3av-3F-4QT"/>
+                            <constraint firstItem="isX-QB-yOX" firstAttribute="centerY" secondItem="zmT-8Q-jte" secondAttribute="centerY" id="cwT-Yc-4AE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Lx6-rX-Pu3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="outline-account_circle-24px" selectedImage="twotone-account_circle-24px" id="ycf-JH-guA" customClass="FacebookTabBarItem" customModule="TabBarController_Example_tvOS" customModuleProvider="target">
@@ -97,14 +107,13 @@
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="96h-ST-qK3" firstAttribute="centerX" secondItem="JfZ-RT-6aL" secondAttribute="centerX" id="HIZ-bn-Tb2"/>
-                            <constraint firstItem="1AM-mC-KW2" firstAttribute="top" secondItem="Zef-zu-Abl" secondAttribute="top" id="MNf-Qw-vRj"/>
-                            <constraint firstItem="1AM-mC-KW2" firstAttribute="leading" secondItem="Zef-zu-Abl" secondAttribute="leading" id="aoh-nk-moB"/>
-                            <constraint firstItem="Zef-zu-Abl" firstAttribute="trailing" secondItem="1AM-mC-KW2" secondAttribute="trailing" id="gOY-Tt-Y9t"/>
+                            <constraint firstItem="1AM-mC-KW2" firstAttribute="leading" secondItem="Zef-zu-Abl" secondAttribute="leading" id="QpV-Wz-UfG"/>
                             <constraint firstItem="96h-ST-qK3" firstAttribute="centerY" secondItem="JfZ-RT-6aL" secondAttribute="centerY" id="iNK-QP-Y2B"/>
-                            <constraint firstItem="Zef-zu-Abl" firstAttribute="bottom" secondItem="1AM-mC-KW2" secondAttribute="bottom" id="vc8-CB-6Ep"/>
+                            <constraint firstItem="1AM-mC-KW2" firstAttribute="trailing" secondItem="Zef-zu-Abl" secondAttribute="trailing" id="j2u-Kk-4qK"/>
+                            <constraint firstItem="1AM-mC-KW2" firstAttribute="top" secondItem="Gpy-lz-k2I" secondAttribute="bottom" id="jXz-j2-nlQ"/>
+                            <constraint firstItem="1L5-I2-cXS" firstAttribute="top" secondItem="1AM-mC-KW2" secondAttribute="bottom" id="mP7-1W-ePX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zef-zu-Abl"/>
                     </view>
@@ -119,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d0m-w6-8pj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="69" y="2867"/>
+            <point key="canvasLocation" x="69" y="2842"/>
         </scene>
     </scenes>
     <resources>

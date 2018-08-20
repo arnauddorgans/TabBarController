@@ -24,8 +24,8 @@ internal class TabBarContainerController: UINavigationController {
         return self.viewControllers.last
     }
     
-    init(tabBarController: TabBarController) {
-        self.containerDelegate = tabBarController
+    init(delegate: TabBarContainerControllerDelegate) {
+        self.containerDelegate = delegate
         super.init(nibName: nil, bundle: nil)
         self.delegate = self
     }

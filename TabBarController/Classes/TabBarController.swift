@@ -20,8 +20,8 @@ open class TabBarController: UIViewController {
     @IBOutlet public weak var delegate: TabBarControllerDelegate?
     @IBOutlet public weak var tabBar: TabBar!
     
-    private lazy var containerController = TabBarContainerController(tabBarController: self)
-    private lazy var tabBarContainer = TabBarContainer(tabBarController: self)
+    private lazy var containerController = TabBarContainerController(delegate: self)
+    private lazy var tabBarContainer = TabBarContainer(tabBarController: self, delegate: self)
     private let storyboardSegueIdentifierPrefix = "tab"
     
     private var _viewControllers: [UIViewController]?
@@ -29,7 +29,7 @@ open class TabBarController: UIViewController {
         get { return _viewControllers }
         set {
             _viewControllers = newValue
-            updateViewControllers()
+            updateViewControllers(animated: false)
         }
     }
     
@@ -69,7 +69,7 @@ open class TabBarController: UIViewController {
         self.init(nibName: nil, bundle: nil)
         self.tabBar = tabBar
         self.tabBarAnchor = anchor
-        self.setViewControllers(viewControllers)
+        self.setViewControllers(viewControllers, animated: false)
     }
 
     override open func viewDidLoad() {
@@ -114,15 +114,15 @@ open class TabBarController: UIViewController {
     }
     
     // MARK: ViewControllers
-    public func setViewControllers(_ viewControllers: [UIViewController]?) {
+    public func setViewControllers(_ viewControllers: [UIViewController]?, animated: Bool) {
         self._viewControllers = viewControllers
-        self.updateViewControllers()
+        self.updateViewControllers(animated: animated)
     }
     
-    private func updateViewControllers() {
-        self._viewControllers = self._viewControllers?.map { TabBarNavigationContainerController(controller: $0, tabBarController: self) ?? $0 }
-        self.tabBar?.setItems(viewControllers.flatMap { $0.map { $0.tabBarItem } }, animated: false)
-        updateSelectedController(source: .update)
+    private func updateViewControllers(animated: Bool) {
+        self._viewControllers = self._viewControllers?.map { TabBarNavigationContainerController(viewController: $0, tabBarController: self) ?? $0 }
+        self.tabBar?.setItems(viewControllers.flatMap { $0.map { $0.tabBarItem } }, animated: animated)
+        updateSelectedController(source: .update(animated: animated))
     }
     
     open func update(viewController: UIViewController) {
@@ -136,8 +136,8 @@ open class TabBarController: UIViewController {
     }
     
     private func updateInsets(viewController: UIViewController? = nil) {
-        let controller = (viewController ?? containerController.viewController) as? TabBarChildControllerProtocol
-        controller?.updateAllAdditionalInsets(tabBarContainer.additionalInsets)
+        let viewController: TabBarChildControllerProtocol? = viewController ?? containerController.viewController
+        viewController?.updateAllTabBarConstraints(tabBarContainer.additionalInsets)
     }
     
     private func updateSelectedController(source: TabBarControllerUpdateSource) {
@@ -158,12 +158,24 @@ open class TabBarController: UIViewController {
         }
     }
     
+    // MARK:- SafeArea
+    func updateSafeArea(insets: UIEdgeInsets) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            self.containerController.additionalSafeAreaInsets = insets
+            self.containerController.view.layoutIfNeeded()
+        }
+    }
+    
     // MARK:- Focus
     open override var preferredFocusEnvironments: [UIFocusEnvironment] {
         if self.isTabBarHidden {
-            return [containerController]
+            return [containerController.view]
         }
-        return [tabBarContainer, containerController]
+        return [tabBarContainer, containerController.view]
+    }
+    
+    override open var preferredFocusedView: UIView? {
+        return preferredFocusEnvironments.first as? UIView
     }
     
     open override func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
@@ -198,7 +210,7 @@ extension TabBarController: TabBarDelegate {
             return
         }
         guard self.delegate?.tabBarController?(self, shouldSelect: controller) != false else {
-            updateSelectedController(source: .update)
+            updateSelectedController(source: .update(animated: false))
             return
         }
         if index != self.selectedIndex {
@@ -208,7 +220,8 @@ extension TabBarController: TabBarDelegate {
             }
             self.delegate?.tabBarController?(self, didSelect: selectedViewController)
         } else if UIDevice.current.userInterfaceIdiom != .tv {
-            (self.selectedViewController as? TabBarChildControllerProtocol)?.tabBarAction?()
+            let viewController: TabBarChildControllerProtocol? = self.selectedViewController
+            viewController?.tabBarAction?()
         }
     }
 }
@@ -229,11 +242,20 @@ extension TabBarController: UINavigationControllerDelegate {
             self.update(viewController: viewController)
             return
         }
-        transitionCoordinator.notifyWhenInteractionEnds { [unowned self] context in
-            guard let viewController = context.viewController(forKey: .from), context.isCancelled else {
-                return
+        if #available(iOS 10.0, *) {
+            transitionCoordinator.notifyWhenInteractionChanges { [unowned self] context in
+                guard let viewController = context.viewController(forKey: .from), context.isCancelled else {
+                    return
+                }
+                self.update(viewController: viewController)
             }
-            self.update(viewController: viewController)
+        } else {
+            transitionCoordinator.notifyWhenInteractionEnds { [unowned self] context in
+                guard let viewController = context.viewController(forKey: .from), context.isCancelled else {
+                    return
+                }
+                self.update(viewController: viewController)
+            }
         }
         transitionCoordinator.animateAlongsideTransition(in: tabBarContainer, animation: { [unowned self] context in
             guard let viewController = context.viewController(forKey: .to) else {
@@ -278,14 +300,5 @@ extension TabBarController: TabBarContainerControllerDelegate {
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?) {
         updateInsets(viewController: viewController)
-    }
-}
-
-extension TabBarController: TabBarChildControllerProtocol {
-    
-    public func updateAdditionalInsets(_ insets: UIEdgeInsets) {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            self.containerController.additionalSafeAreaInsets = insets
-        }
     }
 }

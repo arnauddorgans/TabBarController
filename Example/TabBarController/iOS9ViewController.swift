@@ -9,8 +9,15 @@
 import UIKit
 import TabBarController
 
-class iOS9ViewController: UIViewController, TabBarChildControllerProtocol {
+class iOS9ViewController: UIViewController {
 
-    @IBOutlet weak var additionalTopInsetConstraint: NSLayoutConstraint!
-    @IBOutlet weak var additionalBottomInsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tabBarTopInsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tabBarBottomInsetConstraint: NSLayoutConstraint!
+    
+    @IBAction func toggleTabBar(_ sender: Any) {
+        guard let contoller = self.tab.controller else {
+            return
+        }
+        contoller.setTabBarHidden(!contoller.isTabBarHidden, animated: true)
+    }
 }

@@ -25,6 +25,8 @@
 		D45C21C22126F604004D21C2 /* FacebookTabBarTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */; };
 		D45C21C32126F614004D21C2 /* FacebookTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* FacebookTabBarController.swift */; };
 		D486CDC121284B380015BE9A /* iOS9TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486CDC021284B380015BE9A /* iOS9TableViewController.swift */; };
+		D49561132129AF08008363D2 /* SpringboardTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49561122129AF08008363D2 /* SpringboardTabBar.swift */; };
+		D49561142129AF08008363D2 /* SpringboardTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49561122129AF08008363D2 /* SpringboardTabBar.swift */; };
 		D4B0F2392125BD17000F9DE8 /* FacebookTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */; };
 		D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -66,6 +68,7 @@
 		D45C21B72126B7B0004D21C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45C21C02126EFA4004D21C2 /* FacebookTabBarTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTabBarTransition.swift; sourceTree = "<group>"; };
 		D486CDC021284B380015BE9A /* iOS9TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS9TableViewController.swift; sourceTree = "<group>"; };
+		D49561122129AF08008363D2 /* SpringboardTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringboardTabBar.swift; sourceTree = "<group>"; };
 		D4B0F2382125BD17000F9DE8 /* FacebookTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookTabBar.swift; sourceTree = "<group>"; };
 		DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +133,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				D44452A1212790AD009146F0 /* iOS9ViewController.swift */,
 				D486CDC021284B380015BE9A /* iOS9TableViewController.swift */,
+				D49561112129AEBC008363D2 /* Springboard */,
 				D44452A021278F33009146F0 /* Facebook */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -207,6 +211,14 @@
 				D45C21B72126B7B0004D21C2 /* Info.plist */,
 			);
 			path = "Example tvOS";
+			sourceTree = "<group>";
+		};
+		D49561112129AEBC008363D2 /* Springboard */ = {
+			isa = PBXGroup;
+			children = (
+				D49561122129AF08008363D2 /* SpringboardTabBar.swift */,
+			);
+			name = Springboard;
 			sourceTree = "<group>";
 		};
 		D7136837F9A4A10D451C19B0 /* Frameworks */ = {
@@ -459,6 +471,7 @@
 				D45C21C12126EFA4004D21C2 /* FacebookTabBarTransition.swift in Sources */,
 				D44452A2212790AD009146F0 /* iOS9ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				D49561132129AF08008363D2 /* SpringboardTabBar.swift in Sources */,
 				D486CDC121284B380015BE9A /* iOS9TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +492,7 @@
 				D45C21C22126F604004D21C2 /* FacebookTabBarTransition.swift in Sources */,
 				D45C21C32126F614004D21C2 /* FacebookTabBarController.swift in Sources */,
 				D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */,
+				D49561142129AF08008363D2 /* SpringboardTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CPE39ZT2AY;
 				INFOPLIST_FILE = TabBarController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -642,6 +657,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CPE39ZT2AY;
 				INFOPLIST_FILE = TabBarController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -718,7 +734,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.4;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -745,7 +761,7 @@
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.4;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};

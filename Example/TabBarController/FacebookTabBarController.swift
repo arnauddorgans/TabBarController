@@ -13,6 +13,7 @@ class FacebookTabBarController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.delegate = self
     }
 }

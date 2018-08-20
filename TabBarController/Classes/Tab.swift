@@ -22,6 +22,24 @@ public struct Tab {
         return controller?.tabBar
     }
     
+    public var barItem: UITabBarItem? {
+        guard !(self.base is TabBarController) else {
+            return nil
+        }
+        guard self.controller?.viewControllers?.contains(self.base) == true else {
+            return self.base.parent?.tab.barItem
+        }
+        return self.base.tabBarItem
+    }
+    
+    public var isNavigationController: Bool {
+        return navigationController != nil
+    }
+    
+    public var navigationController: UINavigationController? {
+        return (self.base as? TabBarNavigationContainerController)?.viewController
+    }
+    
     internal init(base: UIViewController) {
         self.base = base
     }

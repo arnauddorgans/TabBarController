@@ -22,30 +22,46 @@ class TabBarContainer: UIView {
     
     private (set) var isTabBarHidden: Bool = false
     private var anchorConstraints = [NSLayoutConstraint]()
-    private var hideTabBarGesture: UISwipeGestureRecognizer!
-    private var toggleTabBarGesture: UITapGestureRecognizer!
+    private var hideTabBarGesture: UISwipeGestureRecognizer?
+    private var showTabBarGesture: UITapGestureRecognizer?
     
-    var additionalInsets: UIEdgeInsets = .zero
+    var additionalInsets: UIEdgeInsets {
+        guard let tabBar = self.tabBar else {
+            return .zero
+        }
+        if self.isTabBarHidden || !(tabBar.needsAdditionalInset ?? tabBar.defaultNeedsAdditionalInset) {
+            return .zero
+        } else {
+            let inset = max(0, tabBar.frame.height + (tabBar.additionalInset ?? 0))
+            var insets = UIEdgeInsets.zero
+            if #available(iOS 11.0, tvOS 11.0, *) {
+                switch self.anchor {
+                case .top:
+                    insets.top = max(0, inset - self.safeAreaInsets.top)
+                case .bottom:
+                    insets.bottom = max(0, inset - self.safeAreaInsets.bottom)
+                }
+            } else {
+                switch self.anchor {
+                case .top:
+                    insets.top =  max(0, insets.top + inset)
+                case .bottom:
+                    insets.bottom =  max(0, insets.bottom + inset)
+                }
+            }
+            return insets
+        }
+    }
     var anchor: TabBarAnchor = .default {
         didSet {
             updateTabBarConstraints()
         }
     }
 
-    init(tabBarController: TabBarController) {
+    init(tabBarController: TabBarController, delegate: TabBarContainerDelegate) {
         self.tabBarController = tabBarController
-        self.delegate = tabBarController
+        self.delegate = delegate
         super.init(frame: .zero)
-        self.hideTabBarGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.handleHideGesture(_:)))
-        self.hideTabBarGesture.delegate = self
-        self.hideTabBarGesture.isEnabled = UIDevice.current.userInterfaceIdiom == .tv
-        self.addGestureRecognizer(self.hideTabBarGesture)
-        
-        self.toggleTabBarGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleToggleGesture(_:)))
-        self.toggleTabBarGesture.allowedPressTypes = [NSNumber(integerLiteral: UIPressType.menu.rawValue)]
-        self.toggleTabBarGesture.delegate = self
-        self.toggleTabBarGesture.isEnabled = self.hideTabBarGesture.isEnabled
-        self.addGestureRecognizer(self.toggleTabBarGesture)
     }
     
     func setTabBarHidden(_ hidden: Bool) {
@@ -82,6 +98,8 @@ class TabBarContainer: UIView {
     }
     
     private func updateTabBarConstraints() {
+         updateFocusGestures()
+        
         let oldConstraints = anchorConstraints
         NSLayoutConstraint.deactivate(oldConstraints)
         anchorConstraints.removeAll()
@@ -96,14 +114,12 @@ class TabBarContainer: UIView {
             } else {
                 anchorConstraints = [tabBar.topAnchor.constraint(equalTo: self.topAnchor)]
             }
-            hideTabBarGesture.direction = .down
         case .bottom:
             if isTabBarHidden {
                 anchorConstraints = [tabBar.topAnchor.constraint(equalTo: self.bottomAnchor)]
             } else {
                 anchorConstraints = [tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor)]
             }
-            hideTabBarGesture.direction = .up
         }
         NSLayoutConstraint.activate(anchorConstraints)
         tabBar.removeConstraints(oldConstraints)
@@ -112,36 +128,13 @@ class TabBarContainer: UIView {
         self.layoutIfNeeded()
         
         self.delegate?.tabBarContainer(self, didShowTabBar: !self.isTabBarHidden)
+        updateInset()
     }
     
     private func updateInset() {
         guard let tabBar = self.tabBar,
             let tabBarController = self.tabBarController else {
             return
-        }
-        if self.isTabBarHidden || !(tabBar.needsAdditionalInset ?? tabBar.defaultNeedsAdditionalInset) {
-            self.additionalInsets = .zero
-        } else {
-            self.additionalInsets = {
-                let inset = max(0, tabBar.frame.height + (tabBar.additionalInset ?? 0))
-                var insets = UIEdgeInsets.zero
-                if #available(iOS 11.0, tvOS 11.0, *) {
-                    switch self.anchor {
-                    case .top:
-                        insets.top = max(0, inset - self.safeAreaInsets.top)
-                    case .bottom:
-                        insets.bottom = max(0, inset - self.safeAreaInsets.bottom)
-                    }
-                } else {
-                    switch self.anchor {
-                    case .top:
-                        insets.top =  max(0, insets.top + inset)
-                    case .bottom:
-                        insets.bottom =  max(0, insets.bottom + inset)
-                    }
-                }
-                return insets
-            }()
         }
         if #available(iOS 11.0, tvOS 11.0, *) { }
         else {
@@ -161,9 +154,13 @@ class TabBarContainer: UIView {
         return tabBar.hitTest(point, with: event)
     }
     
-    // MARK: tvOS
+    // MARK: Focus
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
         return [tabBar]
+    }
+    
+    override var preferredFocusedView: UIView? {
+        return preferredFocusEnvironments.first as? UIView
     }
     
     @objc func handleHideGesture(_ gesture: UISwipeGestureRecognizer) {
@@ -182,6 +179,32 @@ class TabBarContainer: UIView {
             return
         }
         self.delegate?.tabBarContainer(self, didHandleShowGesture: true)
+    }
+    
+    private func updateFocusGestures() {
+        guard let tabBarController = self.tabBarController, tabBarController.isViewLoaded,
+            UIDevice.current.userInterfaceIdiom == .tv else {
+            return
+        }
+        if self.showTabBarGesture == nil, self.hideTabBarGesture == nil,
+            let tabBarController = self.tabBarController {
+            let hideTabBarGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.handleHideGesture(_:)))
+            hideTabBarGesture.delegate = self
+            self.addGestureRecognizer(hideTabBarGesture)
+            self.hideTabBarGesture = hideTabBarGesture
+            
+            let showTabBarGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleToggleGesture(_:)))
+            showTabBarGesture.allowedPressTypes = [NSNumber(integerLiteral: UIPressType.menu.rawValue)]
+            showTabBarGesture.delegate = self
+            tabBarController.view.addGestureRecognizer(showTabBarGesture)
+            self.showTabBarGesture = showTabBarGesture
+        }
+        switch self.anchor {
+        case .top:
+            hideTabBarGesture?.direction = .down
+        case .bottom:
+            hideTabBarGesture?.direction = .up
+        }
     }
     
     // MARK: Layout
@@ -225,7 +248,11 @@ class TabBarContainer: UIView {
 
 extension TabBarContainer: UIGestureRecognizerDelegate {
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let gestureRecognizerShouldBegin = super.gestureRecognizerShouldBegin(gestureRecognizer)
+        guard showTabBarGesture == gestureRecognizer else {
+            return gestureRecognizerShouldBegin
+        }
+        return gestureRecognizerShouldBegin && self.isTabBarHidden
     }
 }

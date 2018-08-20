@@ -12,9 +12,14 @@ import TabBarController
 class FacebookTabBarItem: UITabBarItem {
     
     @IBInspectable var selectedTintColor: UIColor = .blue
+    
+    convenience init(image: UIImage?, selectedImage: UIImage?, selectedTintColor: UIColor) {
+        self.init(title: nil, image: image, selectedImage: selectedImage)
+        self.selectedTintColor = selectedTintColor
+    }
 }
 
-class FacebookTabBar: UIView, TabBarProtocol {
+@IBDesignable class FacebookTabBar: UIView, TabBarProtocol {
     
     private let contentView = UIStackView()
     
@@ -50,7 +55,7 @@ class FacebookTabBar: UIView, TabBarProtocol {
         } else {
             contentView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
             contentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
             contentView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         } else {
@@ -61,7 +66,10 @@ class FacebookTabBar: UIView, TabBarProtocol {
     
     func setTabBarHidden(_ hidden: Bool) {
         contentView.arrangedSubviews.forEach {
-            $0.transform = hidden ? CGAffineTransform(rotationAngle: .pi/4) : .identity
+            guard let button = $0 as? FacebookTabBarButton else {
+                return
+            }
+            button.isHiddenInTabBar = hidden
         }
     }
     
@@ -81,11 +89,18 @@ class FacebookTabBar: UIView, TabBarProtocol {
     }
     
     func setSelectedItem(_ item: UITabBarItem?, animated: Bool) {
-        contentView.arrangedSubviews.forEach {
-            guard let button = $0 as? FacebookTabBarButton else {
-                return
+        func update() {
+            contentView.arrangedSubviews.forEach {
+                guard let button = $0 as? FacebookTabBarButton else {
+                    return
+                }
+                button.isSelected = button.item == item
             }
-            button.isSelected = button.item == item
+        }
+        if !animated {
+            update()
+        } else {
+            UIView.animate(withDuration: 0.1, animations: update)
         }
     }
     
@@ -96,9 +111,14 @@ class FacebookTabBar: UIView, TabBarProtocol {
         self.delegate?.tabBar(self, didSelect: button.item)
     }
     
-    //MARK: tvOS
+    //MARK: Focus
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        return contentView.arrangedSubviews.sorted(by: { lhs, _ in return (lhs as? UIButton)?.isSelected == true })
+        return contentView.arrangedSubviews.first(where: { ($0 as? UIButton)?.isSelected == true })
+            .flatMap { [$0] } ?? contentView.arrangedSubviews
+    }
+    
+    override open var preferredFocusedView: UIView? {
+        return preferredFocusEnvironments.first as? UIView
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
@@ -107,11 +127,34 @@ class FacebookTabBar: UIView, TabBarProtocol {
         }
         self.didSelect(nextButton)
     }
+    
+    //MARK: Designable
+    override func prepareForInterfaceBuilder() {
+        let designableImage: (String)->UIImage? = {
+            return UIImage(named: $0, in: Bundle(for: FacebookTabBar.self), compatibleWith: nil)
+        }
+        let items = [FacebookTabBarItem(image: designableImage("outline-chrome_reader_mode-24px"),
+                                        selectedImage: designableImage("twotone-chrome_reader_mode-24px"),
+                                        selectedTintColor: UIColor.red),
+                     FacebookTabBarItem(image: designableImage("outline-account_circle-24px"),
+                                        selectedImage: designableImage("baseline-account_circle-24px"),
+                                        selectedTintColor: UIColor.red),
+                     FacebookTabBarItem(image: designableImage("outline-notifications-24px"),
+                                        selectedImage: designableImage("twotone-notifications-24px"),
+                                        selectedTintColor: UIColor.red)]
+        self.setItems(items, animated: false)
+        self.setSelectedItem(items.first, animated: false)
+    }
 }
 
 private class FacebookTabBarButton: UIButton {
     
     let item: FacebookTabBarItem
+    var isHiddenInTabBar: Bool = false {
+        didSet {
+            update()
+        }
+    }
     
     override var isSelected: Bool {
         didSet {
@@ -133,10 +176,19 @@ private class FacebookTabBarButton: UIButton {
         self.setImage(self.isSelected ? item.selectedImage : item.image, for: .normal)
         self.tintColor = self.isSelected ? item.selectedTintColor : UIColor.gray.withAlphaComponent(0.5)
         self.setTitleColor(self.tintColor, for: .normal)
-        self.transform = self.isFocused ? CGAffineTransform(scaleX: 1.5, y: 1.5) : .identity
+        
+        if UIDevice.current.userInterfaceIdiom == .tv {
+            self.transform = self.isFocused ? CGAffineTransform(scaleX: 1.5, y: 1.5) : .identity
+        } else {
+            self.transform = self.isSelected ? .identity : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            if isHiddenInTabBar {
+                self.transform = self.transform.rotated(by: .pi/4)
+            }
+        }
         self.setTitle(self.item.badgeValue, for: .normal)
     }
     
+    // MARK: Focus
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         coordinator.addCoordinatedAnimations(self.update, completion: nil)
     }

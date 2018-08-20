@@ -10,7 +10,7 @@ import UIKit
 @IBDesignable open class SystemTabBar: UIView {
     
     public let tabBar = UITabBar()
-    public var delegate: TabBarDelegate?
+    public weak var delegate: TabBarDelegate?
     
     public var items: [UITabBarItem]? {
         return tabBar.items
@@ -68,6 +68,12 @@ import UIKit
         tabBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
+    public func setTabBarHidden(_ hidden: Bool) {
+        #if os(tvOS)
+        tabBar.alpha = hidden ? 0.1 : 1
+        #endif
+    }
+    
     // MARK: Layout
     override open func safeAreaInsetsDidChange() {
         if #available(iOS 11.0, tvOS 11.0, *) {
@@ -86,9 +92,13 @@ import UIKit
         self.selectedItem = items.first
     }
     
-    // MARK: tvOS
+    // MARK: Focus
     open override var preferredFocusEnvironments: [UIFocusEnvironment] {
         return [tabBar]
+    }
+    
+    override open var preferredFocusedView: UIView? {
+        return preferredFocusEnvironments.first as? UIView
     }
 }
 

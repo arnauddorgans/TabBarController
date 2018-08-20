@@ -9,14 +9,18 @@ import UIKit
 
 @objc public protocol TabBarChildControllerProtocol where Self: UIViewController {
 
-    @objc optional weak var additionalTopInsetConstraint: NSLayoutConstraint! { get }
-    @objc optional weak var additionalBottomInsetConstraint: NSLayoutConstraint! { get }
+    @objc optional weak var tabBarTopInsetConstraint: NSLayoutConstraint! { get }
+    @objc optional weak var tabBarBottomInsetConstraint: NSLayoutConstraint! { get }
     
-    @objc optional func updateAdditionalInsets(_ insets: UIEdgeInsets)
+    @objc optional func updateTabBarInsets(_ insets: UIEdgeInsets)
     @objc optional func tabBarAction()
 }
 
 extension TabBarChildControllerProtocol {
+    
+    public var tab: Tab {
+        return Tab(base: self)
+    }
     
     private func update(constraint: NSLayoutConstraint??, inset: CGFloat) -> Bool {
         guard let additionalInsetConstraint = constraint as? NSLayoutConstraint,
@@ -27,23 +31,23 @@ extension TabBarChildControllerProtocol {
         return true
     }
     
-    internal func updateAdditionalConstraints(_ insets: UIEdgeInsets) {
+    internal func updateTabBarConstraints(_ insets: UIEdgeInsets) {
         let controller = self as TabBarChildControllerProtocol
-        guard update(constraint: controller.additionalTopInsetConstraint, inset: insets.top) ||
-            update(constraint: controller.additionalBottomInsetConstraint, inset: insets.bottom) else {
+        guard update(constraint: controller.tabBarTopInsetConstraint, inset: insets.top) ||
+            update(constraint: controller.tabBarBottomInsetConstraint, inset: insets.bottom) else {
                 return
         }
         self.view.layoutIfNeeded()
     }
     
-    internal func updateAllAdditionalInsets(_ insets: UIEdgeInsets) {
+    internal func updateAllTabBarConstraints(_ insets: UIEdgeInsets) {
+        self.loadViewIfNeeded()
+
         var controller: TabBarChildControllerProtocol? = self
         if #available(iOS 11.0, tvOS 11.0, *) {
-            if !(self is TabBarController) {
-                controller = self.tab.controller
-            }
+            controller = self.tab.controller
         }
-        controller?.updateAdditionalInsets?(insets)
-        controller?.updateAdditionalConstraints(insets)        
+        controller?.updateTabBarInsets?(insets)
+        controller?.updateTabBarConstraints(insets)
     }
 }

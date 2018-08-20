@@ -9,23 +9,28 @@ import UIKit
 
 enum TabBarControllerUpdateSource {
     case action
-    case update
+    case update(animated: Bool)
     
     func animateViewController(_ viewController: UIViewController?, in containerController: TabBarContainerController) -> Bool {
         #if os(iOS)
-        return self == .action && containerController.viewController.flatMap { fromVC in
+        return animateTabBarSelectedItem() && containerController.viewController.flatMap { fromVC in
             viewController.flatMap { toVC in
                 containerController.containerDelegate?.tabBarContainerController(containerController, animationControllerFrom: fromVC, to: toVC)
             }
             } != nil
         #elseif os(tvOS)
-        return true
+        return animateTabBarSelectedItem()
         #endif
     }
     
     func animateTabBarSelectedItem() -> Bool {
         #if os(iOS)
-        return self == .action
+        switch self {
+        case .action:
+            return true
+        case .update(animated: let animated):
+            return animated
+        }
         #elseif os(tvOS)
         return true
         #endif

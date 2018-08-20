@@ -7,69 +7,58 @@
 
 import UIKit
 
-public class TabBarNavigationContainerController: UIViewController {
+class TabBarNavigationContainerController: UIViewController {
     
-    let controller: UINavigationController
+    let viewController: UINavigationController
     
-    override public var title: String? {
-        get { return controller.title }
-        set { controller.title = newValue }
+    override var title: String? {
+        get { return viewController.title }
+        set { viewController.title = newValue }
     }
     
-    override public var tabBarItem: UITabBarItem! {
-        get { return controller.tabBarItem }
-        set { controller.tabBarItem = newValue }
+    override var tabBarItem: UITabBarItem! {
+        get { return viewController.tabBarItem }
+        set { viewController.tabBarItem = newValue }
     }
     
-    init?(controller: UIViewController, tabBarController: TabBarController) {
-        guard let controller = controller as? UINavigationController else {
+    init?(viewController: UIViewController, tabBarController: TabBarController) {
+        guard let viewController = viewController as? UINavigationController else {
             return nil
         }
-        self.controller = controller
+        self.viewController = viewController
         super.init(nibName: nil, bundle: nil)
-        controller.delegate = tabBarController
+        viewController.delegate = tabBarController
     }
     
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
-        controller.willMove(toParentViewController: self)
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(controller.view)
-        controller.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        controller.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        controller.view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        controller.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        self.addChildViewController(controller)
-        controller.didMove(toParentViewController: self)
+        viewController.willMove(toParentViewController: self)
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(viewController.view)
+        viewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        viewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        viewController.view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        viewController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.addChildViewController(viewController)
+        viewController.didMove(toParentViewController: self)
     }
     
     #if os(iOS)
-    override public var childViewControllerForStatusBarStyle: UIViewController? {
-        return controller
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return viewController
     }
     
-    override public var childViewControllerForStatusBarHidden: UIViewController? {
-        return controller
+    override var childViewControllerForStatusBarHidden: UIViewController? {
+        return viewController
     }
     
-    override public func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
-        return controller
+    override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
+        return viewController
     }
     #endif
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension TabBarNavigationContainerController: TabBarChildControllerProtocol {
-    
-    public func tabBarAction() {
-        controller.tabBarAction()
-    }
-    
-    public func updateAdditionalInsets(_ insets: UIEdgeInsets) {
-        self.controller.updateAdditionalInsets(insets)
     }
 }
