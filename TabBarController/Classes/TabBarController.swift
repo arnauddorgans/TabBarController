@@ -20,7 +20,7 @@ open class TabBarController: UIViewController {
     @IBOutlet public weak var tabBar: TabBar!
     
     private lazy var containerController = TabBarContainerController(delegate: self)
-    private var menuGesture: UITapGestureRecognizer?
+    fileprivate var menuGesture: UITapGestureRecognizer?
     private let storyboardSegueIdentifierPrefix = "tab"
     
     private var _viewControllers: [UIViewController]?
@@ -167,7 +167,7 @@ open class TabBarController: UIViewController {
         viewController?.updateAllTabBarConstraints(additionalInsets)
     }
     
-    private func updateSelectedController(source: TabBarControllerUpdateSource) {
+    fileprivate func updateSelectedController(source: TabBarControllerUpdateSource) {
         guard let viewControllers = self.viewControllers, !viewControllers.isEmpty else {
             containerController.setViewController(nil, source: source)
             self._selectedIndex = 0
