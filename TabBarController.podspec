@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'TabBarController'
   s.version          = '1.0'
-  s.summary          = 'TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar.'
+  s.summary          = 'TabBarController acts like a UITabBarController that allows you to customize TabBar, frame and animations.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar.
+TabBarController acts like a UITabBarController that allows you to customize TabBar, frame and animations.
                        DESC
 
   s.homepage         = 'https://github.com/Arnoymous/TabBarController'
