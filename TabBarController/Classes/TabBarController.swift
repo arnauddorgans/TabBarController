@@ -12,7 +12,7 @@ import UIKit
     @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
     @objc optional func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
     @objc optional func tabBarController(_ tabBarController: TabBarController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
-    @objc optional func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: ()->Void)
+    @objc optional func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: @escaping ()->Void)
 }
 
 open class TabBarController: UIViewController {
