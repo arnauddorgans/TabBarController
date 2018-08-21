@@ -32,6 +32,7 @@ TabBarController acts like a UITabBarController that allows you to customize Tab
   s.tvos.deployment_target = '9.0'
 
   s.source_files = 'TabBarController/Classes/**/*'
+  s.swift_version = '4.0'
   
   # s.resource_bundles = {
   #   'TabBarController' => ['TabBarController/Assets/*.png']
