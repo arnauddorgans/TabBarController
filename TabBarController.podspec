@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TabBarController acts like a UITabBarController that allows you to customize TabBar, frame and animations.
+TabBarController acts like a UITabBarController for iOS and tvOS, that allows you to customize TabBar, frame and animations.
                        DESC
 
   s.homepage         = 'https://github.com/arnauddorgans/TabBarController'
