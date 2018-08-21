@@ -228,11 +228,6 @@ extension YourTabBarController: TabBarControllerDelegate {
     func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         // return your custom UIViewControllerAnimatedTransitioning
     }
-    
-    func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: @escaping ()->Void) {
-        // Custom animation when setTabBarHidden(_, animated: true)
-        // UIView.animate(withDuration: 0.3, animations: animations)
-    }
 }
 ```
 
