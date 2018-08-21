@@ -26,7 +26,7 @@ class TabBarContainer: UIView {
     private var showTabBarGesture: UITapGestureRecognizer?
     
     var additionalInsets: UIEdgeInsets {
-        guard let tabBar = self.tabBar else {
+        guard let tabBar = self.tabBar, let tabBarController = self.tabBarController else {
             return .zero
         }
         if self.isTabBarHidden || !(tabBar.needsAdditionalInset ?? tabBar.defaultNeedsAdditionalInset) {
@@ -44,9 +44,9 @@ class TabBarContainer: UIView {
             } else {
                 switch self.anchor {
                 case .top:
-                    insets.top =  max(0, insets.top + inset)
+                    insets.top = max(0, inset - tabBarController.topLayoutGuide.length)
                 case .bottom:
-                    insets.bottom =  max(0, insets.bottom + inset)
+                    insets.bottom = max(0, inset - tabBarController.bottomLayoutGuide.length)
                 }
             }
             return insets
