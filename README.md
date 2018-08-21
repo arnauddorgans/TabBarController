@@ -218,6 +218,8 @@ class YourTabBarAnimator: TabBarAnimator {
 }
 ```
 
+*See TabBarAnimator.swift*
+
 ### Transition
 
 If you want to use custom animations on your TabBarController you have to make it inherits from TabBarControllerDelegate
