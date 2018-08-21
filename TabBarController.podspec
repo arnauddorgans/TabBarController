@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TabBarController acts like a UITabBarController that allows you to customize TabBar, frame and animations.
                        DESC
 
-  s.homepage         = 'https://github.com/Arnoymous/TabBarController'
+  s.homepage         = 'https://github.com/arnauddorgans/TabBarController'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Arnoymous' => 'arnaud.dorgans@gmail.com' }
-  s.source           = { :git => 'https://github.com/Arnoymous/TabBarController.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/arnauddorgans/TabBarController.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/arnauddorgans'
 
   s.ios.deployment_target = '9.0'
