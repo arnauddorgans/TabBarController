@@ -238,11 +238,11 @@ extension YourTabBarController: TabBarControllerDelegate {
 ## Prior iOS 11 support
 
 TabBarController is optimized for iOS 11 and safeArea, if you want support iOS 9 & 10 you need to use additional insets.
-This library provide different ways to do so.
+This library provides different ways to do so.
 
 ### TabBar Top/Bottom Inset Constraint
 
-The TabBarChildControllerProtocol provide two optional properties that allows you to manage tabBar insets easily :
+The TabBarChildControllerProtocol provides two optional properties that allows you to manage TabBar insets easily :
 ```swift 
 var tabBarTopInsetConstraint: NSLayoutConstraint!
 var tabBarBottomInsetConstraint: NSLayoutConstraint!
