@@ -5,12 +5,10 @@
 [![License](https://img.shields.io/cocoapods/l/TabBarController.svg?style=flat)](https://cocoapods.org/pods/TabBarController)
 [![Platform](https://img.shields.io/cocoapods/p/TabBarController.svg?style=flat)](https://cocoapods.org/pods/TabBarController)
 
-How boring it is, when you discover on the latest update of your Zeplin's project that your designer made a tabBar, that didn't fit in 49px height ?
-Or maybe just an advanced design of tabBar that can't be a subclass of UITabBar ?
-This moment when you know that you'll be constraint to imagine a custom hierarchy for your app just for a designer.. 😜
+How boring is it when you discover on the latest update of your Zeplin’s project that you designer made a TabBar that doesn’t fit in 49px in height? 
+Or when you discover that they only made an advanced design of tabBar that can’t be a subclass of UITabBar? We all know that moment when you have to imagine a custom hierarchy for your app just for a designer… 😜
 
-TabBarController act like a UITabBarController that allow you to provide any custom view and use it as tabBar, you can even set a custom anchor for your tabBar, you want a top tabBar ? or maybe just a bottom tabBar on tvOS ?
-Well.. you can easily do all of thoses things with exactly 0 line of code, directly from you storyboard (or programmatically, if your not a storyboard's big fan 😉)
+TabBarController acts like a UITabBarController that allows you to provide any custom view and to use it as a tabBar and you can even set a custom anchor for your tabBar. You want a tabBar? Or just a bottom tabBar on tvOS? Well… you can easily do all these things with exactly 0 line of code, directly from your story borard (or programmatically, if you’re not a big fan of storyboards 😉)
 
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/004.gif" width="520">
 
@@ -48,7 +46,7 @@ You can set up a TabBarController directly from your storyboard, to do it :
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard1.png" width="250">
 
 - Add custom segues that inherit from TabBarSegue
-- For each of your segues you have to set an identifier that start with 'tab' and end with its index in TabBar
+- For each of your segues you have to set an identifier that starts with 'tab' and ends with its index in TabBar
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard2.jpg" width="250">
 
 Example: if you want 4 viewControllers in your tab, you have to set storyboardSeguesCount to 4, and name your custom segues tab0, tab1, tab2 and tab3
@@ -91,7 +89,7 @@ TabBarController provide extensions for UIViewController:
 ```swift
 self.tab.controller // return the tabBarController of self
 self.tab.bar // return the tabBar of self.tab.controller
-self.tab.barItem // return the tabBarItem of self parent in TabBarController
+self.tab.barItem // return the tabBarItem of self's parent in TabBarController
 self.tab.navigationController /* In case of the root view controller of your controller's tab is a UINavigationController, TabBarController add it in private parent controller. 
 Using self.tab.navigationController on this private parent controller (via self.tab.controller?.viewControllers for example) return your navigationController*/
 self.tab.isNavigationController // return true if self.tab.navigationController != nil
@@ -153,7 +151,7 @@ let tabBarController = TabBarController(viewControllers: [...], tabBar: tabBar)
 
 ### Anchor
 
-TabBarController support two anchor for TabBar:
+TabBarController support two anchors for TabBar:
 
 - top: tvOS style
 - bottom: iOS style
