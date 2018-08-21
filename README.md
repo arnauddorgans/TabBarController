@@ -6,9 +6,10 @@
 [![Platform](https://img.shields.io/cocoapods/p/TabBarController.svg?style=flat)](https://cocoapods.org/pods/TabBarController)
 
 How boring is it when you discover on the latest update of your Zeplin’s project that you designer made a TabBar that doesn’t fit in 49px in height? 
-Or when you discover that they only made an advanced design of tabBar that can’t be a subclass of UITabBar? We all know that moment when you have to imagine a custom hierarchy for your app just for a designer… 😜
+Or when you discover that they only made an advanced design of TabBar that can’t be a subclass of UITabBar? We all know that moment when you have to imagine a custom hierarchy for your app just for a designer… 😜
 
-TabBarController acts like a UITabBarController that allows you to provide any custom view and to use it as a tabBar and you can even set a custom anchor for your tabBar. You want a tabBar? Or just a bottom tabBar on tvOS? Well… you can easily do all these things with exactly 0 line of code, directly from your story borard (or programmatically, if you’re not a big fan of storyboards 😉)
+TabBarController acts like a UITabBarController that allows you to provide any custom view and to use it as a TabBar. 
+You can even set a custom anchor for your TabBar. You want a top tabBar? Or just a bottom TabBar on tvOS? Well… you can easily do all these things with exactly 0 line of code, directly from your storyboard (or programmatically, if you’re not a big fan of storyboards 😉)
 
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/004.gif" width="520">
 
@@ -39,10 +40,10 @@ pod 'TabBarController'
 
 You can set up a TabBarController directly from your storyboard, to do it :
 
-- Add a UIViewController on your storyboard and subclass it with TabBarController
+- Add a UIViewController on your storyboard and make it inherits from TabBarController
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard0.png" width="250">
 
-- Change the storyboardSeguesCount attribute
+- Change the TabBarController's storyboardSeguesCount attribute
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboard1.png" width="250">
 
 - Add custom segues that inherit from TabBarSegue
@@ -72,7 +73,7 @@ self.tab.controller?.setTabBarHidden(true, animated: true) // manually hide tabB
 
 ### Scroll To Top
 
-If you want to handle the scroll to top functionallity like system's UITabBarController when you tap on selected tab in tabBar
+If you want to handle the scroll to top functionallity like system's UITabBarController when you tap on selected tab in TabBar
 
 ```swift
 func tabBarAction() {
@@ -114,7 +115,7 @@ func navigationController(_ navigationController: UINavigationController, didSho
 
 ## Customization
 
-Create a UIView class and make it inherit from TabBarProtocol
+Create a UIView class and make it inherits from TabBarProtocol
 
 ```swift
 import TabBarController
@@ -137,7 +138,7 @@ class YourTabBar: UIView, TabBarProtocol {
 
 ### Storyboard
 
-Link tabBar outlet from your TabBarController to your custom tabBar in storyboard
+Link the tabBar outlet from your TabBarController to your custom tabBar in storyboard
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboardtab.jpg" width="500">
 
 ### Programmatically
@@ -151,7 +152,7 @@ let tabBarController = TabBarController(viewControllers: [...], tabBar: tabBar)
 
 ### Anchor
 
-TabBarController support two anchors for TabBar:
+TabBarController supports two anchors for TabBar:
 
 - top: tvOS style
 - bottom: iOS style
@@ -190,7 +191,7 @@ class YourTabBar: UIView, TabBarProtocol {
 
 ### Animations
 
-If you want to use custom animations on your TabBarController you have to make it inherit from TabBarControllerDelegate
+If you want to use custom animations on your TabBarController you have to make it inherits from TabBarControllerDelegate
 
 ```swift
 extension YourTabBarController: TabBarControllerDelegate {
@@ -210,13 +211,13 @@ This library provide different ways to do so.
 
 ### TabBar Top/Bottom Inset Constraint
 
-The TabBarChildControllerProtocol provide two optionals property that allow you to manage tabBar insets easily :
+The TabBarChildControllerProtocol provide two optional properties that allows you to manage tabBar insets easily :
 ```swift 
 var tabBarTopInsetConstraint: NSLayoutConstraint!
 var tabBarBottomInsetConstraint: NSLayoutConstraint!
 ```
 
-Since UIViewController inherit from TabBarChildControllerProtocol, just add these properties in your class (use IBOutlet if you want to use them Interface Builder)
+Since UIViewController inherits from TabBarChildControllerProtocol, just add these properties in your class (use IBOutlet if you want to use them Interface Builder)
 
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/constraint.jpg" width="500">
 
@@ -224,7 +225,7 @@ Since UIViewController inherit from TabBarChildControllerProtocol, just add thes
 
 ### Update TabBar Insets
 
-If you want to add inset on your UIScrollView instead of directly update its frame, you can handle it using this method:
+If you want to add insets on your UIScrollView instead of directly update its frame, you can handle it using this method:
 ```swift
 func updateTabBarInsets(_ insets: UIEdgeInsets) {
     self.tableView.contentInset.bottom = insets.bottom
