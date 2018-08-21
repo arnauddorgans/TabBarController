@@ -57,13 +57,8 @@ class SpringboardTabBarItem: UITabBarItem {
             backgroundView.topAnchor.constraint(greaterThanOrEqualTo: self.layoutMarginsGuide.topAnchor).isActive = true
             backgroundView.bottomAnchor.constraint(lessThanOrEqualTo: self.layoutMarginsGuide.bottomAnchor).isActive = true
         }
-        let top = backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
-        top.priority = .defaultHigh
-        top.isActive = true
-        
-        let bottom = backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-        bottom.priority = .defaultHigh
-        bottom.isActive = true
+        backgroundView.topAnchor.constraint(greaterThanOrEqualTo: self.topAnchor, constant: 10).isActive = true
+        backgroundView.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: -10).isActive = true
         
         contentView.axis = .horizontal
         contentView.distribution = .fillEqually
@@ -143,7 +138,7 @@ class SpringboardTabBarButton: UIButton {
         
         badgeView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(badgeView)
-        badgeView.centerXAnchor.constraint(equalTo: itemImageView.rightAnchor, constant: -3).isActive = true
+        badgeView.centerXAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: -3).isActive = true
         badgeView.centerYAnchor.constraint(equalTo: itemImageView.topAnchor, constant: 3).isActive = true
         
         self.widthAnchor.constraint(greaterThanOrEqualTo: self.heightAnchor).isActive = true

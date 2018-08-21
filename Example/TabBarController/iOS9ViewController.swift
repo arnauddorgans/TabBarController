@@ -13,6 +13,8 @@ class iOS9ViewController: UIViewController {
 
     @IBOutlet weak var tabBarTopInsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var tabBarBottomInsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tabBarLeadingInsetConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tabBarTrailingInsetConstraint: NSLayoutConstraint!
     
     @IBAction func toggleTabBar(_ sender: Any) {
         guard let contoller = self.tab.controller else {

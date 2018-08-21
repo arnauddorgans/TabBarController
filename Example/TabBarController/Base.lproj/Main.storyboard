@@ -70,7 +70,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tabBarBottomInsetConstraint" destination="5b6-I2-31R" id="ZPf-8B-UIX"/>
+                        <outlet property="tabBarLeadingInsetConstraint" destination="jvB-WV-fPI" id="Yo4-vw-pDH"/>
                         <outlet property="tabBarTopInsetConstraint" destination="XR5-Yp-g3A" id="1SJ-4M-CbD"/>
+                        <outlet property="tabBarTrailingInsetConstraint" destination="xVe-3D-ali" id="c3B-aR-q4M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gmA-QT-QcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -674,7 +676,7 @@
         <!--Hidden-->
         <scene sceneID="uCv-AL-RdP">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="IkP-9N-lXM" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="IkP-9N-lXM" customClass="iOS9ViewController" customModule="TabBarController_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ORk-R4-sxe"/>
                         <viewControllerLayoutGuide type="bottom" id="CXp-z7-c7I"/>
@@ -697,6 +699,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Hidden" id="A92-lH-LDB"/>
+                    <connections>
+                        <outlet property="tabBarBottomInsetConstraint" destination="xRu-Ib-uBY" id="DYF-A3-Kox"/>
+                        <outlet property="tabBarLeadingInsetConstraint" destination="NmR-IT-v8N" id="DNY-n9-K2Q"/>
+                        <outlet property="tabBarTopInsetConstraint" destination="aiN-MZ-hoa" id="0jf-et-7YC"/>
+                        <outlet property="tabBarTrailingInsetConstraint" destination="cb5-pg-VKO" id="Dsr-BZ-c1u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8a-qi-kaB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

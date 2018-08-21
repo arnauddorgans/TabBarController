@@ -48,11 +48,10 @@ open class SystemTabBar: UIView {
     }
     
     // MARK: Layout
+    @available(iOS 11.0, tvOS 11.0, *)
     override open func safeAreaInsetsDidChange() {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            super.safeAreaInsetsDidChange()
-            tabBar.invalidateIntrinsicContentSize()
-        }
+        super.safeAreaInsetsDidChange()
+        tabBar.invalidateIntrinsicContentSize()
     }
     
     // MARK: Focus

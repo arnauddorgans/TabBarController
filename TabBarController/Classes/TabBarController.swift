@@ -12,7 +12,6 @@ import UIKit
     @objc optional func tabBarController(_ tabBarController: TabBarController, didSelect viewController: UIViewController)
     @objc optional func tabBarController(_ tabBarController: TabBarController, animationControllerFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
     @objc optional func tabBarController(_ tabBarController: TabBarController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
-    @objc optional func tabBarController(_ tabBarController: TabBarController, animateTabBar animations: @escaping ()->Void)
 }
 
 open class TabBarController: UIViewController {
@@ -21,7 +20,7 @@ open class TabBarController: UIViewController {
     @IBOutlet public weak var tabBar: TabBar!
     
     private lazy var containerController = TabBarContainerController(delegate: self)
-    private lazy var tabBarContainer = TabBarContainer(tabBarController: self, delegate: self)
+    private var menuGesture: UITapGestureRecognizer?
     private let storyboardSegueIdentifierPrefix = "tab"
     
     private var _viewControllers: [UIViewController]?
@@ -46,20 +45,27 @@ open class TabBarController: UIViewController {
     
     @IBInspectable var tabBarAnchorIndex: Int {
         get { return TabBarAnchor.all.index(of: tabBarAnchor)! }
-        set { tabBarAnchor = TabBarAnchor.all[newValue % 2 == 0 ? 0 : 1] }
+        set { tabBarAnchor = TabBarAnchor.at(index: newValue) }
     }
     
     #if os(tvOS)
-    @IBInspectable var isMenuGesturesEnabled: Bool = true
+    @IBInspectable var isMenuGesturesEnabled: Bool = true {
+        didSet {
+            updateFocusGestures()
+        }
+    }
     #endif
     
+    private var _tabBarAnchor: TabBarAnchor = .default
     public var tabBarAnchor: TabBarAnchor {
-        get { return tabBarContainer.anchor }
-        set { tabBarContainer.anchor = newValue }
+        get { return _tabBarAnchor }
+        set { self.setTabBarAnchor(newValue) }
     }
     
-    public var isTabBarHidden: Bool {
-        return tabBarContainer.isTabBarHidden
+    private var _isTabBarHidden: Bool = false
+    @IBInspectable public var isTabBarHidden: Bool {
+        get { return _isTabBarHidden }
+        set { self.setTabBarHidden(newValue, animated: false) }
     }
     
     public var selectedViewController: UIViewController? {
@@ -67,6 +73,13 @@ open class TabBarController: UIViewController {
             return nil
         }
         return viewControllers[selectedIndex]
+    }
+    
+    private var tabBarAnimator: TabBarAnimator {
+        guard let transitionDelegate = tabBar.animator?() else {
+            return DefaultTabBarAnimator.shared
+        }
+        return transitionDelegate
     }
     
     public convenience init(viewControllers: [UIViewController]?, tabBar: TabBar? = nil, anchor: TabBarAnchor = .default) {
@@ -82,12 +95,7 @@ open class TabBarController: UIViewController {
         let tabBar = self.tabBar ?? SystemTabBar()
         self.tabBar = tabBar
         self.tabBar?.delegate = self
-        tabBarContainer.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(tabBarContainer)
-        tabBarContainer.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        tabBarContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        tabBarContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        tabBarContainer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.view.addSubview(tabBar)
         
         addStoryboardSegues()
         
@@ -100,21 +108,33 @@ open class TabBarController: UIViewController {
         containerController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.addChildViewController(containerController)
         containerController.didMove(toParentViewController: self)
+        
+        self.setTabBarHidden(false, animated: false)
+        updateFocusGestures()
+        addObservers()
     }
     
     // MARK: TabBar
     public func setTabBarHidden(_ hidden: Bool, animated: Bool) {
-        func update() {
-            self.tabBarContainer.setTabBarHidden(hidden)
+        self._isTabBarHidden = hidden
+        updateTabBar(animated: animated)
+    }
+    
+    private func updateTabBar(animated: Bool) {
+        guard self.isViewLoaded else {
+            return
         }
-        if animated {
-            guard self.delegate?.tabBarController?(self, animateTabBar: update) == nil else {
-                return
-            }
-            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: update, completion: nil)
-        } else {
-            update()
+        let context = TabBarAnimatorContext(tabBarController: self, animated: animated) { [unowned self] in
+            self.tabBar?.setTabBarHidden?(self.isTabBarHidden)
+            self.tabBar?.setAnchor?(self.tabBarAnchor)
+            self.updateInsets()
         }
+        tabBarAnimator.animateTabBar(using: context)
+    }
+    
+    public func setTabBarAnchor(_ anchor: TabBarAnchor) {
+        _tabBarAnchor = anchor
+        updateTabBar(animated: false)
     }
     
     // MARK: ViewControllers
@@ -136,12 +156,15 @@ open class TabBarController: UIViewController {
             self.setNeedsUpdateOfHomeIndicatorAutoHidden()
         }
         self.setTabBarHidden(viewController.hidesBottomBarWhenPushed, animated: false)
+        #else
+        self.updateInsets(viewController: viewController)
         #endif
     }
     
     private func updateInsets(viewController: UIViewController? = nil) {
         let viewController: TabBarChildControllerProtocol? = viewController ?? containerController.viewController
-        viewController?.updateAllTabBarConstraints(tabBarContainer.additionalInsets)
+        let additionalInsets = tabBarAnimator.tabBarInsets(withContext: TabBarAnimatorContext(tabBarController: self))
+        viewController?.updateAllTabBarConstraints(additionalInsets)
     }
     
     private func updateSelectedController(source: TabBarControllerUpdateSource) {
@@ -162,12 +185,11 @@ open class TabBarController: UIViewController {
         }
     }
     
-    // MARK:- SafeArea
+    // MARK:- Layout
+    @available(iOS 11.0, tvOS 11.0, *)
     func updateSafeArea(insets: UIEdgeInsets) {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            self.containerController.additionalSafeAreaInsets = insets
-            self.containerController.view.layoutIfNeeded()
-        }
+        self.containerController.additionalSafeAreaInsets = insets
+        self.containerController.view.layoutIfNeeded()
     }
     
     // MARK:- Focus
@@ -175,7 +197,7 @@ open class TabBarController: UIViewController {
         if self.isTabBarHidden {
             return [containerController.view]
         }
-        return [tabBarContainer, containerController.view]
+        return [tabBar, containerController.view]
     }
     
     // iOS 9 support
@@ -183,11 +205,52 @@ open class TabBarController: UIViewController {
         return preferredFocusEnvironments.first as? UIView
     }
     
+    // MARK: Focus
+    func updateFocusGestures() {
+        #if os(tvOS)
+        guard self.isViewLoaded else {
+            return
+        }
+        if menuGesture == nil {
+            let menuGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleMenuGesture(_:)))
+            menuGesture.delegate = self
+            menuGesture.allowedPressTypes = [NSNumber(value: UIPressType.menu.rawValue)]
+            self.view.addGestureRecognizer(menuGesture)
+            self.menuGesture = menuGesture
+        }
+        menuGesture?.isEnabled = isMenuGesturesEnabled
+        #endif
+    }
+    
+    #if os(tvOS)
+    @objc func handleMenuGesture(_ gesture: UITapGestureRecognizer) {
+        self.setTabBarHidden(false, animated: true)
+        self.setNeedsFocusUpdate()
+        self.updateFocusIfNeeded()
+    }
+    #endif
+    
     open override func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
         guard !self.containerController.isAnimating else {
             return false
         }
         return super.shouldUpdateFocus(in: context)
+    }
+    
+    open override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        guard let tabBar = self.tabBar else {
+            return
+        }
+        if let nextView = context.nextFocusedView, self.isTabBarHidden, tabBar.contains(subview: nextView) {
+            coordinator.addCoordinatedAnimations({
+                self.setTabBarHidden(false, animated: false)
+            }, completion: nil)
+            return
+        } else if !isTabBarHidden, context.nextFocusedView.flatMap({ tabBar.contains(subview: $0) }) != true {
+            coordinator.addCoordinatedAnimations({
+                self.setTabBarHidden(true, animated: false)
+            }, completion: nil)
+        }
     }
     
     // MARK:- ChildViewController
@@ -204,6 +267,25 @@ open class TabBarController: UIViewController {
         return containerController
     }
     #endif
+    
+    // MARK: KVO
+    private func addObservers() {
+        self.tabBar.layer.addObserver(self, forKeyPath: #keyPath(CALayer.position), options: .new, context: nil)
+        self.tabBar.layer.addObserver(self, forKeyPath: #keyPath(CALayer.bounds), options: .new, context: nil)
+    }
+    
+    private func removeObservers() {
+        self.tabBar.layer.removeObserver(self, forKeyPath: #keyPath(CALayer.position))
+        self.tabBar.layer.removeObserver(self, forKeyPath: #keyPath(CALayer.bounds))
+    }
+    
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        updateInsets()
+    }
+    
+    deinit {
+        self.removeObservers()
+    }
 }
 
 // MARK:- TabBarDelegate
@@ -264,29 +346,12 @@ extension TabBarController: UINavigationControllerDelegate {
                 self.update(viewController: viewController)
             }
         }
-        transitionCoordinator.animateAlongsideTransition(in: tabBarContainer, animation: { [unowned self] context in
+        transitionCoordinator.animateAlongsideTransition(in: self.tabBar, animation: { [unowned self] context in
             guard let viewController = context.viewController(forKey: .to) else {
                 return
             }
             self.update(viewController: viewController)
         }, completion: nil)
-    }
-}
-
-// MARK:- TabBarContainerDelegate
-extension TabBarController: TabBarContainerDelegate {
-    
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didShowTabBar show: Bool) {
-        self.setNeedsFocusUpdate()
-        self.updateFocusIfNeeded()
-    }
-    
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didHandleShowGesture show: Bool) {
-        self.setTabBarHidden(!show, animated: true)
-    }
-    
-    func tabBarContainer(_ tabBarContainer: TabBarContainer, didUpdateAdditionalInsets insets: UIEdgeInsets) {
-        updateInsets()
     }
 }
 
@@ -302,10 +367,27 @@ extension TabBarController: TabBarContainerControllerDelegate {
     }
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, didShow viewController: UIViewController?) {
-        updateInsets(viewController: viewController)
+        guard let viewController = viewController else {
+            return
+        }
+        update(viewController: viewController)
     }
     
     func tabBarContainerController(_ tabBarContainerController: TabBarContainerController, willShow viewController: UIViewController?) {
-        updateInsets(viewController: viewController)
+        guard let viewController = viewController else {
+            return
+        }
+        update(viewController: viewController)
+    }
+}
+
+// MARK:- UITapGestureRecognizer
+extension TabBarController: UIGestureRecognizerDelegate {
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer == menuGesture else {
+            return true
+        }
+        return isTabBarHidden
     }
 }

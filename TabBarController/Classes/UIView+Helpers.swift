@@ -18,4 +18,8 @@ extension UIView {
         }
         return contains(subview: subview.superview)
     }
+    
+    func constraints(withView view: UIView) -> [NSLayoutConstraint] {
+        return self.constraints.filter { $0.firstItem as? UIView == view || $0.secondItem as? UIView == view }
+    }
 }

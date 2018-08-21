@@ -152,14 +152,17 @@ let tabBarController = TabBarController(viewControllers: [...], tabBar: tabBar)
 
 ### Anchor
 
-TabBarController supports two anchors for TabBar:
+TabBarController supports four anchors for TabBar:
 
 - top: tvOS style
 - bottom: iOS style
+- left
+- right
+
 
 #### Storyboard
 
-Set the tabBarAnchorIndex attribute of your TabBarController (0: top, 1: bottom)
+Set the tabBarAnchorIndex attribute of your TabBarController (0: top, 1: bottom, 2: left, 3: right)
 
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/storyboardAnchor.png" width="250">
 
@@ -177,7 +180,6 @@ let tabBarController = TabBarController(viewControllers: [...], tabBar: tabBar, 
 class YourTabBar: UIView, TabBarProtocol {
 
     var additionalInset: CGFloat { return 0 } // positive or negative value
-    var needsAdditionalInset: Bool { return true } // return false if you don't want tabBarController to add inset below tabBar (like tvOS)
 
     func setAnchor(_ anchor: TabBarAnchor) {
         // Update view
@@ -186,6 +188,33 @@ class YourTabBar: UIView, TabBarProtocol {
     func setTabBarHidden(_ hidden: Bool) {
         // Update view
     }
+}
+```
+
+### Animator
+
+TabBarProtocol provides optionnal method that allows you to customize animations and frames for your TabBar.
+```swift
+class YourTabBar: UIView, TabBarProtocol {
+
+    func animator() -> TabBarAnimator? {
+        return YourTabBarAnimator()
+    }
+}
+
+class YourTabBarAnimator: TabBarAnimator {
+
+    func tabBarInsets(withContext context: TabBarAnimatorContext) -> UIEdgeInsets {
+        // return additional insets below your TabBar
+    }
+
+    func animateTabBar(using context: TabBarAnimatorContext) {
+        // Animate and update frame of the TabBar
+        UIView.animate(duration: 0.3, animations: {
+            context.tabBar.frame = finalFrame // update frame
+            context.animate() // animate insets updates
+        }, completion: context.completeTransition) // call completeTransition
+    }   
 }
 ```
 
@@ -220,6 +249,8 @@ The TabBarChildControllerProtocol provide two optional properties that allows yo
 ```swift 
 var tabBarTopInsetConstraint: NSLayoutConstraint!
 var tabBarBottomInsetConstraint: NSLayoutConstraint!
+var tabBarLeadingInsetConstraint: NSLayoutConstraint!
+var tabBarTrailingInsetConstraint: NSLayoutConstraint!
 ```
 
 Since UIViewController inherits from TabBarChildControllerProtocol, just add these properties in your class (use IBOutlet if you want to use them Interface Builder)

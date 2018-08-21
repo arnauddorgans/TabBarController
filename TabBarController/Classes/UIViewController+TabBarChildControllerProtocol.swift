@@ -13,6 +13,7 @@ extension UIViewController: TabBarChildControllerProtocol {
 
 extension TabBarController {
     
+    @available(iOS 11.0, tvOS 11.0, *)
     public func updateTabBarInsets(_ insets: UIEdgeInsets) {
         self.updateSafeArea(insets: insets)
     }
