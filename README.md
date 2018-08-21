@@ -218,7 +218,7 @@ class YourTabBarAnimator: TabBarAnimator {
 }
 ```
 
-### Animations
+### Transition
 
 If you want to use custom animations on your TabBarController you have to make it inherits from TabBarControllerDelegate
 
