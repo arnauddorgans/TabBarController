@@ -8,7 +8,7 @@
 How boring is it when you discover on the latest update of your Zeplin’s project that you designer made a TabBar that doesn’t fit in 49px in height? 
 Or when you discover that they only made an advanced design of TabBar that can’t be a subclass of UITabBar? We all know that moment when you have to imagine a custom hierarchy for your app just for a designer… 😜
 
-TabBarController acts like a UITabBarController that allows you to customize TabBar, frame and animations. 
+TabBarController acts like a UITabBarController that allows you to customize TabBar, transforms and animations. 
 You can even set a custom anchor for your TabBar. You want a top tabBar? Or just a bottom TabBar on tvOS? Well… you can easily do all these things with exactly 0 line of code, directly from your storyboard (or programmatically, if you’re not a big fan of storyboards 😉)
 
 <img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/001.gif" width="250" height="540"><img src="https://github.com/arnauddorgans/TabBarController/blob/master/Images/004.gif" width="520">
