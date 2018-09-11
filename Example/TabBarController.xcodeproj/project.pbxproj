@@ -24,6 +24,10 @@
 		D486CDC121284B380015BE9A /* iOS9TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D486CDC021284B380015BE9A /* iOS9TableViewController.swift */; };
 		D49561132129AF08008363D2 /* SpringboardTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49561122129AF08008363D2 /* SpringboardTabBar.swift */; };
 		D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		D4EEEE022147EF580082FB08 /* YoutubeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EEEE012147EF580082FB08 /* YoutubeTabBar.swift */; };
+		D4EEEE042147F1DB0082FB08 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EEEE032147F1DB0082FB08 /* Colors.xcassets */; };
+		D4EEEE0621480AEF0082FB08 /* YoutubeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EEEE0521480AEF0082FB08 /* YoutubeTabBarController.swift */; };
+		D4EEEE082148364B0082FB08 /* YoutubeTabBarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EEEE072148364B0082FB08 /* YoutubeTabBarAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,10 @@
 		D45C21C02126EFA4004D21C2 /* SpringboardTabBarTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringboardTabBarTransition.swift; sourceTree = "<group>"; };
 		D486CDC021284B380015BE9A /* iOS9TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS9TableViewController.swift; sourceTree = "<group>"; };
 		D49561122129AF08008363D2 /* SpringboardTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringboardTabBar.swift; sourceTree = "<group>"; };
+		D4EEEE012147EF580082FB08 /* YoutubeTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTabBar.swift; sourceTree = "<group>"; };
+		D4EEEE032147F1DB0082FB08 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		D4EEEE0521480AEF0082FB08 /* YoutubeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTabBarController.swift; sourceTree = "<group>"; };
+		D4EEEE072148364B0082FB08 /* YoutubeTabBarAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTabBarAnimator.swift; sourceTree = "<group>"; };
 		DDC31CB3904783CBD80ADB30 /* Pods-TabBarController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E6D42CFDD2DF28A3B3C61818 /* Pods_TabBarController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabBarController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8401B9CBC7D663C150F67D /* Pods-TabBarController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabBarController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TabBarController_Example/Pods-TabBarController_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,9 +196,11 @@
 		D45C21AD2126B7AF004D21C2 /* Example tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				D4EEEE002147EF350082FB08 /* Youtube */,
 				D45C21AE2126B7AF004D21C2 /* AppDelegate.swift */,
 				D45C21B22126B7AF004D21C2 /* Main.storyboard */,
 				D45C21B52126B7B0004D21C2 /* Assets.xcassets */,
+				D4EEEE032147F1DB0082FB08 /* Colors.xcassets */,
 				D45C21B72126B7B0004D21C2 /* Info.plist */,
 			);
 			path = "Example tvOS";
@@ -204,6 +214,16 @@
 				607FACD71AFB9204008FA782 /* SpringboardTabBarController.swift */,
 			);
 			name = Springboard;
+			sourceTree = "<group>";
+		};
+		D4EEEE002147EF350082FB08 /* Youtube */ = {
+			isa = PBXGroup;
+			children = (
+				D4EEEE012147EF580082FB08 /* YoutubeTabBar.swift */,
+				D4EEEE0521480AEF0082FB08 /* YoutubeTabBarController.swift */,
+				D4EEEE072148364B0082FB08 /* YoutubeTabBarAnimator.swift */,
+			);
+			name = Youtube;
 			sourceTree = "<group>";
 		};
 		D7136837F9A4A10D451C19B0 /* Frameworks */ = {
@@ -346,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4EDE0A721270D7900B5346A /* Images.xcassets in Resources */,
+				D4EEEE042147F1DB0082FB08 /* Colors.xcassets in Resources */,
 				D45C21B62126B7B0004D21C2 /* Assets.xcassets in Resources */,
 				D45C21B42126B7AF004D21C2 /* Main.storyboard in Resources */,
 			);
@@ -472,7 +493,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4EEEE0621480AEF0082FB08 /* YoutubeTabBarController.swift in Sources */,
 				D45C21AF2126B7AF004D21C2 /* AppDelegate.swift in Sources */,
+				D4EEEE082148364B0082FB08 /* YoutubeTabBarAnimator.swift in Sources */,
+				D4EEEE022147EF580082FB08 /* YoutubeTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,7 +738,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
 		};
@@ -741,7 +765,7 @@
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
 		};

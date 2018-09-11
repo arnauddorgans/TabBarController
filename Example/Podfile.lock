@@ -1,5 +1,5 @@
 PODS:
-  - TabBarController (0.1.0)
+  - TabBarController (1.0)
 
 DEPENDENCIES:
   - TabBarController (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  TabBarController: c2e762e8898f5d3af42beb108a639771baf4fae3
+  TabBarController: afe4560c4934f25088b0f13129e95d0d76410ad8
 
 PODFILE CHECKSUM: 8947fba8d959d70de552e8e03041ad5648b8e41c
 

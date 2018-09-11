@@ -56,6 +56,10 @@ open class TabBarController: UIViewController {
     }
     #endif
     
+    public var containerView: UIView {
+        return containerController.view
+    }
+    
     private var _tabBarAnchor: TabBarAnchor = .default
     public var tabBarAnchor: TabBarAnchor {
         get { return _tabBarAnchor }
