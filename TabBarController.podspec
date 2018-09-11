@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TabBarController'
-  s.version          = '1.0'
+  s.version          = '1.0.1'
   s.summary          = 'TabBarController acts like a UITabBarController that allows you to customize TabBar, transforms and animations.'
 
 # This description is used to generate tags and improve search results.
